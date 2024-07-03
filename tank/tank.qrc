@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>F:/90_tank/start/tank_main.png</file>
+        <file>F:/90_tank/start/1(1).png</file>
+        <file>F:/90_tank/player_tank/Icon-hdpi.png</file>
+        <file>F:/90_tank/player_tank/girls_preview.png</file>
+    </qresource>
+</RCC>
