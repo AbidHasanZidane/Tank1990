@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/blast1.gif</file>
+        <file>res/blast2.gif</file>
+        <file>res/blast3.gif</file>
+        <file>res/blast4.gif</file>
+        <file>res/blast5.gif</file>
+        <file>res/blast6.gif</file>
+        <file>res/blast7.gif</file>
+        <file>res/blast8.gif</file>
+        <file>res/enemy_tank_right.gif</file>
+        <file>res/enemy_tank_right.jpg</file>
+        <file>res/enemy_tank_up.gif</file>
+        <file>res/enemy_tank_up.jpg</file>
+        <file>res/gameover.jpg</file>
+        <file>res/home.jpg</file>
+        <file>res/illustrate.jpg</file>
+        <file>res/logo.bmp</file>
+        <file>res/p2tankD.gif</file>
+        <file>res/p2tankL.gif</file>
+        <file>res/p2tankR.gif</file>
+        <file>res/p2tankU.gif</file>
+        <file>res/tank_down.jpg</file>
+        <file>res/tank_left.jpg</file>
+        <file>res/tank_right.jpg</file>
+        <file>res/tank_up.jpg</file>
+        <file>res/wall1.jpg</file>
+        <file>res/wall2.jpg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res5/icon_bomb.png</file>
+        <file>res5/playagain.png</file>
+    </qresource>
+</RCC>
