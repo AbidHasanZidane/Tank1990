@@ -1,7 +1,7 @@
 #ifndef TANK_S_H
 #define TANK_S_H
 #include<vector>
-#include<QSound>
+#include<QSoundEffect>
 #include<QPainter>
 #include <QWidget>
 using namespace std;
