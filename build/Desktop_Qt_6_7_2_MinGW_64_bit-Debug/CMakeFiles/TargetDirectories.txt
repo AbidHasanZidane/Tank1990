@@ -1,0 +1,9 @@
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/Tank.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/Tank_autogen_timestamp_deps.dir
+D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/Tank_autogen.dir

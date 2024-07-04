@@ -1,0 +1,15 @@
+# ninja log v6
+16	1169	7416823462622667	Tank_autogen/timestamp	8cf931e9e894f6fa
+16	1169	7416823462622667	Tank_autogen/mocs_compilation.cpp	8cf931e9e894f6fa
+16	1169	7416823462622667	D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Tank_autogen/timestamp	8cf931e9e894f6fa
+16	1169	7416823462622667	D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Tank_autogen/mocs_compilation.cpp	8cf931e9e894f6fa
+1180	1503	7416823466642059	Tank_autogen/EWIEGA46WW/qrc_pic.cpp	b383adfef5b03cbf
+1180	1503	7416823466642059	D:/GIt_tank/Tank1990/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Tank_autogen/EWIEGA46WW/qrc_pic.cpp	b383adfef5b03cbf
+1512	3177	7416823467471232	CMakeFiles/Tank.dir/main.cpp.obj	2040d38029c06f18
+1552	3179	7416823467865987	CMakeFiles/Tank.dir/w2.cpp.obj	95d167ee11dc4c92
+1530	3194	7416823467642261	CMakeFiles/Tank.dir/ctrl.cpp.obj	310e545a81b0700c
+1504	3195	7416823467386304	CMakeFiles/Tank.dir/Tank_autogen/mocs_compilation.cpp.obj	e7db5f59c21dde34
+1521	3204	7416823467537223	CMakeFiles/Tank.dir/widget.cpp.obj	f9034512e05cfb50
+1542	3246	7416823467762805	CMakeFiles/Tank.dir/w1.cpp.obj	cc425c1c4d3b528
+1561	3814	7416823467958969	CMakeFiles/Tank.dir/Tank_autogen/EWIEGA46WW/qrc_pic.cpp.obj	55ac25d67167cdf0
+3814	4119	7416823490493743	Tank.exe	2f54a90649e7ab79
