@@ -7,8 +7,12 @@
 #include<QGraphicsView>
 #include<QGraphicsScene>
 #include<QList>
+#include<QTimer>
+#include<QtDebug>
+#include<QKeyEvent>
 #include"mytank.h"
 #include"bullet.h"
+#include"enemy.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +30,10 @@ public:
 
     void BulletShoot();
 
+    void BulletDestroy();
+
+    void EnemyBoom();
+
 private:
     Ui::MainWindow *ui;
 
@@ -37,9 +45,14 @@ private:
 
     MyTank mTank;
 
-    QList<int>mKeyList;
+    Enemy enemy;
+
+    QTimer* BulletTime;
+
+    QList<Bullet*>mBullet;
 
 };
+
 
 #endif // MAINWINDOW_H
 

@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     mytank.cpp \
-    bullet.cpp
+    bullet.cpp \
+    enemy.cpp
 
 HEADERS += \
         mainwindow.h \
     mytank.h \
-    bullet.h
+    bullet.h \
+    enemy.h
 
 FORMS += \
         mainwindow.ui

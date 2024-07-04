@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<QKeyEvent>
+#include"mytank.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mGameView.setParent(this);
 
     mGameView.show();
-
-    EnemyBoom();
 
 }
 
@@ -66,40 +65,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         break;
     }
     case Qt::Key_J:{
-        BulletShoot();
-        break;
-     }
-     case Qt::Key_K:{
-        mScene.addItem(&enemy);
-        break;
-     }
-     case Qt::Key_L:{
-        if(mTank.collidesWithItem(&enemy)){
-           qDebug()<<mTank.x()<<"."<<mTank.y();
-        }
-        //qDebug()<<mTank.x()<<"."<<mTank.y();
-        //EnemyBoom();
-        break;
+     BulletShoot();
      }
      };
-     if(mTank.x()<0){
-         mTank.setX(0);
-     }
-     if(mTank.y()<0){
-         mTank.setY(0);
-     }
-     if((mTank.x()+mTank.pixmap().width())>1000){
-         mTank.setX(1000-mTank.pixmap().width());
-     }
-     if(mTank.y()+mTank.pixmap().height()>800){
-         mTank.setY(800-mTank.pixmap().height());
-     }
 }
 
 void MainWindow::BulletShoot()
 {
    BulletTime =new QTimer (this);
-   BulletTime->start(50);
+   BulletTime->start(100);
    QPixmap bulletImg("://F:/90_tank/player_tank/girls_preview.png");
 
    if(mTank.rotation()==0){
@@ -111,7 +85,7 @@ void MainWindow::BulletShoot()
    connect(BulletTime,&QTimer::timeout,[bullet](){
        bullet->moveBy(0,-bullet->mBulletSpeed);
    });
-   mBullet.append(bullet);
+   if(bullet->QP)
    }
 
    if(mTank.rotation()==180){
@@ -123,7 +97,6 @@ void MainWindow::BulletShoot()
    connect(BulletTime,&QTimer::timeout,[bullet](){
        bullet->moveBy(0,+bullet->mBulletSpeed);
    });
-   mBullet.append(bullet);
    }
 
    if(mTank.rotation()==90){
@@ -135,8 +108,6 @@ void MainWindow::BulletShoot()
    connect(BulletTime,&QTimer::timeout,[bullet](){
        bullet->moveBy(+bullet->mBulletSpeed,0);
    });
-   qDebug()<<bullet->x()<<"."<<bullet->y();
-   mBullet.append(bullet);
    }
 
    if(mTank.rotation()==270){
@@ -148,25 +119,6 @@ void MainWindow::BulletShoot()
    connect(BulletTime,&QTimer::timeout,[bullet](){
        bullet->moveBy(-bullet->mBulletSpeed,0);
    });
-   mBullet.append(bullet);
    }
 }
 
-void MainWindow::BulletDestroy()
-{
-
-}
-
-void MainWindow::EnemyBoom()
-{
-    BulletTime =new QTimer (this);
-    BulletTime->start(50);
-    connect(BulletTime,&QTimer::timeout,[this](){
-       for(auto bullet : mBullet){
-           if(bullet->collidesWithItem(&enemy)){
-               mScene.removeItem(&enemy);
-           }
-       }
-    });
-
-}

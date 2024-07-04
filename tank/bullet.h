@@ -2,6 +2,8 @@
 #define BULLET_H
 
 #include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
+#include<QtDebug>
 
 class Bullet : public QGraphicsPixmapItem
 {
@@ -9,9 +11,12 @@ public:
 
     Bullet(QPoint _pos,QPixmap _pixmap);
     
-    void BulletMove(QPoint _dir=QPoint(0,-1));
-    
-    int mSpeed;
+    int mBulletSpeed=25;
+
+    ~Bullet()
+    {
+        qDebug()<<"~bullet"<<endl;
+    }
     
 };
 #endif // BULLET_H
