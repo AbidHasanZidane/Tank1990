@@ -70,15 +70,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         break;
      }
      case Qt::Key_K:{
-        mScene.addItem(&enemy);
+        CreatEnemy();
         break;
      }
      case Qt::Key_L:{
-        if(mTank.collidesWithItem(&enemy)){
-           qDebug()<<mTank.x()<<"."<<mTank.y();
-        }
-        //qDebug()<<mTank.x()<<"."<<mTank.y();
-        //EnemyBoom();
         break;
      }
      };
@@ -101,7 +96,6 @@ void MainWindow::BulletShoot()
    BulletTime =new QTimer (this);
    BulletTime->start(50);
    QPixmap bulletImg("://F:/90_tank/player_tank/girls_preview.png");
-
    if(mTank.rotation()==0){
 
    QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y());
@@ -135,7 +129,6 @@ void MainWindow::BulletShoot()
    connect(BulletTime,&QTimer::timeout,[bullet](){
        bullet->moveBy(+bullet->mBulletSpeed,0);
    });
-   qDebug()<<bullet->x()<<"."<<bullet->y();
    mBullet.append(bullet);
    }
 
@@ -152,21 +145,41 @@ void MainWindow::BulletShoot()
    }
 }
 
-void MainWindow::BulletDestroy()
+void MainWindow::CreatEnemy()
 {
-
+    Enemy* enemy=new Enemy();
+    mScene.addItem(enemy);
+    mEnemy.append(enemy);
 }
 
 void MainWindow::EnemyBoom()
 {
-    BulletTime =new QTimer (this);
-    BulletTime->start(50);
-    connect(BulletTime,&QTimer::timeout,[this](){
-       for(auto bullet : mBullet){
-           if(bullet->collidesWithItem(&enemy)){
-               mScene.removeItem(&enemy);
+    Time =new QTimer (this);
+    Time->start(10);
+    connect(Time,&QTimer::timeout,[this](){
+       for(auto enemy : mEnemy)
+       for(auto bullet : mBullet)
+       {
+           if(bullet->collidesWithItem(enemy)){
+               mEnemy.removeOne(enemy);
+               enemy->deleteLater();
+               bullet->setX(1000);
+               bullet->setY(1000);
+               mBullet.removeOne(bullet);
+               //bullet->deleteLater();
            }
        }
     });
 
+}
+
+void MainWindow::EnemyMove()
+{
+    Time =new QTimer (this);
+    Time->start(10);
+    connect(Time,&QTimer::timeout,[this](){
+        for(auto enemy:mEnemy){
+            enemy->moveBy(0,-10);
+        }
+    });
 }

@@ -7,5 +7,4 @@ Bullet::Bullet(QPoint _pos, QPixmap _pixmap)
 
     this->setPixmap(QPixmap(_pixmap));
 
-
 }

@@ -4,8 +4,9 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include<QtDebug>
+#include<QObject>
 
-class Bullet : public QGraphicsPixmapItem
+class Bullet : public QGraphicsPixmapItem,public QObject
 {
 public:
 
@@ -13,9 +14,8 @@ public:
     
     int mBulletSpeed=25;
 
-    ~Bullet()
-    {
-        qDebug()<<"~bullet"<<endl;
+    ~Bullet(){
+        qDebug()<<"bug"<<endl;
     }
     
 };

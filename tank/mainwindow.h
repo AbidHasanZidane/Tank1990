@@ -30,9 +30,11 @@ public:
 
     void BulletShoot();
 
-    void BulletDestroy();
+    void CreatEnemy();
 
     void EnemyBoom();
+
+    void EnemyMove();
 
 private:
     Ui::MainWindow *ui;
@@ -45,11 +47,13 @@ private:
 
     MyTank mTank;
 
-    Enemy enemy;
-
     QTimer* BulletTime;
 
+    QTimer* Time;
+
     QList<Bullet*>mBullet;
+
+    QList<Enemy*>mEnemy;
 
 };
 
