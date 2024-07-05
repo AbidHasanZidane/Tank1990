@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,14 +10,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ctrl.cpp \
     main.cpp \
     w1.cpp \
     w2.cpp \
     widget.cpp
 
 HEADERS += \
-    ctrl.h \
     w1.h \
     w2.h \
     widget.h
@@ -32,6 +31,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    music.qrc \
     pic.qrc
 
 DISTFILES += \

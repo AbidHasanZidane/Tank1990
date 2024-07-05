@@ -2,9 +2,11 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QSoundEffect>
+#include <QKeyEvent>
+#include <QTimer>
 #include "w1.h"
 #include "w2.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -18,18 +20,24 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    static Widget *mywidget;
+    QSoundEffect *effect=new QSoundEffect;
+    QSoundEffect *butEffect=new QSoundEffect;
     Ui::Widget *ui;
-    void button1();
+    double curVol0=70;
+    double curVol1=70;
+
+signals:
+    void spawnw2(double vol0,double vol1);
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_toolButton_clicked();
-
     void on_pushButton_2_clicked();
-
+    void changeVolume0(int val);
+    void changeVolume1(int val);
+    void switchOn();
 private:
-
+    void keyPressEvent(QKeyEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+    void textsLoop();
 };
 #endif // WIDGET_H
