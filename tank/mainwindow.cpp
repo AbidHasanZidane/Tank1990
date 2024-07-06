@@ -8,13 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setFixedSize(1000,800);
+    this->setFixedSize(1280,720);
 
-    mGameView.setSceneRect(QRect(0,0,1000,800));
+    mGameView.setSceneRect(QRect(0,0,1280,720));
 
-    mScene.setSceneRect(QRect(0,0,1000,800));
+    mScene.setSceneRect(QRect(0,0,1280,720));
 
-    mBackGround.setPixmap(QPixmap("://90Tank/start/1(1).png"));
+    mBackGround.setPixmap(QPixmap("://90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png"));
 
     mScene.addItem(&mBackGround);
 
@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mGameView.setScene(&mScene);
 
     mGameView.setParent(this);
+
     setCentralWidget(&mGameView);
 
     mGameView.show();
@@ -36,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     BuildingCollide();
 
     BuildingCollide2();
+
+    BuildingCollide3();
 
     BulletTime =new QTimer (this);
     BulletTime->start(50);
@@ -91,7 +94,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         break;
      }
      case Qt::Key_L:{
-        BuildingCreate();
+        MapCreate();
         break;
      }
      };
@@ -101,11 +104,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
      if(mTank.y()<0){
          mTank.setY(0);
      }
-     if((mTank.x()+mTank.pixmap().width())>1000){
-         mTank.setX(1000-mTank.pixmap().width());
+     if((mTank.x()+mTank.pixmap().width())>1280){
+         mTank.setX(1280-mTank.pixmap().width());
      }
-     if(mTank.y()+mTank.pixmap().height()>800){
-         mTank.setY(800-mTank.pixmap().height());
+     if(mTank.y()+mTank.pixmap().height()>720){
+         mTank.setY(720-mTank.pixmap().height());
      }
 }
 
@@ -161,6 +164,8 @@ void MainWindow::EnemyBoom()
        for(auto bullet : mBullet)
        {
            if(bullet->collidesWithItem(enemy)){
+               mBullet.removeOne(bullet);
+               bullet->deleteLater();
                mEnemy.removeOne(enemy);
                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                QTimer::singleShot(50,this,[=](){
@@ -178,8 +183,6 @@ void MainWindow::EnemyBoom()
                QTimer::singleShot(200,this,[=](){
                enemy->deleteLater();
                });
-               mBullet.removeOne(bullet);
-               bullet->deleteLater();
            }
        }
     });
@@ -216,11 +219,11 @@ void MainWindow::EnemyMove()
        if(enemy->y()<0){
            enemy->setY(0);
        }
-       if(enemy->x()+enemy->pixmap().width()>1000){
-           enemy->setX(1000-enemy->pixmap().width());
+       if(enemy->x()+enemy->pixmap().width()>1280){
+           enemy->setX(1280-enemy->pixmap().width());
        }
-       if(enemy->y()+enemy->pixmap().height()>800){
-           enemy->setY(800-enemy->pixmap().height());
+       if(enemy->y()+enemy->pixmap().height()>720){
+           enemy->setY(720-enemy->pixmap().height());
        }
        }
     });
@@ -248,7 +251,7 @@ void MainWindow::myTankCollide()
                 mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
                 QTimer::singleShot(250,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/player_tank/Icon-hdpi.png"));
+                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
                 mTank.setX(200);
                 mTank.setY(200);
                 mTank.mTankSpeed=10;
@@ -258,13 +261,11 @@ void MainWindow::myTankCollide()
     });
 }
 
-void MainWindow::BuildingCreate()
+void MainWindow::BuildingCreate(int y,int x,int kind)
 {
-    for(int i=1;i<=4;i++){
-    Building* building=new Building(i);
+    Building* building=new Building(y,x,kind);
     mScene.addItem(building);
     mBuilding.append(building);
-    }
 }
 
 void MainWindow::BuildingCollide()
@@ -298,16 +299,75 @@ void MainWindow::BuildingCollide()
 void MainWindow::BuildingCollide2()
 {
     Time =new QTimer (this);
-    Time->start(10);
+    Time->start(1);
     connect(Time,&QTimer::timeout,[this](){
         for(auto building : mBuilding){
             if(mTank.collidesWithItem(building)){
                 if(building->kind!=3){
                    if(mTank.rotation()==0){
-                       mTank.setY(mTank.y()+1);
+                      mTank.setY(building->y()+building->pixmap().height());
+                      mTank.setX(mTank.x());
+                   }
+                   if(mTank.rotation()==180){
+                      mTank.setY(building->y()-mTank.pixmap().height());
+                      mTank.setX(mTank.x());
+                   }
+                   if(mTank.rotation()==90){
+                      mTank.setY(mTank.y());
+                      mTank.setX(building->x()-mTank.pixmap().width());
+                   }
+                   if(mTank.rotation()==270){
+                      mTank.setY(mTank.y());
+                      mTank.setX(building->x()+building->pixmap().width());
                    }
                 }
             }
         }
     });
+}
+
+void MainWindow::BuildingCollide3()
+{
+    Time =new QTimer (this);
+    Time->start(1);
+    connect(Time,&QTimer::timeout,[this](){
+        for(auto building : mBuilding)
+        for(auto enemy : mEnemy){
+            if(enemy->collidesWithItem(building)){
+                if(building->kind!=3){
+                   if(enemy->rotation()==0){
+                      enemy->setY(building->y()+building->pixmap().height());
+                      enemy->setX(enemy->x());
+                   }
+                   if(enemy->rotation()==180){
+                      enemy->setY(building->y()-enemy->pixmap().height());
+                      enemy->setX(enemy->x());
+                   }
+                   if(enemy->rotation()==90){
+                      enemy->setY(enemy->y());
+                      enemy->setX(building->x()-enemy->pixmap().width());
+                   }
+                   if(enemy->rotation()==270){
+                      enemy->setY(enemy->y());
+                      enemy->setX(building->x()+building->pixmap().width());
+                   }
+                }
+                if(building->kind==3){
+                    mScene.removeItem(building);
+                    mScene.addItem(building);
+                }
+            }
+        }
+    });
+}
+
+void MainWindow::MapCreate()
+{
+    for(int i=0;i<32;i++){
+        for(int j=0;j<18;j++){
+            if(map1[j][i]!=0){
+                BuildingCreate(j,i,map1[j][i]);
+            }
+        }
+    }
 }
