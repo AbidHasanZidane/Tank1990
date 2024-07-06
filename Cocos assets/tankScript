@@ -1,0 +1,28 @@
+import { _decorator, Component, Prefab, Node, instantiate, Vec3 } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('tankScript')
+export class tankScript extends Component {
+    @property(Prefab)
+    bulletPrefab: Prefab = null;
+
+    private speed = 0;
+
+    start() {
+
+    }
+
+    update(deltaTime: number) {
+        let position = this.node.getPosition();
+        position.x += this.speed * deltaTime;
+        this.node.setPosition(position);
+    }
+
+    shootBullet() {
+        if (this.bulletPrefab) {
+            let bullet = instantiate(this.bulletPrefab);
+            bullet.setPosition(this.node.getPosition());
+            this.node.parent.addChild(bullet);
+        }
+    }
+}
