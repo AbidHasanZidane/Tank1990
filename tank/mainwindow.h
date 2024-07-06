@@ -36,6 +36,8 @@ public:
 
     void EnemyMove();
 
+    void myTankCollide();
+
 private:
     Ui::MainWindow *ui;
 
@@ -50,6 +52,8 @@ private:
     QTimer* BulletTime;
 
     QTimer* Time;
+
+    QTimer* Time2;
 
     QList<Bullet*>mBullet;
 

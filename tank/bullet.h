@@ -9,14 +9,13 @@
 class Bullet : public QGraphicsPixmapItem,public QObject
 {
 public:
+    char _dir;
 
-    Bullet(QPoint _pos,QPixmap _pixmap);
+    Bullet(QPoint _pos,QPixmap _pixmap,char _dir);
     
     int mBulletSpeed=25;
 
-    ~Bullet(){
-        qDebug()<<"bug"<<endl;
-    }
+    void BulletMove();
     
 };
 #endif // BULLET_H
