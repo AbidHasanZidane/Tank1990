@@ -1,0 +1,17 @@
+import { _decorator, Component, Vec3, Node } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('BulletScript')
+export class BulletScript extends Component {
+    @property
+    speed = 500; // Speed of the bullet
+
+    update(deltaTime: number) {
+        let position = this.node.getPosition();
+        position.x += this.speed * deltaTime;
+        this.node.setPosition(position);
+    }
+}
+
+
+
