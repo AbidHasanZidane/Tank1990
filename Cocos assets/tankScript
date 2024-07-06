@@ -1,4 +1,6 @@
-import { _decorator, Component, Prefab, Node, instantiate, Vec3 } from 'cc';
+
+import { _decorator, Component, Prefab, Node, instantiate, Vec3, Quat } from 'cc';
+import { BulletScript } from './bulletScript';
 const { ccclass, property } = _decorator;
 
 @ccclass('tankScript')
@@ -6,23 +8,31 @@ export class tankScript extends Component {
     @property(Prefab)
     bulletPrefab: Prefab = null;
 
-    private speed = 0;
+    private direction: Vec3 = new Vec3(1, 0, 0); // Default direction
 
-    start() {
-
-    }
+    start() { }
 
     update(deltaTime: number) {
-        let position = this.node.getPosition();
-        position.x += this.speed * deltaTime;
-        this.node.setPosition(position);
+        // Your tank movement logic (if any)
     }
 
     shootBullet() {
         if (this.bulletPrefab) {
             let bullet = instantiate(this.bulletPrefab);
             bullet.setPosition(this.node.getPosition());
+            bullet.setRotation(this.node.getRotation()); // Set bullet rotation
+
+            let bulletScript = bullet.getComponent(BulletScript);
+            if (bulletScript) {
+                bulletScript.setDirection(this.direction); // Set bullet direction
+            }
+
             this.node.parent.addChild(bullet);
         }
+    }
+
+    setDirectionAndRotation(direction: Vec3, rotation: Quat) {
+        this.direction = direction.clone();
+        this.node.setRotation(rotation);
     }
 }
