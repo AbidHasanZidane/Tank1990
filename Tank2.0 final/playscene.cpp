@@ -6,7 +6,8 @@
 #include<QTimer>
 #include<QDebug>
 #include<queue>
-#include<QSound>
+#include<QSoundEffect>
+#include <QRandomGenerator>
 using namespace std;
 
 //上1下2左3右4
@@ -330,12 +331,14 @@ void PlayScene::initBullet(tank_s* tank,bullet_s*bullet,int direction){
 //创造道具
 vector<int> PlayScene::CreateRandomPosAndTool(){
     vector<int>res;
-    int x=0,y=0;
-    while(mainmap[x][y]!=0){
-    x=qrand()%29;
-    y=qrand()%42;
+    int x = 0, y = 0;
+    QRandomGenerator randomGenerator;
+
+    while (mainmap[x][y] != 0) {
+        x = randomGenerator.bounded(29);  // Generates a random integer in the range [0, 29)
+        y = randomGenerator.bounded(42);  // Generates a random integer in the range [0, 42)
     }
-    int tooltype=qrand()%3;
+    int tooltype=randomGenerator.bounded(3);
     mainmap[x][y]=250;
     res.push_back(x);
     res.push_back(y);
@@ -534,9 +537,7 @@ void PlayScene::PaintLaserIsHit(tank_s*tank){
 //画死亡效果
 void PlayScene::DeathEffect(tank_s*tank){
     if(!tank->alive){
-        if(!tank->DieOnce){
-        QSound*BoomSound=new QSound("://music/boom.wav",this);
-        BoomSound->play();}
+
         tank->DieOnce=true;
         QPainter painter(this);
         QBrush Brush(Qt::black);
