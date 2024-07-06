@@ -1,23 +1,51 @@
-import { _decorator, Component, Vec3, Node } from 'cc';
+// import { _decorator, Component, Vec3, Node } from 'cc';
+// const { ccclass, property } = _decorator;
+
+// @ccclass('BulletScript')
+// export class BulletScript extends Component {
+//     @property
+//     speed = 500; // Speed of the bullet
+
+//     update(deltaTime: number) {
+//         let position = this.node.getPosition();
+//         position.x += this.speed * deltaTime;
+//         this.node.setPosition(position);
+//     }
+//      onLoad() {
+//         //this.startTime = Date.now() / 1000; 
+//         this.scheduleOnce(() => {
+//             this.node.destroy();
+//         }, 2);  // Destroy bullet after 2 seconds
+//     }
+// }
+
+import { _decorator, Component, Vec3, Quat } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('BulletScript')
 export class BulletScript extends Component {
     @property
-    speed = 500; // Speed of the bullet
+    speed: number = 500; // Speed of the bullet
+
+    private direction: Vec3 = new Vec3(1, 0, 0); // Default direction
+
+    start() { }
 
     update(deltaTime: number) {
         let position = this.node.getPosition();
-        position.x += this.speed * deltaTime;
+        let movement = new Vec3(this.direction.x * this.speed * deltaTime, this.direction.y * this.speed * deltaTime, 0);
+        position.add(movement);
         this.node.setPosition(position);
     }
-     onLoad() {
-        this.startTime = Date.now() / 1000; 
-        this.scheduleOnce(() => {
-            this.node.destroy();
-        }, 2);  // Destroy bullet after 2 seconds
+
+    public setDirection(direction: Vec3) {
+        this.direction = direction.clone();
     }
+
+    public setRotation(rotation: Quat) {
+        this.node.setRotation(rotation);
+    }
+
+   
 }
-
-
 
