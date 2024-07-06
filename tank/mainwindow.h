@@ -13,6 +13,7 @@
 #include"mytank.h"
 #include"bullet.h"
 #include"enemy.h"
+#include"building.h"
 
 namespace Ui {
 class MainWindow;
@@ -38,6 +39,12 @@ public:
 
     void myTankCollide();
 
+    void BuildingCreate();
+
+    void BuildingCollide();
+
+    void BuildingCollide2();
+
 private:
     Ui::MainWindow *ui;
 
@@ -58,6 +65,8 @@ private:
     QList<Bullet*>mBullet;
 
     QList<Enemy*>mEnemy;
+
+    QList<Building*>mBuilding;
 
 };
 
