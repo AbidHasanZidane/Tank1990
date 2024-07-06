@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mGameView.setScene(&mScene);
 
     mGameView.setParent(this);
+    setCentralWidget(&mGameView);
 
     mGameView.show();
 
