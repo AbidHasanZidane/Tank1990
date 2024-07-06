@@ -11,6 +11,12 @@ export class BulletScript extends Component {
         position.x += this.speed * deltaTime;
         this.node.setPosition(position);
     }
+     onLoad() {
+        this.startTime = Date.now() / 1000; 
+        this.scheduleOnce(() => {
+            this.node.destroy();
+        }, 2);  // Destroy bullet after 2 seconds
+    }
 }
 
 
