@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -23,7 +22,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -31,14 +29,11 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1289, 643);
+        MainWindow->resize(1280, 720);
+        MainWindow->setMinimumSize(QSize(0, 286));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
         MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 1289, 26));
-        MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName("mainToolBar");
         MainWindow->addToolBar(Qt::ToolBarArea::TopToolBarArea, mainToolBar);

@@ -133,6 +133,8 @@ release/qrc_tank.cpp: ../../tank.qrc \
 		../../90Tank/start/tank_main.png \
 		../../90Tank/start/1.png \
 		../../90Tank/start/1(1).png \
+		../../90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png \
+		../../90Tank/player_tank/mTank.png \
 		../../90Tank/player_tank/Icon-ldpi.png \
 		../../90Tank/player_tank/Icon-mdpi.png \
 		../../90Tank/player_tank/Icon-hdpi.png \
@@ -154,6 +156,8 @@ release/qrc_tank.cpp: ../../tank.qrc \
 		../../90Tank/start/tank_main.png \
 		../../90Tank/start/1.png \
 		../../90Tank/start/1(1).png \
+		../../90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png \
+		../../90Tank/player_tank/mTank.png \
 		../../90Tank/player_tank/Icon-ldpi.png \
 		../../90Tank/player_tank/Icon-mdpi.png \
 		../../90Tank/player_tank/Icon-hdpi.png \
@@ -175,6 +179,8 @@ release/qrc_tank.cpp: ../../tank.qrc \
 		../../90Tank/start/tank_main.png \
 		../../90Tank/start/1.png \
 		../../90Tank/start/1(1).png \
+		../../90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png \
+		../../90Tank/player_tank/mTank.png \
 		../../90Tank/player_tank/Icon-ldpi.png \
 		../../90Tank/player_tank/Icon-mdpi.png \
 		../../90Tank/player_tank/Icon-hdpi.png \
@@ -862,11 +868,13 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../building.h \
 		ui_mainwindow.h \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtCore/QVariant \
+		D:/adklsjakl/6.7.2/mingw_64/include/QtGui/QAction \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/QMenu \
+		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
-		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/QStatusBar \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
 		D:/adklsjakl/6.7.2/mingw_64/include/QtWidgets/QToolBar \

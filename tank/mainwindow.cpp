@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setFixedSize(1280,720);
+    this->setFixedSize(1290,754);
 
     mGameView.setSceneRect(QRect(0,0,1280,720));
 
@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mGameView.setScene(&mScene);
 
     mGameView.setParent(this);
+
+
+    mGameView.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mGameView.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mGameView.setResizeAnchor(QGraphicsView::NoAnchor);
 
     setCentralWidget(&mGameView);
 
