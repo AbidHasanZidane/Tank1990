@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setFixedSize(1290,754);
+    this->setFixedSize(1280,720);
 
     mGameView.setSceneRect(QRect(0,0,1280,720));
 
@@ -23,11 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mGameView.setScene(&mScene);
 
     mGameView.setParent(this);
-
-
-    mGameView.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mGameView.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mGameView.setResizeAnchor(QGraphicsView::NoAnchor);
 
     setCentralWidget(&mGameView);
 
@@ -121,7 +116,7 @@ void MainWindow::BulletShoot()
 {
    QPixmap bulletImg("://90Tank/player_tank/girls_preview.png");
    if(mTank.rotation()==0){
-       QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y());
+       QPoint pos(mTank.x()+mTank.pixmap().width()/2-1,mTank.y());
        Bullet* bullet=new Bullet(pos,bulletImg,'N');
        bullet->setRotation(0);
        mScene.addItem(bullet);
@@ -129,7 +124,7 @@ void MainWindow::BulletShoot()
    }
 
    if(mTank.rotation()==180){
-       QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y()+mTank.pixmap().height());
+       QPoint pos(mTank.x()+mTank.pixmap().width()/2+1,mTank.y()+mTank.pixmap().height());
        Bullet* bullet=new Bullet(pos,bulletImg,'S');
        bullet->setRotation(180);
        mScene.addItem(bullet);
@@ -137,7 +132,7 @@ void MainWindow::BulletShoot()
    }
 
    if(mTank.rotation()==90){
-       QPoint pos(mTank.x()+mTank.pixmap().width(),mTank.y()+mTank.pixmap().height()/2);
+       QPoint pos(mTank.x()+mTank.pixmap().width(),mTank.y()+mTank.pixmap().height()/2-1);
        Bullet* bullet=new Bullet(pos,bulletImg,'E');
        bullet->setRotation(90);
        mScene.addItem(bullet);
@@ -145,7 +140,7 @@ void MainWindow::BulletShoot()
    }
 
    if(mTank.rotation()==270){
-       QPoint pos(mTank.x(),mTank.y()+mTank.pixmap().height()/2);
+       QPoint pos(mTank.x(),mTank.y()+mTank.pixmap().height()/2+3);
        Bullet* bullet=new Bullet(pos,bulletImg,'W');
        bullet->setRotation(270);
        mScene.addItem(bullet);
