@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res2/1player.png</file>
+        <file>res2/2player.png</file>
+        <file>res2/bomb.png</file>
+        <file>res2/brick.png</file>
+        <file>res2/down.jpg</file>
+        <file>res2/food_boom.png</file>
+        <file>res2/food_clock.png</file>
+        <file>res2/food_gun.png</file>
+        <file>res2/food_iron.png</file>
+        <file>res2/food_protect.png</file>
+        <file>res2/food_star.png</file>
+        <file>res2/food_tank.png</file>
+        <file>res2/gun.png</file>
+        <file>res2/left.jpg</file>
+        <file>res2/right.jpg</file>
+        <file>res2/river1.png</file>
+        <file>res2/river2.png</file>
+        <file>res2/shield.png</file>
+        <file>res2/snail.png</file>
+        <file>res2/start.png</file>
+        <file>res2/tree.png</file>
+        <file>res2/up.jpg</file>
+    </qresource>
+</RCC>

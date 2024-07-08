@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>wallimage/unbitWall.png</file>
+        <file>wallimage/river.png</file>
+        <file>wallimage/bitWall.png</file>
+        <file>wallimage/tree.png</file>
+    </qresource>
+</RCC>

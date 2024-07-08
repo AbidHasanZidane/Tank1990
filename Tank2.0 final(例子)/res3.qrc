@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res3/enemy_tank_down.jpg</file>
+        <file>res3/enemy_tank_left.jpg</file>
+        <file>res3/gameover.jpg</file>
+        <file>res3/quit.tga</file>
+        <file>res3/back.tga</file>
+    </qresource>
+</RCC>

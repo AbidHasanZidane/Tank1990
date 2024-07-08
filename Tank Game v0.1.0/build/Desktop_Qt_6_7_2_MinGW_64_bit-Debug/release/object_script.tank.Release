@@ -1,0 +1,14 @@
+release/main.o
+release/mainwindow.o
+release/mytank.o
+release/bullet.o
+release/enemy.o
+release/building.o
+release/w2.o
+release/widget.o
+release/qrc_music.o
+release/qrc_pic.o
+release/qrc_tank.o
+release/moc_mainwindow.o
+release/moc_w2.o
+release/moc_widget.o
