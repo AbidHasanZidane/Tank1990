@@ -8,9 +8,11 @@
 class MyTank : public QGraphicsPixmapItem
 {
 public:
+    int HP=3;
+
     MyTank();
 
-    int mTankSpeed=10;
+    int mTankSpeed=15;
 private:
 
 };
