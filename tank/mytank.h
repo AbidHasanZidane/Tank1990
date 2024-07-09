@@ -4,6 +4,7 @@
 #include <QObject>
 #include<QGraphicsPixmapItem>
 #include<QKeyEvent>
+#include<QWidget>
 
 class MyTank : public QGraphicsPixmapItem
 {
@@ -12,7 +13,7 @@ public:
 
     MyTank();
 
-    int mTankSpeed=15;
+    int mTankSpeed=10;
 private:
 
 };

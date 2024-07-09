@@ -53,6 +53,9 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     eBulletShoot();
+    Time = new QTimer (this);
+    Time->start(100);
+    connect(Time,&QTimer::timeout,this,GameOver);
 }
 
 
@@ -91,10 +94,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         break;
     }
      case Qt::Key_J:{
-
-        BulletShoot();
-
-        break;
+         BulletShoot();
+         break;
      }
      case Qt::Key_K:{
         CreatEnemy(100,100);
@@ -121,7 +122,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          break;
      }
      case Qt::Key_F:{
-         qDebug()<<mTank.HP<<Qt::endl;
+         qDebug()<<killnum<<endl;
      }
      };
      if(mTank.x()<0){
@@ -137,7 +138,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          mTank.setY(720-mTank.pixmap().height());
      }
 }
-
 void MainWindow::BulletShoot()
 {
    QPixmap bulletImg("://90Tank/player_tank/girls_preview.png");
@@ -350,7 +350,6 @@ void MainWindow::myTankCollide()
                 mTank.mTankSpeed=10;
                 mTank.HP--;
                 });
-                killnum++;
             }
         }
     });
@@ -574,10 +573,10 @@ void MainWindow::game1()
     }
     killnum=0;
     for(int i=1;i<=5;i++){
-        QTimer::singleShot(10000*i,this,[=](){
+        QTimer::singleShot(5000*i,this,[=](){
         CreatEnemy(100,600);
         });
-        QTimer::singleShot(10000*i*2,this,[=](){
+        QTimer::singleShot(10000*i,this,[=](){
         CreatEnemy(1100,600);
         });
     }
@@ -684,5 +683,13 @@ void MainWindow::game5()
                 BuildingCreate(j,i,map5[j][i]);
             }
         }
+    }
+}
+
+void MainWindow::GameOver()
+{
+    if(mTank.HP<=0){
+        qDebug()<<"GameOver"<<endl;
+        mTank.HP=3;
     }
 }

@@ -68,6 +68,8 @@ public:
 
     void game5();
 
+    void GameOver();
+
 private:
     Ui::MainWindow *ui;
 
