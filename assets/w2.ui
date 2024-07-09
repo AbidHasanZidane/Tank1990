@@ -31,8 +31,8 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>70</width>
-     <height>35</height>
+     <width>100</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -43,8 +43,8 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>100</y>
-     <width>512</width>
+     <y>103</y>
+     <width>500</width>
      <height>16</height>
     </rect>
    </property>
@@ -55,7 +55,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>412</x>
+     <x>410</x>
      <y>87</y>
      <width>41</width>
      <height>41</height>
@@ -63,9 +63,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="pic.qrc">:/pic/resources/sound.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -75,8 +72,8 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>97</y>
-     <width>111</width>
+     <y>100</y>
+     <width>110</width>
      <height>20</height>
     </rect>
    </property>
@@ -96,8 +93,8 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>150</y>
-     <width>111</width>
+     <y>170</y>
+     <width>110</width>
      <height>20</height>
     </rect>
    </property>
@@ -116,17 +113,14 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>412</x>
-     <y>140</y>
+     <x>410</x>
+     <y>157</y>
      <width>41</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="pic.qrc">:/pic/resources/sound.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -136,13 +130,67 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>153</y>
-     <width>512</width>
+     <y>173</y>
+     <width>500</width>
      <height>16</height>
     </rect>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>230</y>
+     <width>500</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>360</y>
+     <width>651</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>恢 复 默 认 设 置</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>240</y>
+     <width>130</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>游 戏 分 辨 率</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QSoundEffect>
+#include <QPixmap>
+#include <QImage>
+#include <QPixmapCache>
+#include <QFile>
 namespace Ui {
 class w2;
 }
@@ -16,6 +20,8 @@ public:
     ~w2();
     Ui::w2 *ui;
     QSoundEffect *butEffect=new QSoundEffect;
+    QImage *image0=new QImage(":/pic/resources/sound.png");
+    QImage *image1=new QImage(":/pic/resources/muted.png");
 
 signals:
     void sendVolume0(int val);
@@ -27,6 +33,9 @@ private slots:
     void on_horizontalSlider_valueChanged(int value);
     void on_horizontalSlider_2_valueChanged(int value);
     void spawned(double vol0,double vol1);
+    void checkIndexChangedSignal(int index);
+
+    void on_pushButton_2_clicked();
 
 private:
     bool eventFilter(QObject *obj, QEvent *event) override;

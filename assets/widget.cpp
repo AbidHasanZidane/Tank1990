@@ -1,4 +1,5 @@
 #include "widget.h"
+#include "ui_w2.h"
 #include "ui_widget.h"
 
 Widget::Widget(QWidget *parent)
@@ -18,6 +19,10 @@ Widget::Widget(QWidget *parent)
     ui->pushButton_2->installEventFilter(this);
     ui->toolButton->setAttribute(Qt::WA_Hover,true);
     ui->toolButton->installEventFilter(this);
+    connect(timer0, SIGNAL(timeout()), this, SLOT(changeOpacity()));
+    timer0->start(20);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(changeTexts()));
+    timer1->start(800);
 }
 
 Widget::~Widget()
@@ -28,6 +33,7 @@ Widget::~Widget()
 void Widget::on_toolButton_clicked()
 {
     w2 *w=new w2();
+    w->setFixedSize(1280,720);
     w->show();
     this->hide();
     connect(w,SIGNAL(sendVolume0(int)),this,SLOT(changeVolume0(int)));
@@ -35,6 +41,16 @@ void Widget::on_toolButton_clicked()
     connect(w,SIGNAL(switch2w()),this,SLOT(switchOn()));
     connect(this,SIGNAL(spawnw2(double,double)),w,SLOT(spawned(double,double)));
     emit spawnw2(curVol0,curVol1);
+    if(scale=="0.8")
+        w->ui->comboBox->setCurrentIndex(5);
+    else if(scale=="1")
+        w->ui->comboBox->setCurrentIndex(4);
+    else if(scale=="1.25")
+        w->ui->comboBox->setCurrentIndex(3);
+    else if(scale=="1.5")
+        w->ui->comboBox->setCurrentIndex(2);
+    else if(scale=="2")
+        w->ui->comboBox->setCurrentIndex(1);
 }
 
 void Widget::on_pushButton_2_clicked()
@@ -95,5 +111,59 @@ void Widget::keyPressEvent(QKeyEvent *event)
         this->hide();
         w1 *w=new w1();
         w->show();
+    }
+}
+
+void Widget::changeOpacity()
+{
+    if(upedge)
+    {
+        opacity+=0.01;
+        if(opacity>1)
+            upedge=false;
+    }
+    else
+    {
+        opacity-=0.01;
+        if(opacity<0.3)
+            upedge=true;
+    }
+    QString str=QString::number(opacity);
+    QString style="color:rgba(200,200,200,"+str+")";
+    ui->label_2->setStyleSheet(style);
+}
+
+void Widget::changeTexts()
+{
+    switch(state)
+    {
+        case 0:
+        {
+            state++;
+            ui->label_2->setText("按 任 意 键 开 始 游 戏");
+            ui->label_2->setGeometry(475,545,400,40);
+            break;
+        }
+        case 1:
+        {
+            state++;
+            ui->label_2->setText("按 任 意 键 开 始 游 戏 .");
+            ui->label_2->setGeometry(469,545,400,40);
+            break;
+        }
+        case 2:
+        {
+            state++;
+            ui->label_2->setText("按 任 意 键 开 始 游 戏 . .");
+            ui->label_2->setGeometry(463,545,400,40);
+            break;
+        }
+        case 3:
+        {
+            state=0;
+            ui->label_2->setText("按 任 意 键 开 始 游 戏 . . .");
+            ui->label_2->setGeometry(457,545,400,40);
+            break;
+        }
     }
 }
