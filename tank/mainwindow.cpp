@@ -121,7 +121,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          break;
      }
      case Qt::Key_F:{
-         qDebug()<<mTank.HP<<endl;
+         qDebug()<<mTank.HP<<Qt::endl;
      }
      };
      if(mTank.x()<0){
