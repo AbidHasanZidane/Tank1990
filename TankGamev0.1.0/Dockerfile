@@ -11,11 +11,10 @@ RUN apt-get update && apt-get install -y \
     linguist-qt6 \
     libqt6sql6-mysql \
     qt6-l10n-tools \
-    qtcreator
-RUN apt-get update && apt-get install -y \
-    qtbase5-dev \
+    qtcreator \
     pulseaudio \
-    libpulse-dev
+    libpulse-dev \
+    qtbase5-dev
 
 
 # 检查是否安装成功
