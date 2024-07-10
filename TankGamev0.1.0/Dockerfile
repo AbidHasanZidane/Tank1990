@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 # 更新并安装依赖项
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     qt6-base-dev \
@@ -11,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libqt6sql6-mysql \
     qt6-l10n-tools \
     qtcreator
+RUN apt install qt5-default
 RUN apt-get update && apt-get install -y pulseaudio
 RUN apt-get install -y libpulse-dev
 
