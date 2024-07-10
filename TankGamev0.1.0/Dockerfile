@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     pulseaudio \
     qtbase5-dev \
     libqt5multimedia5-plugins \
+    apt-get install qtmultimedia5-dev \
     libpulse-dev \
     qtbase5-dev
 
