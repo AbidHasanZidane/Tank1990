@@ -124,6 +124,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
      case Qt::Key_F:{
          qDebug()<<killnum<<endl;
      }
+     case Qt::Key_Escape:{0
+         QThread::sleep(2);
+     }
      };
      if(mTank.x()<0){
          mTank.setX(0);
@@ -350,6 +353,7 @@ void MainWindow::myTankCollide()
                 mTank.mTankSpeed=10;
                 mTank.HP--;
                 });
+                killnum++;
             }
         }
     });
@@ -580,6 +584,16 @@ void MainWindow::game1()
         CreatEnemy(1100,600);
         });
     }
+    GTime1 = new QTimer (this);
+    GTime1->start(100);
+    connect(GTime1,&QTimer::timeout,[this](){
+        if(killnum>=10){
+            killnum=0;
+            game2();
+            GTime1->stop();
+            //disconnect(Time,&QTimer::timeout,this,nullptr);
+        }
+    });
 }
 
 void MainWindow::game2()
@@ -606,6 +620,23 @@ void MainWindow::game2()
             }
         }
     }
+    for(int i=1;i<=5;i++){
+        QTimer::singleShot(5000*i,this,[=](){
+        CreatEnemy(200,150);
+        });
+        QTimer::singleShot(10000*i,this,[=](){
+        CreatEnemy(760,200);
+        });
+    }
+    GTime2 = new QTimer (this);
+    GTime2->start(100);
+    connect(GTime2,&QTimer::timeout,[this](){
+        if(killnum>=10){
+            killnum=0;
+            game3();
+            GTime2->stop();
+        }
+    });
 }
 
 void MainWindow::game3()
@@ -632,6 +663,23 @@ void MainWindow::game3()
             }
         }
     }
+    for(int i=1;i<=5;i++){
+        QTimer::singleShot(5000*i,this,[=](){
+        CreatEnemy(200,150);
+        });
+        QTimer::singleShot(10000*i,this,[=](){
+        CreatEnemy(760,200);
+        });
+    }
+    GTime3 = new QTimer (this);
+    GTime3->start(100);
+    connect(GTime3,&QTimer::timeout,[this](){
+        if(killnum>=10){
+            killnum=0;
+            game4();
+            GTime3->stop();
+        }
+    });
 }
 
 void MainWindow::game4()
@@ -658,6 +706,23 @@ void MainWindow::game4()
             }
         }
     }
+    for(int i=1;i<=5;i++){
+        QTimer::singleShot(5000*i,this,[=](){
+        CreatEnemy(200,150);
+        });
+        QTimer::singleShot(10000*i,this,[=](){
+        CreatEnemy(760,200);
+        });
+    }
+    GTime4 = new QTimer (this);
+    GTime4->start(100);
+    connect(GTime4,&QTimer::timeout,[this](){
+        if(killnum>=10){
+            killnum=0;
+            game5();
+            GTime4->stop();
+        }
+    });
 }
 
 void MainWindow::game5()

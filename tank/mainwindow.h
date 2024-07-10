@@ -15,6 +15,7 @@
 #include"enemy.h"
 #include"building.h"
 #include"enemybullet.h"
+#include <QThread>
 
 namespace Ui {
 class MainWindow;
@@ -87,6 +88,14 @@ private:
 
     QTimer* Time2;
 
+    QTimer* GTime1;
+
+    QTimer* GTime2;
+
+    QTimer* GTime3;
+
+    QTimer* GTime4;
+
     QList<Bullet*>mBullet;
 
     QList<Enemy*>mEnemy;
@@ -94,6 +103,8 @@ private:
     QList<Building*>mBuilding;
 
     QList<enemyBullet*>eBullet;
+
+    Qmutex m_mutex;
 
     int dir;
 
