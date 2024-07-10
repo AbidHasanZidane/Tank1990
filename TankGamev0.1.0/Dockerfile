@@ -24,7 +24,7 @@ WORKDIR /TANKFIGHTER_EXAMPLE
 COPY . /TANKFIGHTER_EXAMPLE
 
 # 使用 qmake 构建项目
-RUN qmake6 -o Makefile tank.pro
+RUN qmake -o Makefile tank.pro
 
 # 使用 make 编译项目
 RUN make
