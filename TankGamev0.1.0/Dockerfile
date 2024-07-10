@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
     qt6-l10n-tools \
     qtcreator \
     pulseaudio \
+    qtbase5-dev \
+    libqt5multimedia5-plugins \
     libpulse-dev \
     qtbase5-dev
 
