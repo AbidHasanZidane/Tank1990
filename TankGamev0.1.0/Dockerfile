@@ -40,3 +40,4 @@ RUN make
 
 # 进入运行
 RUN ./tank
+CMD ["./Tank!!"]
