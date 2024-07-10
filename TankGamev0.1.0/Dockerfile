@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     libqt6sql6-mysql \
     qt6-l10n-tools \
     qtcreator
-RUN apt-get install pulseaudio libpulse-dev
-RUN apt-get install libpul se-dev
+RUN apt-get update && apt-get install -y pulseaudio
+RUN apt-get install -y libpulse-dev
 
 # 检查是否安装成功
 RUN qmake6 --version
