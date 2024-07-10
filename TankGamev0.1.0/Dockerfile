@@ -2,27 +2,28 @@ FROM ubuntu:latest
 
 # 更新并安装依赖项
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    qt6-base-dev \
-    qmake6 \
-    qt6-charts-dev \
-    libmysqlclient-dev \
-    linguist-qt6 \
-    libqt6sql6-mysql \
-    qt6-l10n-tools \
-    qtcreator \
-    pulseaudio \
-    libqt5multimedia5-plugins \
-    qtmultimedia5-dev \
-    libpulse-dev \
-    qtbase5-dev \
-    libgstreamer1.0-dev \
-    libgstreamer-plugins-base1.0-dev \
-    gstreamer1.0-plugins-base \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-bad \
-    gstreamer1.0-plugins-ugly
+RUN apt-get update \
+    && apt-get install -y \
+        build-essential \
+        qt6-base-dev \
+        qmake6 \
+        qt6-charts-dev \
+        libmysqlclient-dev \
+        linguist-qt6 \
+        libqt6sql6-mysql \
+        qt6-l10n-tools \
+        qtcreator \
+        pulseaudio \
+        qtbase5-dev \
+        libqt5multimedia5-plugins \
+        qtmultimedia5-dev \
+        libpulse-dev \
+        libgstreamer1.0-dev \
+        libgstreamer-plugins-base1.0-dev \
+        gstreamer1.0-plugins-base \
+        gstreamer1.0-plugins-good \
+        gstreamer1.0-plugins-bad \
+        gstreamer1.0-plugins-ugly \
 
 
 # 检查是否安装成功
