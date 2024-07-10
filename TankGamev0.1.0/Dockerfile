@@ -15,9 +15,12 @@ RUN apt-get update && apt-get install -y \
     pulseaudio \
     qtbase5-dev \
     libqt5multimedia5-plugins \
+    
     apt-get install qtmultimedia5-dev \
     libpulse-dev \
-    qtbase5-dev
+    qtbase5-dev \
+    apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
+    apt-get install qtmultimedia5-dev
 
 
 # 检查是否安装成功
