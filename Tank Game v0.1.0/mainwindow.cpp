@@ -116,6 +116,29 @@ void MainWindow::BulletShoot()
     }
 
     // 同理，创建其他方向的子弹，代码类似
+     if(mTank.rotation()==180){
+       QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y()+mTank.pixmap().height());
+       Bullet* bullet=new Bullet(pos,bulletImg,'S');
+       bullet->setRotation(180);
+       mScene.addItem(bullet);
+       mBullet.append(bullet);
+   }
+
+   if(mTank.rotation()==90){
+       QPoint pos(mTank.x()+mTank.pixmap().width(),mTank.y()+mTank.pixmap().height()/2);
+       Bullet* bullet=new Bullet(pos,bulletImg,'E');
+       bullet->setRotation(90);
+       mScene.addItem(bullet);
+       mBullet.append(bullet);
+   }
+
+   if(mTank.rotation()==270){
+       QPoint pos(mTank.x(),mTank.y()+mTank.pixmap().height()/2);
+       Bullet* bullet=new Bullet(pos,bulletImg,'W');
+       bullet->setRotation(270);
+       mScene.addItem(bullet);
+       mBullet.append(bullet);
+   }
 }
 
 void MainWindow::CreatEnemy()
