@@ -30,7 +30,8 @@ SOURCES += \
     bullet.cpp \
     enemy.cpp \
     building.cpp \
-    enemybullet.cpp
+    enemybullet.cpp \
+    mainwindow2.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,10 +39,12 @@ HEADERS += \
     bullet.h \
     enemy.h \
     building.h \
-    enemybullet.h
+    enemybullet.h \
+    mainwindow2.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    mainwindow2.ui
 
 RESOURCES += \
     tank.qrc \

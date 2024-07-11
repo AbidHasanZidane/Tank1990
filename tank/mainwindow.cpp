@@ -7,6 +7,34 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->main2=new MainWindow2;
+    QFile Hfile("://90Tank/player_tank/HP.txt");
+    if(!Hfile.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            qDebug()<< "Open failed." << endl;
+        }
+        QTextStream HtxtInput(&Hfile);
+        QString HlineStr;
+        while(!HtxtInput.atEnd())
+        {
+            HlineStr = HtxtInput.readLine();
+            hp=HlineStr.toInt();
+            mTank.HP=HlineStr.toInt();
+        }
+    Hfile.close();
+    QFile Sfile("://90Tank/player_tank/Speed.txt");
+    if(!Sfile.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            qDebug()<< "Open failed." << endl;
+        }
+        QTextStream StxtInput(&Sfile);
+        QString SlineStr;
+        while(!StxtInput.atEnd())
+        {
+            SlineStr = StxtInput.readLine();
+            mTank.mTankSpeed=SlineStr.toInt();
+        }
+    Sfile.close();
 
     this->setFixedSize(1320,790);
 
@@ -32,11 +60,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     EnemyMove();
 
-    myTankCollide();
+    myTankCollide1();
 
     myTankCollide2();
 
-    BuildingCollide();
+    BuildingCollide1();
 
     BuildingCollide2();
 
@@ -98,8 +126,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          break;
      }
      case Qt::Key_K:{
-        CreatEnemy(100,100);
-        break;
+
+         break;
      }
      case Qt::Key_L:{
          game1();
@@ -124,8 +152,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
      case Qt::Key_F:{
          qDebug()<<killnum<<endl;
      }
-     case Qt::Key_Escape:{0
-         QThread::sleep(2);
+     case Qt::Key_Escape:{
      }
      };
      if(mTank.x()<0){
@@ -268,6 +295,7 @@ void MainWindow::EnemyBoom()
                enemy->deleteLater();
                });
                killnum++;
+               grade+=100;
            }
        }
     });
@@ -308,7 +336,7 @@ void MainWindow::EnemyMove()
     });
 }
 
-void MainWindow::myTankCollide()
+void MainWindow::myTankCollide1()
 {
     Time =new QTimer (this);
     Time->start(10);
@@ -354,6 +382,7 @@ void MainWindow::myTankCollide()
                 mTank.HP--;
                 });
                 killnum++;
+                grade+=100;
             }
         }
     });
@@ -402,7 +431,7 @@ void MainWindow::BuildingCreate(int y,int x,int kind)
     mBuilding.append(building);
 }
 
-void MainWindow::BuildingCollide()
+void MainWindow::BuildingCollide1()
 {
     Time =new QTimer (this);
     Time->start(10);
@@ -575,6 +604,7 @@ void MainWindow::game1()
             }
         }
     }
+    mTank.HP=hp;
     killnum=0;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
@@ -589,10 +619,15 @@ void MainWindow::game1()
     connect(GTime1,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
-            game2();
             GTime1->stop();
-            //disconnect(Time,&QTimer::timeout,this,nullptr);
+            this->hide();
+            this->main2->show();
         }
+    });
+    connect(this->main2,&MainWindow2::next,[=](){
+        this->show();
+        this->main2->close();
+        game2();
     });
 }
 
@@ -620,6 +655,7 @@ void MainWindow::game2()
             }
         }
     }
+    mTank.HP=hp;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
         CreatEnemy(200,150);
@@ -633,9 +669,15 @@ void MainWindow::game2()
     connect(GTime2,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
-            game3();
             GTime2->stop();
+            this->hide();
+            this->main2->show();
         }
+    });
+    connect(this->main2,&MainWindow2::next,[=](){
+        this->show();
+        this->main2->close();
+        game3();
     });
 }
 
@@ -663,6 +705,7 @@ void MainWindow::game3()
             }
         }
     }
+    mTank.HP=hp;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
         CreatEnemy(200,150);
@@ -676,9 +719,13 @@ void MainWindow::game3()
     connect(GTime3,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
-            game4();
             GTime3->stop();
         }
+    });
+    connect(this->main2,&MainWindow2::next,[=](){
+        this->show();
+        this->main2->close();
+        game4();
     });
 }
 
@@ -706,6 +753,7 @@ void MainWindow::game4()
             }
         }
     }
+    mTank.HP=hp;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
         CreatEnemy(200,150);
@@ -719,9 +767,13 @@ void MainWindow::game4()
     connect(GTime4,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
-            game5();
             GTime4->stop();
         }
+    });
+    connect(this->main2,&MainWindow2::next,[=](){
+        this->show();
+        this->main2->close();
+        game5();
     });
 }
 
@@ -749,12 +801,21 @@ void MainWindow::game5()
             }
         }
     }
+    mTank.HP=hp;
+    for(int i=1;i<=5;i++){
+        QTimer::singleShot(5000*i,this,[=](){
+        CreatEnemy(200,150);
+        });
+        QTimer::singleShot(10000*i,this,[=](){
+        CreatEnemy(760,200);
+        });
+    }
 }
 
 void MainWindow::GameOver()
 {
     if(mTank.HP<=0){
         qDebug()<<"GameOver"<<endl;
-        mTank.HP=3;
+        mTank.HP=hp;
     }
 }
