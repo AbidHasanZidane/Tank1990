@@ -13,7 +13,7 @@ public:
 
     Bullet(QPoint _pos,QPixmap _pixmap,char _dir);
     
-    int mBulletSpeed=25;
+    int mBulletSpeed=40;
 
     void BulletMove();
     

@@ -13,7 +13,7 @@ public:
 
     enemyBullet(QPoint _pos,QPixmap _pixmap,char _dir);
 
-    int eBulletSpeed=25;
+    int eBulletSpeed=40;
 
     void eBulletMove();
 };

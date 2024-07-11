@@ -79,13 +79,15 @@ MainWindow::MainWindow(QWidget *parent) :
             bullet->BulletMove();
         }
     });
-
     eBulletShoot();
+    game1();
     Time = new QTimer (this);
     Time->start(100);
     connect(Time,&QTimer::timeout,this,GameOver);
+    Time = new QTimer (this);
+    Time->start(500);
+    connect(Time,&QTimer::timeout,this,BulletShoot2);
 }
-
 
 
 MainWindow::~MainWindow()
@@ -122,37 +124,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         break;
     }
      case Qt::Key_J:{
-         BulletShoot();
-         break;
-     }
-     case Qt::Key_K:{
-
-         break;
-     }
-     case Qt::Key_L:{
-         game1();
-        break;
-     }
-     case Qt::Key_U:{
-         game2();
-         break;
-     }
-     case Qt::Key_I:{
-         game3();
-         break;
-     }
-     case Qt::Key_O:{
-         game4();
-         break;
-     }
-     case Qt::Key_P:{
-         game5();
+         BulletMove.append(Qt::Key_J);
          break;
      }
      case Qt::Key_F:{
          qDebug()<<killnum<<endl;
-     }
-     case Qt::Key_Escape:{
      }
      };
      if(mTank.x()<0){
@@ -168,6 +144,16 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          mTank.setY(720-mTank.pixmap().height());
      }
 }
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    switch(event->key()){
+    case Qt::Key_J:
+        BulletMove.removeOne(Qt::Key_J);
+        break;
+    }
+}
+
 void MainWindow::BulletShoot()
 {
    QPixmap bulletImg("://90Tank/player_tank/girls_preview.png");
@@ -202,6 +188,15 @@ void MainWindow::BulletShoot()
        mScene.addItem(bullet);
        mBullet.append(bullet);
    }
+}
+
+void MainWindow::BulletShoot2()
+{
+    for(int keyCode:BulletMove){
+        if(keyCode==Qt::Key_J){
+            BulletShoot();
+        }
+    }
 }
 
 void MainWindow::EnemyShoot()

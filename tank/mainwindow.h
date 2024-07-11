@@ -35,8 +35,12 @@ public:
     MainWindow2* main2=NULL;
     //按键控制坦克移动和发射子弹
     void keyPressEvent(QKeyEvent* event);
+
+    void keyReleaseEvent(QKeyEvent* event);
     //子弹的移动
     void BulletShoot();
+    //子弹射击
+    void BulletShoot2();
     //敌人射击
     void EnemyShoot();
     //敌人子弹的移动
@@ -107,6 +111,8 @@ private:
     QList<Building*>mBuilding;
 
     QList<enemyBullet*>eBullet;
+
+    QList<int>BulletMove;
 
     int dir;
 
