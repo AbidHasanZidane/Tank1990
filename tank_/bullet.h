@@ -13,7 +13,7 @@ public:
 
     Bullet(QPoint _pos, QPixmap _pixmap, char _dir);  // 构造函数，初始化子弹的位置、图像和方向
 
-    int mBulletSpeed = 25;  // 子弹的移动速度
+    int mBulletSpeed = 40;  // 子弹的移动速度
 
     void BulletMove();  // 子弹移动的方法
 
