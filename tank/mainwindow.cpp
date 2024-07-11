@@ -265,145 +265,167 @@ void MainWindow::EnemyShoot()
 }
 void MainWindow::eBulletShoot()
 {
-    Time = new QTimer (this);
+    // 创建定时器并启动，每隔2秒触发一次EnemyShoot函数
+    Time = new QTimer(this);
     Time->start(2000);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time, &QTimer::timeout, [this]() {
         EnemyShoot();
     });
+
+    // 初始时立即调用EnemyShoot函数
     EnemyShoot();
-    Time2 = new QTimer (this);
+
+    // 创建定时器并启动，每隔50毫秒触发一次移动敌方子弹的函数
+    Time2 = new QTimer(this);
     Time2->start(50);
-    connect(Time2,&QTimer::timeout,[this](){
-        for(auto bullet:eBullet){
+    connect(Time2, &QTimer::timeout, [this]() {
+        for (auto bullet : eBullet) {
             bullet->eBulletMove();
         }
     });
 }
 
-void MainWindow::CreatEnemy(int x,int y)
+void MainWindow::CreatEnemy(int x, int y)
 {
-    Enemy* enemy=new Enemy(x,y);
+    // 创建敌人对象并添加到场景中及敌人列表中
+    Enemy* enemy = new Enemy(x, y);
     mScene.addItem(enemy);
     mEnemy.append(enemy);
 }
 
 void MainWindow::EnemyBoom()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔10毫秒检测子弹与敌人的碰撞及处理爆炸效果
+    Time = new QTimer(this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-       for(auto enemy : mEnemy)
-       for(auto bullet : mBullet)
-       {
-           if(bullet->collidesWithItem(enemy)){
-               mBullet.removeOne(bullet);
-               bullet->deleteLater();
-               mEnemy.removeOne(enemy);
-               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-               QTimer::singleShot(50,this,[=](){
-               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
-               });
-               QTimer::singleShot(100,this,[=](){
-               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
-               });
-               QTimer::singleShot(150,this,[=](){
-               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
-               });
-               QTimer::singleShot(200,this,[=](){
-               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
-               });
-               QTimer::singleShot(200,this,[=](){
-               enemy->deleteLater();
-               });
-               killnum++;
-               grade+=100;
-           }
-       }
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto enemy : mEnemy) {
+            for (auto bullet : mBullet) {
+                if (bullet->collidesWithItem(enemy)) {
+                    // 移除子弹并销毁
+                    mBullet.removeOne(bullet);
+                    bullet->deleteLater();
+                    // 移除敌人并设置爆炸动画
+                    mEnemy.removeOne(enemy);
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+                    QTimer::singleShot(50, this, [=]() {
+                        enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                    });
+                    QTimer::singleShot(100, this, [=]() {
+                        enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                    });
+                    QTimer::singleShot(150, this, [=]() {
+                        enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                    });
+                    QTimer::singleShot(200, this, [=]() {
+                        enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                    });
+                    QTimer::singleShot(200, this, [=]() {
+                        enemy->deleteLater();
+                    });
+                    // 更新得分和击败敌人数量
+                    killnum++;
+                    grade += 100;
+                }
+            }
+        }
     });
-
 }
 
 void MainWindow::EnemyMove()
 {
-    Time2=new QTimer(this);
+    // 创建定时器并启动，每隔1秒随机改变敌人移动的方向
+    Time2 = new QTimer(this);
     Time2->start(1000);
-    connect(Time2,&QTimer::timeout,[this](){
-    dir=rand();
+    connect(Time2, &QTimer::timeout, [this]() {
+        dir = rand();
     });
-    Time =new QTimer (this);
+
+    // 创建定时器并启动，每隔100毫秒更新敌人的移动状态
+    Time = new QTimer(this);
     Time->start(100);
-    connect(Time,&QTimer::timeout,[this](){
-       for(auto enemy:mEnemy){
-       enemy->setTransformOriginPoint(enemy->boundingRect().center());
-       if(dir%2==1){
-       if(mTank.x()>enemy->x()){
-       enemy->setRotation(90);
-       enemy->moveBy(enemy->enemySpeed,0);
-       }
-       if(mTank.x()<enemy->x()){
-       enemy->setRotation(270);
-       enemy->moveBy(-enemy->enemySpeed,0);
-       }}
-       if(dir%2==0){
-       if(mTank.y()<enemy->y()){
-       enemy->setRotation(0);
-       enemy->moveBy(0,-enemy->enemySpeed);
-       }
-       if(mTank.y()>enemy->y()){
-       enemy->setRotation(180);
-       enemy->moveBy(0,enemy->enemySpeed);
-       }
-       }}
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto enemy : mEnemy) {
+            // 设置敌人的旋转和移动方向
+            enemy->setTransformOriginPoint(enemy->boundingRect().center());
+            if (dir % 2 == 1) {
+                if (mTank.x() > enemy->x()) {
+                    enemy->setRotation(90);
+                    enemy->moveBy(enemy->enemySpeed, 0);
+                }
+                if (mTank.x() < enemy->x()) {
+                    enemy->setRotation(270);
+                    enemy->moveBy(-enemy->enemySpeed, 0);
+                }
+            }
+            if (dir % 2 == 0) {
+                if (mTank.y() < enemy->y()) {
+                    enemy->setRotation(0);
+                    enemy->moveBy(0, -enemy->enemySpeed);
+                }
+                if (mTank.y() > enemy->y()) {
+                    enemy->setRotation(180);
+                    enemy->moveBy(0, enemy->enemySpeed);
+                }
+            }
+        }
     });
 }
 
 void MainWindow::myTankCollide1()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔10毫秒检测我方坦克与敌人的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-        for(auto enemy : mEnemy){
-            if(mTank.collidesWithItem(enemy)){
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto enemy : mEnemy) {
+            if (mTank.collidesWithItem(enemy)) {
+                // 如果我方坦克与敌人碰撞，则移除敌人并触发爆炸效果动画
                 mEnemy.removeOne(enemy);
                 enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-                QTimer::singleShot(50,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                QTimer::singleShot(50, this, [=]() {
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
                 });
-                QTimer::singleShot(100,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                QTimer::singleShot(100, this, [=]() {
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
                 });
-                QTimer::singleShot(150,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                QTimer::singleShot(150, this, [=]() {
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
                 });
-                QTimer::singleShot(200,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                QTimer::singleShot(200, this, [=]() {
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
-                QTimer::singleShot(200,this,[=](){
-                enemy->deleteLater();
+                QTimer::singleShot(200, this, [=]() {
+                    enemy->deleteLater();
                 });
-                mTank.mTankSpeed=0;
+
+                // 停止我方坦克的移动，并设置爆炸动画及复位处理
+                mTank.mTankSpeed = 0;
                 mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-                QTimer::singleShot(50,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                QTimer::singleShot(50, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
                 });
-                QTimer::singleShot(100,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                QTimer::singleShot(100, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
                 });
-                QTimer::singleShot(150,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                QTimer::singleShot(150, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
                 });
-                QTimer::singleShot(200,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                QTimer::singleShot(200, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
-                QTimer::singleShot(250,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-                mTank.setX(200);
-                mTank.setY(200);
-                mTank.mTankSpeed=10;
-                mTank.HP--;
+                QTimer::singleShot(250, this, [=]() {
+                    // 复位我方坦克位置和速度，并减少生命值
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed = 10;
+                    mTank.HP--;
                 });
+
+                // 增加击败敌人数量和得分
                 killnum++;
-                grade+=100;
+                grade += 100;
             }
         }
     });
@@ -411,70 +433,76 @@ void MainWindow::myTankCollide1()
 
 void MainWindow::myTankCollide2()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔10毫秒检测我方坦克与敌方子弹的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-       for(auto bullet : eBullet)
-       {
-           if(bullet->collidesWithItem(&mTank)){
-               eBullet.removeOne(bullet);
-               bullet->deleteLater();
-               mTank.mTankSpeed=0;
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-               QTimer::singleShot(50,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
-               });
-               QTimer::singleShot(100,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
-               });
-               QTimer::singleShot(150,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
-               });
-               QTimer::singleShot(200,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
-               });
-               QTimer::singleShot(250,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-               mTank.setX(200);
-               mTank.setY(200);
-               mTank.mTankSpeed=10;
-               mTank.HP--;
-               });
-           }
-       }
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto bullet : eBullet) {
+            if (bullet->collidesWithItem(&mTank)) {
+                // 如果我方坦克被敌方子弹击中，则移除子弹并触发爆炸动画及停止我方坦克移动
+                eBullet.removeOne(bullet);
+                bullet->deleteLater();
+                mTank.mTankSpeed = 0;
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+                QTimer::singleShot(50, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                });
+                QTimer::singleShot(100, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                });
+                QTimer::singleShot(150, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                });
+                QTimer::singleShot(200, this, [=]() {
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                });
+                QTimer::singleShot(250, this, [=]() {
+                    // 复位我方坦克位置和速度，并减少生命值
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed = 10;
+                    mTank.HP--;
+                });
+            }
+        }
     });
 }
 
-void MainWindow::BuildingCreate(int y,int x,int kind)
+void MainWindow::BuildingCreate(int y, int x, int kind)
 {
-    Building* building=new Building(y,x,kind);
+    // 创建建筑物对象，并添加到场景和建筑物列表中
+    Building* building = new Building(y, x, kind);
     mScene.addItem(building);
     mBuilding.append(building);
 }
 
 void MainWindow::BuildingCollide1()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔10毫秒检测建筑物与子弹的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-        for(auto building : mBuilding)
-        for(auto bullet : mBullet){
-            if(building->collidesWithItem(bullet)){
-            if(building->kind==1){
-                mBullet.removeOne(bullet);
-                bullet->deleteLater();
-                mBuilding.removeOne(building);
-                building->deleteLater();
-            }
-            if(building->kind==2){
-                mBullet.removeOne(bullet);
-                bullet->deleteLater();
-            }
-            if(building->kind==3){
-                mScene.removeItem(building);
-                mScene.addItem(building);
-            }
-
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto building : mBuilding) {
+            for (auto bullet : mBullet) {
+                if (building->collidesWithItem(bullet)) {
+                    // 根据建筑物种类不同执行不同的碰撞处理
+                    if (building->kind == 1) {
+                        mBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                        mBuilding.removeOne(building);
+                        building->deleteLater();
+                    }
+                    else if (building->kind == 2) {
+                        mBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                    }
+                    else if (building->kind == 3) {
+                        // 重新添加建筑物以刷新其显示
+                        mScene.removeItem(building);
+                        mScene.addItem(building);
+                    }
+                }
             }
         }
     });
@@ -482,75 +510,85 @@ void MainWindow::BuildingCollide1()
 
 void MainWindow::BuildingCollide2()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔1毫秒检测我方坦克与建筑物的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(1);
-    connect(Time,&QTimer::timeout,[this](){
-        for(auto building : mBuilding){
-            if(mTank.collidesWithItem(building)){
-                if(building->kind!=3){
-                   if(mTank.rotation()==0){
-                      mTank.setY(building->y()+building->pixmap().height());
-                      mTank.setX(mTank.x());
-                   }
-                   if(mTank.rotation()==180){
-                      mTank.setY(building->y()-mTank.pixmap().height());
-                      mTank.setX(mTank.x());
-                   }
-                   if(mTank.rotation()==90){
-                      mTank.setY(mTank.y());
-                      mTank.setX(building->x()-mTank.pixmap().width());
-                   }
-                   if(mTank.rotation()==270){
-                      mTank.setY(mTank.y());
-                      mTank.setX(building->x()+building->pixmap().width());
-                   }
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto building : mBuilding) {
+            if (mTank.collidesWithItem(building)) {
+                // 根据建筑物种类不同，调整我方坦克的位置以避免穿越建筑物
+                if (building->kind != 3) {
+                    if (mTank.rotation() == 0) {
+                        mTank.setY(building->y() + building->pixmap().height());
+                        mTank.setX(mTank.x());
+                    }
+                    else if (mTank.rotation() == 180) {
+                        mTank.setY(building->y() - mTank.pixmap().height());
+                        mTank.setX(mTank.x());
+                    }
+                    else if (mTank.rotation() == 90) {
+                        mTank.setY(mTank.y());
+                        mTank.setX(building->x() - mTank.pixmap().width());
+                    }
+                    else if (mTank.rotation() == 270) {
+                        mTank.setY(mTank.y());
+                        mTank.setX(building->x() + building->pixmap().width());
+                    }
                 }
             }
         }
     });
 }
 
+
 void MainWindow::BuildingCollide3()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔1毫秒检测敌人与建筑物的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(1);
-    connect(Time,&QTimer::timeout,[this](){
-        for(auto building : mBuilding)
-        for(auto enemy : mEnemy){
-            if(enemy->collidesWithItem(building)){
-                if(building->kind!=3){
-                   if(enemy->rotation()==0){
-                      enemy->setY(building->y()+building->pixmap().height());
-                      enemy->setX(enemy->x());
-                   }
-                   if(enemy->rotation()==180){
-                      enemy->setY(building->y()-enemy->pixmap().height());
-                      enemy->setX(enemy->x());
-                   }
-                   if(enemy->rotation()==90){
-                      enemy->setY(enemy->y());
-                      enemy->setX(building->x()-enemy->pixmap().width());
-                   }
-                   if(enemy->rotation()==270){
-                      enemy->setY(enemy->y());
-                      enemy->setX(building->x()+building->pixmap().width());
-                   }
-                }
-                if(building->kind==3){
-                    mScene.removeItem(building);
-                    mScene.addItem(building);
-                }
-                if(enemy->x()<0){
-                    enemy->setX(0);
-                }
-                if(enemy->y()<0){
-                    enemy->setY(0);
-                }
-                if(enemy->x()+enemy->pixmap().width()>1280){
-                    enemy->setX(1280-enemy->pixmap().width());
-                }
-                if(enemy->y()+enemy->pixmap().height()>720){
-                    enemy->setY(720-enemy->pixmap().height());
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto building : mBuilding) {
+            for (auto enemy : mEnemy) {
+                if (enemy->collidesWithItem(building)) {
+                    // 根据建筑物种类不同，调整敌人的位置以避免穿越建筑物
+                    if (building->kind != 3) {
+                        if (enemy->rotation() == 0) {
+                            enemy->setY(building->y() + building->pixmap().height());
+                            enemy->setX(enemy->x());
+                        }
+                        else if (enemy->rotation() == 180) {
+                            enemy->setY(building->y() - enemy->pixmap().height());
+                            enemy->setX(enemy->x());
+                        }
+                        else if (enemy->rotation() == 90) {
+                            enemy->setY(enemy->y());
+                            enemy->setX(building->x() - enemy->pixmap().width());
+                        }
+                        else if (enemy->rotation() == 270) {
+                            enemy->setY(enemy->y());
+                            enemy->setX(building->x() + building->pixmap().width());
+                        }
+                    }
+                    
+                    // 如果建筑物是类型3，则重新添加以刷新显示
+                    if (building->kind == 3) {
+                        mScene.removeItem(building);
+                        mScene.addItem(building);
+                    }
+                    
+                    // 边界检测，防止敌人超出游戏场景边界
+                    if (enemy->x() < 0) {
+                        enemy->setX(0);
+                    }
+                    if (enemy->y() < 0) {
+                        enemy->setY(0);
+                    }
+                    if (enemy->x() + enemy->pixmap().width() > 1280) {
+                        enemy->setX(1280 - enemy->pixmap().width());
+                    }
+                    if (enemy->y() + enemy->pixmap().height() > 720) {
+                        enemy->setY(720 - enemy->pixmap().height());
+                    }
                 }
             }
         }
@@ -559,27 +597,30 @@ void MainWindow::BuildingCollide3()
 
 void MainWindow::BuildingCollide4()
 {
-    Time =new QTimer (this);
+    // 创建定时器并启动，每隔10毫秒检测建筑物与敌方子弹的碰撞及处理逻辑
+    Time = new QTimer(this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-        for(auto building : mBuilding)
-        for(auto bullet : eBullet){
-            if(building->collidesWithItem(bullet)){
-            if(building->kind==1){
-                eBullet.removeOne(bullet);
-                bullet->deleteLater();
-                mBuilding.removeOne(building);
-                building->deleteLater();
-            }
-            if(building->kind==2){
-                eBullet.removeOne(bullet);
-                bullet->deleteLater();
-            }
-            if(building->kind==3){
-                mScene.removeItem(building);
-                mScene.addItem(building);
-            }
-
+    connect(Time, &QTimer::timeout, [this]() {
+        for (auto building : mBuilding) {
+            for (auto bullet : eBullet) {
+                if (building->collidesWithItem(bullet)) {
+                    // 根据建筑物种类不同执行不同的碰撞处理
+                    if (building->kind == 1) {
+                        eBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                        mBuilding.removeOne(building);
+                        building->deleteLater();
+                    }
+                    else if (building->kind == 2) {
+                        eBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                    }
+                    else if (building->kind == 3) {
+                        // 重新添加建筑物以刷新其显示
+                        mScene.removeItem(building);
+                        mScene.addItem(building);
+                    }
+                }
             }
         }
     });
@@ -587,15 +628,16 @@ void MainWindow::BuildingCollide4()
 
 void MainWindow::clear()
 {
-    for(auto building : mBuilding){
+    // 清理建筑物、敌人和子弹列表，并释放相应的内存资源
+    for (auto building : mBuilding) {
         mBuilding.removeOne(building);
         building->deleteLater();
     }
-    for(auto enemy : mEnemy){
+    for (auto enemy : mEnemy) {
         mEnemy.removeOne(enemy);
         enemy->deleteLater();
     }
-    for(auto bullet : mBullet){
+    for (auto bullet : mBullet) {
         mBullet.removeOne(bullet);
         bullet->deleteLater();
     }
