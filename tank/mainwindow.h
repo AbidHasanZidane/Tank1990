@@ -20,6 +20,9 @@
 #include<QFileDialog>
 #include"mainwindow2.h"
 #include<QPushButton>
+#include"gameover.h"
+#include <QApplication>
+#include <QProcess>
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +36,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     MainWindow2* main2=NULL;
+    GameOver* main3=NULL;
     //按键控制坦克移动和发射子弹
     void keyPressEvent(QKeyEvent* event);
 
@@ -78,49 +82,49 @@ public:
     //第五关
     void game5();
     //游戏结束
-    void GameOver();
+    void gameOver();
 private:
-    Ui::MainWindow *ui; // UI对象指针
+    Ui::MainWindow *ui;
 
-    QGraphicsView mGameView; // 游戏视图对象
+    QGraphicsView mGameView;
 
-    QGraphicsScene mScene; // 游戏场景对象
+    QGraphicsScene mScene;
 
-    QGraphicsPixmapItem mBackGround; // 背景图像对象
+    QGraphicsPixmapItem mBackGround;
 
-    MyTank mTank; // 我方坦克对象
+    MyTank mTank;
 
-    QTimer* BulletTime; // 子弹计时器
+    QTimer* BulletTime;
 
-    QTimer* Time; // 计时器1
+    QTimer* Time;
 
-    QTimer* Time2; // 计时器2
+    QTimer* Time2;
 
-    QTimer* GTime1; // 关卡计时器1
+    QTimer* GTime1;
 
-    QTimer* GTime2; // 关卡计时器2
+    QTimer* GTime2;
 
-    QTimer* GTime3; // 关卡计时器3
+    QTimer* GTime3;
 
-  QTimer* GTime4; // 关卡计时器4
+    QTimer* GTime4;
 
-    QList<Bullet*> mBullet; // 子弹列表
+    QList<Bullet*>mBullet;
 
-    QList<Enemy*> mEnemy; // 敌人列表
+    QList<Enemy*>mEnemy;
 
-    QList<Building*> mBuilding; // 建筑物列表
+    QList<Building*>mBuilding;
 
-    QList<enemyBullet*> eBullet; // 敌方子弹列表
+    QList<enemyBullet*>eBullet;
 
-    QList<int> BulletMove; // 子弹移动列表
+    QList<int>BulletMove;
 
-    int dir; // 方向变量
+    int dir;
 
-    int killnum; // 击杀数
+    int killnum;
 
-    int grade; // 分数
+    int grade;
 
-    int hp; // 生命值
+    int hp;
     //地图二维数组，数字代表建筑种类
     int map1[18][32]={
         {3, 0, 3, 0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	1,	1,	0,	1,	1,	1,1,0,0,1,1,0,0,0,0,0,1,1,1},
@@ -141,7 +145,7 @@ private:
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	2,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0}
-    };//地图1
+    };
     int map2[18][32]={
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
@@ -161,7 +165,7 @@ private:
        { 0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	2,	0,	0,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0}
-    };//地图2
+    };
     int map3[18][32]{
         {3,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,},
         {0,	0,	3,	0,	0,	0,	0,	0,	1,	2,	1,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,},
@@ -182,7 +186,7 @@ private:
         {0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	1,	0,	1,	0,	0,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,},
         {0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,}
 
-    };//地图3
+    };
     int map4[18][32]{
         {0,	0,	0,	4,	0,	0,	0,	0,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	4,	0,	0,	0,	0,	0,},
         {0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,},
@@ -203,7 +207,7 @@ private:
         {0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,}
 
-    };//地图4
+    };
     int map5[18][32]{
         {3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	0,	0,	0,	3,	0,	3,	3,	0,	3,	0,	3,	0,	3,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	3,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,},
@@ -224,7 +228,7 @@ private:
         {3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	1,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,}
 
-    };//地图5
+    };
 };
 
 

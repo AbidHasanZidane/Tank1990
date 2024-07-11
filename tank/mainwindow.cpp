@@ -8,32 +8,27 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->main2=new MainWindow2;
+    this->main3=new GameOver;
     QFile Hfile("://90Tank/player_tank/HP.txt");
-    if(!Hfile.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            qDebug()<< "Open failed." << endl;
-        }
-        QTextStream HtxtInput(&Hfile);
-        QString HlineStr;
-        while(!HtxtInput.atEnd())
-        {
-            HlineStr = HtxtInput.readLine();
-            hp=HlineStr.toInt();
-            mTank.HP=HlineStr.toInt();
-        }
+    Hfile.open(QIODevice::ReadOnly);
+    QTextStream HtxtInput(&Hfile);
+    QString HlineStr;
+    while(!HtxtInput.atEnd())
+    {
+       HlineStr = HtxtInput.readLine();
+       hp=HlineStr.toInt();
+       mTank.HP=HlineStr.toInt();
+    }
     Hfile.close();
     QFile Sfile("://90Tank/player_tank/Speed.txt");
-    if(!Sfile.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            qDebug()<< "Open failed." << endl;
-        }
-        QTextStream StxtInput(&Sfile);
-        QString SlineStr;
-        while(!StxtInput.atEnd())
-        {
-            SlineStr = StxtInput.readLine();
-            mTank.mTankSpeed=SlineStr.toInt();
-        }
+    Sfile.open(QIODevice::ReadOnly );
+    QTextStream StxtInput(&Sfile);
+    QString SlineStr;
+    while(!StxtInput.atEnd())
+     {
+        SlineStr = StxtInput.readLine();
+        mTank.mTankSpeed=SlineStr.toInt();
+     }
     Sfile.close();
 
     this->setFixedSize(1320,790);
@@ -83,10 +78,14 @@ MainWindow::MainWindow(QWidget *parent) :
     game1();
     Time = new QTimer (this);
     Time->start(100);
-    connect(Time,&QTimer::timeout,this,GameOver);
+    connect(Time,&QTimer::timeout,this,&MainWindow::gameOver);
     Time = new QTimer (this);
     Time->start(500);
-    connect(Time,&QTimer::timeout,this,BulletShoot2);
+    connect(Time,&QTimer::timeout,this,&MainWindow::BulletShoot2);
+    connect(this->main3,&GameOver::retry,[=](){
+        this->main3->close();
+     QProcess::startDetached(qApp->applicationFilePath(), QStringList());
+    });
 }
 
 
@@ -130,6 +129,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
      case Qt::Key_F:{
          qDebug()<<killnum<<endl;
      }
+     case Qt::Key_K:{
+         //DataMod();
+     }
      };
      if(mTank.x()<0){
          mTank.setX(0);
@@ -149,7 +151,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
     switch(event->key()){
     case Qt::Key_J:
-        BulletMove.removeOne(Qt::Key_J);
+        BulletMove.removeAll(Qt::Key_J);
         break;
     }
 }
@@ -326,8 +328,8 @@ void MainWindow::EnemyMove()
        if(mTank.y()>enemy->y()){
        enemy->setRotation(180);
        enemy->moveBy(0,enemy->enemySpeed);
-       }}
        }
+       }}
     });
 }
 
@@ -603,7 +605,7 @@ void MainWindow::game1()
     killnum=0;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(100,600);
+        CreatEnemy(200,600);
         });
         QTimer::singleShot(10000*i,this,[=](){
         CreatEnemy(1100,600);
@@ -673,6 +675,10 @@ void MainWindow::game2()
         this->show();
         this->main2->close();
         game3();
+    });
+    connect(this->main3,&GameOver::retry,[=](){
+        this->close();
+        this->show();
     });
 }
 
@@ -770,6 +776,7 @@ void MainWindow::game4()
         this->main2->close();
         game5();
     });
+
 }
 
 void MainWindow::game5()
@@ -807,10 +814,11 @@ void MainWindow::game5()
     }
 }
 
-void MainWindow::GameOver()
+void MainWindow::gameOver()
 {
     if(mTank.HP<=0){
-        qDebug()<<"GameOver"<<endl;
         mTank.HP=hp;
+        this->hide();
+        this->main3->show();
     }
 }

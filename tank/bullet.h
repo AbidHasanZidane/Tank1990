@@ -3,19 +3,19 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-#include <QtDebug>
-#include <QObject>
+#include<QtDebug>
+#include<QObject>
 
-class Bullet : public QGraphicsPixmapItem, public QObject
+class Bullet : public QGraphicsPixmapItem,public QObject
 {
 public:
-    char _dir;  // 子弹的移动方向 ('N', 'S', 'W', 'E')
+    char _dir;
 
-    Bullet(QPoint _pos, QPixmap _pixmap, char _dir);  // 构造函数，初始化子弹的位置、图像和方向
+    Bullet(QPoint _pos,QPixmap _pixmap,char _dir);
+    
+    int mBulletSpeed=40;
 
-    int mBulletSpeed = 40;  // 子弹的移动速度
-
-    void BulletMove();  // 子弹移动的方法
-
+    void BulletMove();
+    
 };
 #endif // BULLET_H

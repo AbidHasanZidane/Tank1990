@@ -2,27 +2,29 @@
 
 enemyBullet::enemyBullet(QPoint _pos, QPixmap _pixmap, char _dir)
 {
-   this->setPos(_pos);  // 设置子弹的初始位置
-    this->setPixmap(QPixmap(_pixmap));  // 设置子弹的外观（图像）
-    this->_dir = _dir;  // 设置子弹的移动方向
+    this->setPos(_pos);
+
+    this->setPixmap(QPixmap(_pixmap));
+
+    this->_dir=_dir;
 }
 
 void enemyBullet::eBulletMove()
 {
-     switch (this->_dir) {
+    switch (this->_dir) {
     case 'N':
-        this->moveBy(0, -mBulletSpeed);  // 向北移动子弹（向上）
+        this->moveBy(0,-eBulletSpeed);
         break;
     case 'S':
-        this->moveBy(0, mBulletSpeed);   // 向南移动子弹（向下）
+        this->moveBy(0,eBulletSpeed);
         break;
     case 'W':
-        this->moveBy(-mBulletSpeed, 0);  // 向西移动子弹（向左）
+        this->moveBy(-eBulletSpeed,0);
         break;
     case 'E':
-        this->moveBy(mBulletSpeed, 0);   // 向东移动子弹（向右）
+        this->moveBy(eBulletSpeed,0);
         break;
     default:
-        break;  // 默认情况，不做任何操作
+        break;
     }
 }
