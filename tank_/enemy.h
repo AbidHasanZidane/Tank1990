@@ -8,8 +8,8 @@
 class Enemy : public QGraphicsPixmapItem, public QObject
 {
 public:
-    Enemy();  // 敌人类的构造函数
-
+   Enemy(int x,int y); // 敌人类的构造函数
+   int enemySpeed=10;//设置敌人的速度
 private:
 };
 
