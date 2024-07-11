@@ -645,49 +645,65 @@ void MainWindow::clear()
 
 void MainWindow::game1()
 {
+    // 清理游戏场景中的所有元素
     clear();
+
+    // 设置玩家坦克的初始位置
     mTank.setX(560);
     mTank.setY(400);
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,-2,2);
+
+    // 创建边界建筑物
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, -2, 2);
     }
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,33,2);
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, 33, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(-1,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(-1, i, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(18,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(18, i, 2);
     }
-    for(int i=0;i<32;i++){
-        for(int j=0;j<18;j++){
-            if(map1[j][i]!=0){
-                BuildingCreate(j,i,map1[j][i]);
+
+    // 根据地图数据创建建筑物
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            if (map1[j][i] != 0) {
+                BuildingCreate(j, i, map1[j][i]);
             }
         }
     }
-    mTank.HP=hp;
-    killnum=0;
-    for(int i=1;i<=5;i++){
-        QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,600);
+
+    // 设置玩家坦克的生命值和击杀数
+    mTank.HP = hp;
+    killnum = 0;
+
+    // 分批次创建敌人，并设置定时器控制敌人的生成
+    for (int i = 1; i <= 5; i++) {
+        QTimer::singleShot(5000 * i, this, [=]() {
+            CreatEnemy(200, 600);
         });
-        QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(1100,600);
+        QTimer::singleShot(10000 * i, this, [=]() {
+            CreatEnemy(1100, 600);
         });
     }
-    GTime1 = new QTimer (this);
+
+    // 创建并启动游戏计时器，监测是否满足过关条件
+    GTime1 = new QTimer(this);
     GTime1->start(100);
-    connect(GTime1,&QTimer::timeout,[this](){
-        if(killnum>=10){
-            killnum=0;
+    connect(GTime1, &QTimer::timeout, [this]() {
+        if (killnum >= 10) {
+            killnum = 0;
             GTime1->stop();
+            // 隐藏当前主窗口，显示游戏2的主窗口
             this->hide();
             this->main2->show();
         }
     });
-    connect(this->main2,&MainWindow2::next,[=](){
+
+    // 连接游戏2的信号，当游戏2完成时继续执行
+    connect(this->main2, &MainWindow2::next, [=]() {
         this->show();
         this->main2->close();
         game2();
@@ -696,100 +712,134 @@ void MainWindow::game1()
 
 void MainWindow::game2()
 {
+    // 清理游戏场景中的所有元素
     clear();
+
+    // 设置玩家坦克的初始位置
     mTank.setX(360);
     mTank.setY(400);
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,-2,2);
+
+    // 创建边界建筑物
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, -2, 2);
     }
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,33,2);
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, 33, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(-1,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(-1, i, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(18,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(18, i, 2);
     }
-    for(int i=0;i<32;i++){
-        for(int j=0;j<18;j++){
-            if(map2[j][i]!=0){
-                BuildingCreate(j,i,map2[j][i]);
+
+    // 根据地图数据创建建筑物
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            if (map2[j][i] != 0) {
+                BuildingCreate(j, i, map2[j][i]);
             }
         }
     }
-    mTank.HP=hp;
-    for(int i=1;i<=5;i++){
-        QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+
+    // 设置玩家坦克的生命值
+    mTank.HP = hp;
+
+    // 分批次创建敌人，并设置定时器控制敌人的生成
+    for (int i = 1; i <= 5; i++) {
+        QTimer::singleShot(5000 * i, this, [=]() {
+            CreatEnemy(200, 150);
         });
-        QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+        QTimer::singleShot(10000 * i, this, [=]() {
+            CreatEnemy(760, 200);
         });
     }
-    GTime2 = new QTimer (this);
+
+    // 创建并启动游戏计时器，监测是否满足过关条件
+    GTime2 = new QTimer(this);
     GTime2->start(100);
-    connect(GTime2,&QTimer::timeout,[this](){
-        if(killnum>=10){
-            killnum=0;
+    connect(GTime2, &QTimer::timeout, [this]() {
+        if (killnum >= 10) {
+            killnum = 0;
             GTime2->stop();
+            // 隐藏当前主窗口，显示游戏2的主窗口
             this->hide();
             this->main2->show();
         }
     });
-    connect(this->main2,&MainWindow2::next,[=](){
+
+    // 连接游戏2的信号，当游戏2完成时继续执行
+    connect(this->main2, &MainWindow2::next, [=]() {
         this->show();
         this->main2->close();
         game3();
     });
-    connect(this->main3,&GameOver::retry,[=](){
+
+    // 连接游戏失败后的重试信号
+    connect(this->main3, &GameOver::retry, [=]() {
         this->close();
         this->show();
     });
 }
 
+
 void MainWindow::game3()
 {
+    // 清理游戏场景中的所有元素
     clear();
+
+    // 设置玩家坦克的初始位置
     mTank.setX(560);
     mTank.setY(400);
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,-2,2);
+
+    // 创建边界建筑物
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, -2, 2);
     }
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,33,2);
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, 33, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(-1,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(-1, i, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(18,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(18, i, 2);
     }
-    for(int i=0;i<32;i++){
-        for(int j=0;j<18;j++){
-            if(map3[j][i]!=0){
-                BuildingCreate(j,i,map3[j][i]);
+
+    // 根据地图数据创建建筑物
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            if (map3[j][i] != 0) {
+                BuildingCreate(j, i, map3[j][i]);
             }
         }
     }
-    mTank.HP=hp;
-    for(int i=1;i<=5;i++){
-        QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+
+    // 设置玩家坦克的生命值
+    mTank.HP = hp;
+
+    // 分批次创建敌人，并设置定时器控制敌人的生成
+    for (int i = 1; i <= 5; i++) {
+        QTimer::singleShot(5000 * i, this, [=]() {
+            CreatEnemy(200, 150);
         });
-        QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+        QTimer::singleShot(10000 * i, this, [=]() {
+            CreatEnemy(760, 200);
         });
     }
-    GTime3 = new QTimer (this);
+
+    // 创建并启动游戏计时器，监测是否满足过关条件
+    GTime3 = new QTimer(this);
     GTime3->start(100);
-    connect(GTime3,&QTimer::timeout,[this](){
-        if(killnum>=10){
-            killnum=0;
+    connect(GTime3, &QTimer::timeout, [this]() {
+        if (killnum >= 10) {
+            killnum = 0;
             GTime3->stop();
         }
     });
-    connect(this->main2,&MainWindow2::next,[=](){
+
+    // 连接游戏2的信号，当游戏2完成时继续执行下一关
+    connect(this->main2, &MainWindow2::next, [=]() {
         this->show();
         this->main2->close();
         game4();
@@ -798,93 +848,124 @@ void MainWindow::game3()
 
 void MainWindow::game4()
 {
+    // 清理游戏场景中的所有元素
     clear();
+
+    // 设置玩家坦克的初始位置
     mTank.setX(560);
     mTank.setY(400);
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,-2,2);
+
+    // 创建边界建筑物
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, -2, 2);
     }
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,33,2);
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, 33, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(-1,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(-1, i, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(18,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(18, i, 2);
     }
-    for(int i=0;i<32;i++){
-        for(int j=0;j<18;j++){
-            if(map4[j][i]!=0){
-                BuildingCreate(j,i,map4[j][i]);
+
+    // 根据地图数据创建建筑物
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            if (map4[j][i] != 0) {
+                BuildingCreate(j, i, map4[j][i]);
             }
         }
     }
-    mTank.HP=hp;
-    for(int i=1;i<=5;i++){
-        QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+
+    // 设置玩家坦克的生命值
+    mTank.HP = hp;
+
+    // 分批次创建敌人，并设置定时器控制敌人的生成
+    for (int i = 1; i <= 5; i++) {
+        QTimer::singleShot(5000 * i, this, [=]() {
+            CreatEnemy(200, 150);
         });
-        QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+        QTimer::singleShot(10000 * i, this, [=]() {
+            CreatEnemy(760, 200);
         });
     }
-    GTime4 = new QTimer (this);
+
+    // 创建并启动游戏计时器，监测是否满足过关条件
+    GTime4 = new QTimer(this);
     GTime4->start(100);
-    connect(GTime4,&QTimer::timeout,[this](){
-        if(killnum>=10){
-            killnum=0;
+    connect(GTime4, &QTimer::timeout, [this]() {
+        if (killnum >= 10) {
+            killnum = 0;
             GTime4->stop();
         }
     });
-    connect(this->main2,&MainWindow2::next,[=](){
+
+    // 连接游戏2的信号，当游戏2完成时继续执行下一关
+    connect(this->main2, &MainWindow2::next, [=]() {
         this->show();
         this->main2->close();
         game5();
     });
-
 }
 
 void MainWindow::game5()
 {
+    // 清理游戏场景中的所有元素
     clear();
+
+    // 设置玩家坦克的初始位置
     mTank.setX(560);
     mTank.setY(400);
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,-2,2);
+
+    // 创建边界建筑物
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, -2, 2);
     }
-    for(int j=0;j<18;j++){
-        BuildingCreate(j,33,2);
+    for (int j = 0; j < 18; j++) {
+        BuildingCreate(j, 33, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(-1,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(-1, i, 2);
     }
-    for(int i=0;i<32;i++){
-        BuildingCreate(18,i,2);
+    for (int i = 0; i < 32; i++) {
+        BuildingCreate(18, i, 2);
     }
-    for(int i=0;i<32;i++){
-        for(int j=0;j<18;j++){
-            if(map5[j][i]!=0){
-                BuildingCreate(j,i,map5[j][i]);
+
+    // 根据地图数据创建建筑物
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 18; j++) {
+            if (map5[j][i] != 0) {
+                BuildingCreate(j, i, map5[j][i]);
             }
         }
     }
-    mTank.HP=hp;
-    for(int i=1;i<=5;i++){
-        QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+
+    // 设置玩家坦克的生命值
+    mTank.HP = hp;
+
+    // 分批次创建敌人，并设置定时器控制敌人的生成
+    for (int i = 1; i <= 5; i++) {
+        QTimer::singleShot(5000 * i, this, [=]() {
+            CreatEnemy(200, 150);
         });
-        QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+        QTimer::singleShot(10000 * i, this, [=]() {
+            CreatEnemy(760, 200);
         });
     }
 }
 
 void MainWindow::gameOver()
 {
-    if(mTank.HP<=0){
-        mTank.HP=hp;
+    // 判断玩家坦克生命值是否小于等于0，若是则执行游戏结束逻辑
+    if (mTank.HP <= 0) {
+        // 重置玩家坦克生命值
+        mTank.HP = hp;
+        
+        // 隐藏当前游戏窗口，显示游戏结束界面
         this->hide();
         this->main3->show();
     }
+}
+
 }
