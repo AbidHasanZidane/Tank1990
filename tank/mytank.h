@@ -1,21 +1,21 @@
-#ifndef MYTANK_H
+##ifndef MYTANK_H
 #define MYTANK_H
 
 #include <QObject>
-#include<QGraphicsPixmapItem>
-#include<QKeyEvent>
-#include<QWidget>
+#include <QGraphicsPixmapItem>
+#include <QKeyEvent>
+#include <QWidget>
 
 class MyTank : public QGraphicsPixmapItem
 {
 public:
-    int HP;
+    int HP; // 玩家坦克的生命值
 
-    MyTank();
+    MyTank(); // 构造函数声明
 
-    int mTankSpeed;
+    int mTankSpeed; // 坦克的速度属性
+
 private:
-
 };
 
 #endif // MYTANK_H
