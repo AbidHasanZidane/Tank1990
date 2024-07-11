@@ -43,4 +43,4 @@ RUN qmake -o Makefile tank.pro
 RUN make
 
 # 进入运行
-CMD ["./Tank!!"]
+CMD ["./tank"]

@@ -1,21 +1,25 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include<QMainWindow>
-#include<QWidget>
-#include<QGraphicsPixmapItem>
-#include<QGraphicsView>
-#include<QGraphicsScene>
-#include<QList>
-#include<QTimer>
-#include<QtDebug>
-#include<QKeyEvent>
-#include"mytank.h"
-#include"bullet.h"
-#include"enemy.h"
-#include"building.h"
-#include"enemybullet.h"
-#include <QThread>
+#include <QMainWindow>
+#include <QWidget>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QList>
+#include <QTimer>
+#include <QDebug>
+#include <QKeyEvent>
+#include "mytank.h"
+#include "bullet.h"
+#include "enemy.h"
+#include "building.h"
+#include "enemybullet.h"
+#include "mainwindow2.h"
+#include <QPushButton>
+#include "gameover.h"
+#include <QApplication>
+#include <QProcess>
 
 namespace Ui {
 class MainWindow;
@@ -26,102 +30,93 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr); // 显式构造函数声明
+    ~MainWindow(); // 析构函数声明
 
-    void keyPressEvent(QKeyEvent* event);
+    MainWindow2* main2 = nullptr; // 指向游戏第二窗口的指针
+    GameOver* main3 = nullptr; // 指向游戏结束窗口的指针
 
-    void BulletShoot();
+    void keyPressEvent(QKeyEvent* event); // 按键按下事件处理函数
+    void keyReleaseEvent(QKeyEvent* event); // 按键释放事件处理函数
 
-    void EnemyShoot();
+    void BulletShoot(); // 子弹移动和碰撞判定函数
+    void BulletShoot2(); // 子弹射击函数
+    void EnemyShoot(); // 敌人射击函数
+    void eBulletShoot(); // 敌人子弹移动和碰撞判定函数
+    void CreatEnemy(int x, int y); // 在指定位置生成敌人函数
+    void EnemyBoom(); // 敌人死亡处理函数
+    void EnemyMove(); // 敌人移动函数
+    void myTankCollide1(); // 我方坦克与敌方坦克碰撞判定函数
+    void myTankCollide2(); // 我方坦克与敌方子弹碰撞判定函数
+    void BuildingCreate(int x, int y, int kind); // 在指定位置生成建筑物函数
+    void BuildingCollide1(); // 我方子弹与建筑物碰撞判定函数
+    void BuildingCollide2(); // 我方坦克与建筑物碰撞判定函数
+    void BuildingCollide3(); // 敌方坦克与建筑物碰撞判定函数
+    void BuildingCollide4(); // 敌方子弹与建筑物碰撞判定函数
+    void clear(); // 清除场上所有物品函数
 
-    void eBulletShoot();
-
-    void CreatEnemy(int x,int y);
-
-    void EnemyBoom();
-
-    void EnemyMove();
-
-    void myTankCollide();
-
-    void myTankCollide2();
-
-    void BuildingCreate(int x,int y,int kind);
-
-    void BuildingCollide();
-
-    void BuildingCollide2();
-
-    void BuildingCollide3();
-
-    void BuildingCollide4();
-
-    void clear();
-
-    void game1();
-
-    void game2();
-
-    void game3();
-
-    void game4();
-
-    void game5();
-
-    void GameOver();
+    void game1(); // 第一关游戏函数
+    void game2(); // 第二关游戏函数
+    void game3(); // 第三关游戏函数
+    void game4(); // 第四关游戏函数
+    void game5(); // 第五关游戏函数
+    void gameOver(); // 游戏结束处理函数
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui; // UI界面指针
 
-    QGraphicsView mGameView;
+    QGraphicsView mGameView; // 游戏视图
 
-    QGraphicsScene mScene;
+    QGraphicsScene mScene; // 游戏场景
 
-    QGraphicsPixmapItem mBackGround;
+    QGraphicsPixmapItem mBackGround; // 背景图片
 
-    MyTank mTank;
+    MyTank mTank; // 玩家坦克对象
 
-    QTimer* BulletTime;
+    QTimer* BulletTime; // 控制子弹发射的定时器
 
-    QTimer* Time;
+    QTimer* Time; // 控制建筑物与我方子弹碰撞检测的定时器
 
-    QTimer* Time2;
+    QTimer* Time2; // 控制我方坦克与建筑物碰撞检测的定时器
 
-    QTimer* GTime1;
+    QTimer* GTime1; // 第一关游戏定时器
 
-    QTimer* GTime2;
+    QTimer* GTime2; // 第二关游戏定时器
 
-    QTimer* GTime3;
+    QTimer* GTime3; // 第三关游戏定时器
 
-    QTimer* GTime4;
+    QTimer* GTime4; // 第四关游戏定时器
 
-    QList<Bullet*>mBullet;
+    QList<Bullet*> mBullet; // 我方子弹列表
 
-    QList<Enemy*>mEnemy;
+    QList<Enemy*> mEnemy; // 敌方坦克列表
 
-    QList<Building*>mBuilding;
+    QList<Building*> mBuilding; // 建筑物列表
 
-    QList<enemyBullet*>eBullet;
+    QList<enemyBullet*> eBullet; // 敌方子弹列表
 
-    Qmutex m_mutex;
+    QList<int> BulletMove; // 子弹移动方向列表
 
-    int dir;
+    int dir; // 坦克移动方向
 
-    int killnum;
+    int killnum; // 击杀敌人数量
 
+    int grade; // 等级
+
+    int hp; // 生命值
+    //地图二维数组，数字代表建筑种类
     int map1[18][32]={
-        {3,0,3,0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	1,	1,	0,	1,	1,	1,1,0,0,1,1,0,0,0,0,0,1,1,1},
-        {0,0,0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	1,	1,	0,	1,	1,	1,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	1},
-        {3,0,0,	1,	1,	1,	1,	1,	1,	0,	1,	0,	0,	1,	1,	0,	0,	1,	1,	1,	0,	1,	0,	1,	1,	1,	1,	1,	1,	0,	0,	1},
-        {0,0,0,	2,	2,	2,	2,	2,	2,	0,	0,	0,	0,	1,	1,	0,	0,	0,	1,	1,	0,	0,	0,	2,	2,	2,	2,	2,	2,	0,	0,	1},
-        {0,0,0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	1},
-        {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
-        {0,0,0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0},
-        {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
-        {0,0,0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0},
-        {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
-        {3,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
+        {3, 0, 3, 0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	1,	1,	0,	1,	1,	1,1,0,0,1,1,0,0,0,0,0,1,1,1},
+        {0, 0, 0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	1,	1,	0,	1,	1,	1,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	1},
+        {3, 0, 0,	1,	1,	1,	1,	1,	1,	0,	1,	0,	0,	1,	1,	0,	0,	1,	1,	1,	0,	1,	0,	1,	1,	1,	1,	1,	1,	0,	0,	1},
+        {0, 0, 0,	2,	2,	2,	2,	2,	2,	0,	0,	0,	0,	1,	1,	0,	0,	0,	1,	1,	0,	0,	0,	2,	2,	2,	2,	2,	2,	0,	0,	1},
+        {0, 0, 0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	1},
+        {0, 0, 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
+        {0, 0, 0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0},
+        {0, 0, 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
+        {0, 0, 0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0},
+        {0, 0, 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
+        {3, 0, 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
         {},
         {},
         {},
@@ -129,7 +124,7 @@ private:
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	2,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
         {0,0,0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0}
-    };
+    };//地图1
     int map2[18][32]={
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0},
@@ -149,7 +144,7 @@ private:
        { 0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0,	2,	0,	0,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	2,	2,	0,	0,	0,	0,	0},
        { 0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	2,	2,	2,	2,	0,	0,	0,	0,	0,	0,	0}
-    };
+    };//地图2
     int map3[18][32]{
         {3,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,},
         {0,	0,	3,	0,	0,	0,	0,	0,	1,	2,	1,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,},
@@ -170,7 +165,7 @@ private:
         {0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	1,	0,	1,	0,	0,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,},
         {0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,}
 
-    };
+    };//地图3
     int map4[18][32]{
         {0,	0,	0,	4,	0,	0,	0,	0,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	4,	0,	0,	0,	0,	0,},
         {0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,},
@@ -191,7 +186,7 @@ private:
         {0,	0,	0,	4,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	4,	0,	0,	0,	0,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,}
 
-    };
+    };//地图4
     int map5[18][32]{
         {3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	0,	0,	0,	3,	0,	3,	3,	0,	3,	0,	3,	0,	3,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	3,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,},
@@ -212,7 +207,7 @@ private:
         {3,	0,	3,	0,	3,	0,	3,	0,	3,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	1,	3,	0,	3,	0,	3,	0,	3,	0,	3,	0,},
         {0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,}
 
-    };
+    };//地图5
 };
 
 
