@@ -1,201 +1,223 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include<QKeyEvent>
+#include <QKeyEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->main2=new MainWindow2;
-    this->main3=new GameOver;
+
+    // 创建游戏第二窗口和游戏结束窗口的实例
+    this->main2 = new MainWindow2;
+    this->main3 = new GameOver;
+
+    // 从文件中读取玩家坦克的生命值和速度
     QFile Hfile("://90Tank/player_tank/HP.txt");
-    Hfile.open(QIODevice::ReadOnly);
-    QTextStream HtxtInput(&Hfile);
-    QString HlineStr;
-    while(!HtxtInput.atEnd())
-    {
-       HlineStr = HtxtInput.readLine();
-       hp=HlineStr.toInt();
-       mTank.HP=HlineStr.toInt();
+    if (Hfile.open(QIODevice::ReadOnly)) {
+        QTextStream HtxtInput(&Hfile);
+        QString HlineStr;
+        while (!HtxtInput.atEnd()) {
+            HlineStr = HtxtInput.readLine();
+            hp = HlineStr.toInt();
+            mTank.HP = HlineStr.toInt();
+        }
+        Hfile.close();
     }
-    Hfile.close();
+
     QFile Sfile("://90Tank/player_tank/Speed.txt");
-    Sfile.open(QIODevice::ReadOnly );
-    QTextStream StxtInput(&Sfile);
-    QString SlineStr;
-    while(!StxtInput.atEnd())
-     {
-        SlineStr = StxtInput.readLine();
-        mTank.mTankSpeed=SlineStr.toInt();
-     }
-    Sfile.close();
+    if (Sfile.open(QIODevice::ReadOnly)) {
+        QTextStream StxtInput(&Sfile);
+        QString SlineStr;
+        while (!StxtInput.atEnd()) {
+            SlineStr = StxtInput.readLine();
+            mTank.mTankSpeed = SlineStr.toInt();
+        }
+        Sfile.close();
+    }
 
-    this->setFixedSize(1320,790);
+    // 设置主窗口大小和游戏视图大小
+    this->setFixedSize(1320, 790);
+    mGameView.setSceneRect(QRect(0, 0, 1280, 720));
+    mScene.setSceneRect(QRect(0, 0, 1280, 720));
 
-    mGameView.setSceneRect(QRect(0,0,1280,720));
-
-    mScene.setSceneRect(QRect(0,0,1280,720));
-
+    // 设置背景图片并添加到场景中
     mBackGround.setPixmap(QPixmap("://90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png"));
-
     mScene.addItem(&mBackGround);
 
+    // 将玩家坦克添加到场景中
     mScene.addItem(&mTank);
 
+    // 将游戏视图设置为主窗口的中心部件
     mGameView.setScene(&mScene);
-
     mGameView.setParent(this);
-
     setCentralWidget(&mGameView);
 
+    // 显示游戏视图
     mGameView.show();
 
+    // 初始化游戏中的敌人和碰撞检测
     EnemyBoom();
-
     EnemyMove();
-
     myTankCollide1();
-
     myTankCollide2();
-
     BuildingCollide1();
-
     BuildingCollide2();
-
     BuildingCollide3();
-
     BuildingCollide4();
 
-    BulletTime =new QTimer (this);
+    // 子弹移动定时器和发射函数连接
+    BulletTime = new QTimer(this);
     BulletTime->start(50);
-    connect(BulletTime,&QTimer::timeout,[this](){
-        for(auto bullet:mBullet){
+    connect(BulletTime, &QTimer::timeout, [this]() {
+        for (auto bullet : mBullet) {
             bullet->BulletMove();
         }
     });
+
+    // 敌方子弹发射函数
     eBulletShoot();
+
+    // 开始第一关游戏
     game1();
-    Time = new QTimer (this);
+
+    // 游戏定时器，每隔100ms检测游戏是否结束
+    Time = new QTimer(this);
     Time->start(100);
-    connect(Time,&QTimer::timeout,this,&MainWindow::gameOver);
-    Time = new QTimer (this);
-    Time->start(500);
-    connect(Time,&QTimer::timeout,this,&MainWindow::BulletShoot2);
-    connect(this->main3,&GameOver::retry,[=](){
+    connect(Time, &QTimer::timeout, this, &MainWindow::gameOver);
+
+    // 子弹射击定时器，每隔500ms发射一次子弹
+    Time2 = new QTimer(this);
+    Time2->start(500);
+    connect(Time2, &QTimer::timeout, this, &MainWindow::BulletShoot2);
+
+    // 游戏结束窗口的重试按钮连接，点击后重新启动游戏进程
+    connect(this->main3, &GameOver::retry, [=]() {
         this->main3->close();
-     QProcess::startDetached(qApp->applicationFilePath(), QStringList());
+        QProcess::startDetached(qApp->applicationFilePath(), QStringList());
     });
 }
-
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    // 设置坦克变换原点为其边界框的中心点
+    mTank.setTransformOriginPoint(mTank.boundingRect().center());
 
-void MainWindow::keyPressEvent(QKeyEvent *event){
-     mTank.setTransformOriginPoint(mTank.boundingRect().center());
-     switch(event->key()){
-     case Qt::Key_W:
-     {
-         mTank.setRotation(0);
-         mTank.moveBy(0,-mTank.mTankSpeed);
-         break;
-     }
-     case Qt::Key_S:
-    {
+    // 根据按键事件处理坦克的移动和旋转
+    switch(event->key()) {
+    case Qt::Key_W: {
+        // 向上移动，朝向角度为0度
+        mTank.setRotation(0);
+        mTank.moveBy(0, -mTank.mTankSpeed);
+        break;
+    }
+    case Qt::Key_S: {
+        // 向下移动，朝向角度为180度
         mTank.setRotation(180);
-        mTank.moveBy(0,+mTank.mTankSpeed);
+        mTank.moveBy(0, mTank.mTankSpeed);
         break;
     }
-    case Qt::Key_A:
-    {
+    case Qt::Key_A: {
+        // 向左移动，朝向角度为270度
         mTank.setRotation(270);
-        mTank.moveBy(-mTank.mTankSpeed,0);
+        mTank.moveBy(-mTank.mTankSpeed, 0);
         break;
     }
-    case Qt::Key_D:
-    {
+    case Qt::Key_D: {
+        // 向右移动，朝向角度为90度
         mTank.setRotation(90);
-        mTank.moveBy(+mTank.mTankSpeed,0);
+        mTank.moveBy(mTank.mTankSpeed, 0);
         break;
     }
-     case Qt::Key_J:{
-         BulletMove.append(Qt::Key_J);
-         break;
-     }
-     case Qt::Key_F:{
-         qDebug()<<killnum<<endl;
-     }
-     case Qt::Key_K:{
-         //DataMod();
-     }
-     };
-     if(mTank.x()<0){
-         mTank.setX(0);
-     }
-     if(mTank.y()<0){
-         mTank.setY(0);
-     }
-     if((mTank.x()+mTank.pixmap().width())>1280){
-         mTank.setX(1280-mTank.pixmap().width());
-     }
-     if(mTank.y()+mTank.pixmap().height()>720){
-         mTank.setY(720-mTank.pixmap().height());
-     }
+    case Qt::Key_J: {
+        // 按下J键，发射子弹
+        BulletMove.append(Qt::Key_J);
+        break;
+    }
+    case Qt::Key_F: {
+        // 按下F键，输出当前击杀数到调试信息
+        qDebug() << killnum << endl;
+        break;
+    }
+    case Qt::Key_K: {
+        // 按下K键，执行某些数据操作（注释部分）
+        // DataMod();
+        break;
+    }
+    };
+
+    // 碰撞检测，确保坦克不会超出游戏场景的边界
+    if (mTank.x() < 0) {
+        mTank.setX(0);
+    }
+    if (mTank.y() < 0) {
+        mTank.setY(0);
+    }
+    if ((mTank.x() + mTank.pixmap().width()) > 1280) {
+        mTank.setX(1280 - mTank.pixmap().width());
+    }
+    if (mTank.y() + mTank.pixmap().height() > 720) {
+        mTank.setY(720 - mTank.pixmap().height());
+    }
 }
 
-void MainWindow::keyReleaseEvent(QKeyEvent *event)
-{
-    switch(event->key()){
+void MainWindow::keyReleaseEvent(QKeyEvent *event) {
+    // 处理释放按键事件
+    switch(event->key()) {
     case Qt::Key_J:
+        // 释放J键，移除子弹发射标记
         BulletMove.removeAll(Qt::Key_J);
         break;
     }
 }
-
 void MainWindow::BulletShoot()
 {
-   QPixmap bulletImg("://90Tank/player_tank/girls_preview.png");
-   if(mTank.rotation()==0){
-       QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y());
-       Bullet* bullet=new Bullet(pos,bulletImg,'N');
-       bullet->setRotation(0);
-       mScene.addItem(bullet);
-       mBullet.append(bullet);
-   }
+    // 创建子弹的图像对象
+    QPixmap bulletImg("://90Tank/player_tank/girls_preview.png");
 
-   if(mTank.rotation()==180){
-       QPoint pos(mTank.x()+mTank.pixmap().width()/2,mTank.y()+mTank.pixmap().height());
-       Bullet* bullet=new Bullet(pos,bulletImg,'S');
-       bullet->setRotation(180);
-       mScene.addItem(bullet);
-       mBullet.append(bullet);
-   }
+    // 根据坦克的朝向创建子弹并添加到场景和子弹列表中
+    if (mTank.rotation() == 0) {
+        QPoint pos(mTank.x() + mTank.pixmap().width() / 2, mTank.y());
+        Bullet* bullet = new Bullet(pos, bulletImg, 'N');
+        bullet->setRotation(0);
+        mScene.addItem(bullet);
+        mBullet.append(bullet);
+    }
 
-   if(mTank.rotation()==90){
-       QPoint pos(mTank.x()+mTank.pixmap().width(),mTank.y()+mTank.pixmap().height()/2);
-       Bullet* bullet=new Bullet(pos,bulletImg,'E');
-       bullet->setRotation(90);
-       mScene.addItem(bullet);
-       mBullet.append(bullet);
-   }
+    if (mTank.rotation() == 180) {
+        QPoint pos(mTank.x() + mTank.pixmap().width() / 2, mTank.y() + mTank.pixmap().height());
+        Bullet* bullet = new Bullet(pos, bulletImg, 'S');
+        bullet->setRotation(180);
+        mScene.addItem(bullet);
+        mBullet.append(bullet);
+    }
 
-   if(mTank.rotation()==270){
-       QPoint pos(mTank.x(),mTank.y()+mTank.pixmap().height()/2);
-       Bullet* bullet=new Bullet(pos,bulletImg,'W');
-       bullet->setRotation(270);
-       mScene.addItem(bullet);
-       mBullet.append(bullet);
-   }
+    if (mTank.rotation() == 90) {
+        QPoint pos(mTank.x() + mTank.pixmap().width(), mTank.y() + mTank.pixmap().height() / 2);
+        Bullet* bullet = new Bullet(pos, bulletImg, 'E');
+        bullet->setRotation(90);
+        mScene.addItem(bullet);
+        mBullet.append(bullet);
+    }
+
+    if (mTank.rotation() == 270) {
+        QPoint pos(mTank.x(), mTank.y() + mTank.pixmap().height() / 2);
+        Bullet* bullet = new Bullet(pos, bulletImg, 'W');
+        bullet->setRotation(270);
+        mScene.addItem(bullet);
+        mBullet.append(bullet);
+    }
 }
 
 void MainWindow::BulletShoot2()
 {
-    for(int keyCode:BulletMove){
-        if(keyCode==Qt::Key_J){
+    // 根据按键列表发射子弹
+    for (int keyCode : BulletMove) {
+        if (keyCode == Qt::Key_J) {
             BulletShoot();
         }
     }
@@ -203,42 +225,44 @@ void MainWindow::BulletShoot2()
 
 void MainWindow::EnemyShoot()
 {
+    // 创建敌人子弹的图像对象
     QPixmap ebulletImg("://90Tank/enemy/pic_13step.png");
-    for(auto enemy : mEnemy){
-        if(enemy->rotation()==0){
-            QPoint pos(enemy->x()+enemy->pixmap().width()/2,enemy->y());
-            enemyBullet* ebullet=new enemyBullet(pos,ebulletImg,'N');
+
+    // 遍历所有敌人，根据其朝向创建子弹并添加到场景和敌人子弹列表中
+    for (auto enemy : mEnemy) {
+        if (enemy->rotation() == 0) {
+            QPoint pos(enemy->x() + enemy->pixmap().width() / 2, enemy->y());
+            enemyBullet* ebullet = new enemyBullet(pos, ebulletImg, 'N');
             ebullet->setRotation(0);
             mScene.addItem(ebullet);
             eBullet.append(ebullet);
         }
 
-        if(enemy->rotation()==180){
-            QPoint pos(enemy->x()+enemy->pixmap().width()/2,enemy->y()+enemy->pixmap().height());
-            enemyBullet* ebullet=new enemyBullet(pos,ebulletImg,'S');
+        if (enemy->rotation() == 180) {
+            QPoint pos(enemy->x() + enemy->pixmap().width() / 2, enemy->y() + enemy->pixmap().height());
+            enemyBullet* ebullet = new enemyBullet(pos, ebulletImg, 'S');
             ebullet->setRotation(180);
             mScene.addItem(ebullet);
             eBullet.append(ebullet);
         }
 
-        if(enemy->rotation()==90){
-            QPoint pos(enemy->x()+enemy->pixmap().width(),enemy->y()+enemy->pixmap().height()/2);
-            enemyBullet* ebullet=new enemyBullet(pos,ebulletImg,'E');
+        if (enemy->rotation() == 90) {
+            QPoint pos(enemy->x() + enemy->pixmap().width(), enemy->y() + enemy->pixmap().height() / 2);
+            enemyBullet* ebullet = new enemyBullet(pos, ebulletImg, 'E');
             ebullet->setRotation(90);
             mScene.addItem(ebullet);
             eBullet.append(ebullet);
         }
 
-        if(enemy->rotation()==270){
-            QPoint pos(enemy->x(),enemy->y()+enemy->pixmap().height()/2);
-            enemyBullet* ebullet=new enemyBullet(pos,ebulletImg,'W');
+        if (enemy->rotation() == 270) {
+            QPoint pos(enemy->x(), enemy->y() + enemy->pixmap().height() / 2);
+            enemyBullet* ebullet = new enemyBullet(pos, ebulletImg, 'W');
             ebullet->setRotation(270);
             mScene.addItem(ebullet);
             eBullet.append(ebullet);
         }
     }
 }
-
 void MainWindow::eBulletShoot()
 {
     Time = new QTimer (this);
