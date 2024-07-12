@@ -34,10 +34,10 @@ private slots:
     void on_horizontalSlider_2_valueChanged(int value);
     void spawned(double vol0,double vol1);
     void checkIndexChangedSignal(int index);
-
     void on_pushButton_2_clicked();
 
 private:
+    void keyPressEvent(QKeyEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 };

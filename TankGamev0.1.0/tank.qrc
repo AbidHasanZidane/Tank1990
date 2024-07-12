@@ -19,5 +19,8 @@
         <file>90Tank/start/tank_main.png</file>
         <file>90Tank/player_tank/mTank.png</file>
         <file>90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png</file>
+        <file>90Tank/enemy/pic_13step.png</file>
+        <file>90Tank/player_tank/HP.txt</file>
+        <file>90Tank/player_tank/Speed.txt</file>
     </qresource>
 </RCC>

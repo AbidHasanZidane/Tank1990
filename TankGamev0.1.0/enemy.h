@@ -7,7 +7,8 @@
 class Enemy : public QGraphicsPixmapItem,public QObject
 {
 public:
-    Enemy();
+    Enemy(int x,int y);
+    int enemySpeed=10;
 private:
 };
 

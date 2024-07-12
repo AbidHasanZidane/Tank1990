@@ -22,6 +22,5 @@
         <file>90Tank/enemy/pic_13step.png</file>
         <file>90Tank/player_tank/HP.txt</file>
         <file>90Tank/player_tank/Speed.txt</file>
-        <file>90Tank/player_tank/grade.txt</file>
     </qresource>
 </RCC>

@@ -1,15 +1,16 @@
 #include "widget.h"
+#include "ui_w2.h"
 #include "ui_widget.h"
-#include <QDebug>
-#include "mainwindow.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
     ui->pushButton_2->setStyleSheet("background-color:rgba(255,255,255,1)");
     ui->toolButton->setStyleSheet("background-color:rgba(255,255,255,1)");
+    ui->toolButton_2->setStyleSheet("background-color:rgba(255,255,255,1)");
     effect->setSource(QUrl::fromLocalFile(":/music/resources/background.wav"));
     effect->setLoopCount(QSoundEffect::Infinite);
     effect->setVolume(0.7);
@@ -34,6 +35,7 @@ Widget::~Widget()
 void Widget::on_toolButton_clicked()
 {
     w2 *w=new w2();
+    w->setFixedSize(1280,720);
     w->show();
     this->hide();
     connect(w,SIGNAL(sendVolume0(int)),this,SLOT(changeVolume0(int)));
@@ -41,6 +43,16 @@ void Widget::on_toolButton_clicked()
     connect(w,SIGNAL(switch2w()),this,SLOT(switchOn()));
     connect(this,SIGNAL(spawnw2(double,double)),w,SLOT(spawned(double,double)));
     emit spawnw2(curVol0,curVol1);
+    if(scale=="0.8")
+        w->ui->comboBox->setCurrentIndex(5);
+    else if(scale=="1")
+        w->ui->comboBox->setCurrentIndex(4);
+    else if(scale=="1.25")
+        w->ui->comboBox->setCurrentIndex(3);
+    else if(scale=="1.5")
+        w->ui->comboBox->setCurrentIndex(2);
+    else if(scale=="2")
+        w->ui->comboBox->setCurrentIndex(1);
 }
 
 void Widget::on_pushButton_2_clicked()
@@ -99,7 +111,8 @@ void Widget::keyPressEvent(QKeyEvent *event)
     else
     {
         this->hide();
-        MainWindow *w=new MainWindow();
+        w1 *w=new w1();
+        w->setFixedSize(1280,720);
         w->show();
     }
 }
@@ -156,4 +169,13 @@ void Widget::changeTexts()
             break;
         }
     }
+}
+
+void Widget::on_toolButton_2_clicked()
+{
+    achivement *w=new achivement();
+    w->setFixedSize(1280,720);
+    w->show();
+    this->hide();
+    connect(w,SIGNAL(switch2w()),this,SLOT(switchOn()));
 }

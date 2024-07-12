@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>坦克大战 v0.0.1 test</string>
+   <string>坦克大战 v0.1.1</string>
   </property>
   <property name="windowIcon">
    <iconset resource="pic.qrc">
@@ -30,6 +30,9 @@
     <font>
      <pointsize>15</pointsize>
     </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="text">
     <string>退 出</string>
@@ -72,8 +75,16 @@
      <height>60</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="mouseTracking">
     <bool>false</bool>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
@@ -129,10 +140,63 @@
     <string>按 任 意 键 开 始 游 戏</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="toolButton_2">
+   <property name="geometry">
+    <rect>
+     <x>33</x>
+     <y>630</y>
+     <width>60</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>成就</string>
+   </property>
+   <property name="icon">
+    <iconset resource="pic.qrc">
+     <normaloff>:/pic/resources/achivements.png</normaloff>:/pic/resources/achivements.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="autoExclusive">
+    <bool>false</bool>
+   </property>
+   <property name="popupMode">
+    <enum>QToolButton::InstantPopup</enum>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <property name="arrowType">
+    <enum>Qt::NoArrow</enum>
+   </property>
+  </widget>
   <zorder>label</zorder>
   <zorder>toolButton</zorder>
   <zorder>pushButton_2</zorder>
   <zorder>label_2</zorder>
+  <zorder>toolButton_2</zorder>
  </widget>
  <resources>
   <include location="pic.qrc"/>

@@ -14,8 +14,7 @@ class GameOver : public QMainWindow
 public:
     explicit GameOver(QWidget *parent = 0);
     ~GameOver();
-signals:
-    void retry();
+
 private:
     Ui::GameOver *ui;
 };

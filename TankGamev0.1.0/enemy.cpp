@@ -1,9 +1,10 @@
 #include "enemy.h"
 
-Enemy::Enemy()
+Enemy::Enemy(int x,int y)
 {
     this->setPixmap(QPixmap("://90Tank/enemy/animation_sprite_126.png"));
 
-    this->setPos(rand()%700,rand()%900);
+    this->setPos(x,y);
 
 }
+

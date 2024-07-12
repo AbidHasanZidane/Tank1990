@@ -27,7 +27,7 @@
      <string>返回菜单</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ReTty">
+   <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>860</x>
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>重新开始</string>
+     <string>退出游戏</string>
     </property>
    </widget>
   </widget>

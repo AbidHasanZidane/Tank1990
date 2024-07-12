@@ -25,28 +25,45 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    achivement.cpp \
         main.cpp \
         mainwindow.cpp \
     mytank.cpp \
     bullet.cpp \
     enemy.cpp \
     building.cpp \
+    enemybullet.cpp \
+    mainwindow2.cpp \
+    gameover.cpp \
+    pause.cpp \
+    w1.cpp \
     w2.cpp \
     widget.cpp
 
 HEADERS += \
+    achivement.h \
         mainwindow.h \
     mytank.h \
     bullet.h \
     enemy.h \
     building.h \
+    enemybullet.h \
+    mainwindow2.h \
+    gameover.h \
+    pause.h \
+    w1.h \
     w2.h \
     widget.h
 
 FORMS += \
+    achivement.ui \
         mainwindow.ui \
-        w2.ui \
-        widget.ui
+    mainwindow2.ui \
+    gameover.ui \
+    pause.ui \
+    w1.ui \
+    w2.ui \
+    widget.ui
 
 RESOURCES += \
     music.qrc \

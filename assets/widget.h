@@ -7,6 +7,7 @@
 #include <QTimer>
 #include "w1.h"
 #include "w2.h"
+#include "achivement.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -44,6 +45,7 @@ private slots:
     void switchOn();
     void changeOpacity();
     void changeTexts();
+    void on_toolButton_2_clicked();
 
 private:
     void keyPressEvent(QKeyEvent *event) override;
