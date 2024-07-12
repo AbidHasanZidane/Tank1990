@@ -16,9 +16,6 @@ int main(int argc,char *argv[])
             scale=line.at(1).toStdString();
     }
     fileOpen.close();
-    fileOpen.open(QFile::WriteOnly | QIODevice::Text | QFile::Truncate);
-    in<<"Resolution ratio:"<<1;
-    fileOpen.close();
     qputenv("QT_SCALE_FACTOR",scale);
     QApplication a(argc,argv);
     Widget w;
