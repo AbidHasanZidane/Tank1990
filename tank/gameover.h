@@ -12,15 +12,12 @@ class GameOver : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit GameOver(QWidget *parent = 0); // 显示构造函数声明
-    ~GameOver(); // 显示析构函数声明
-
+    explicit GameOver(QWidget *parent = 0);
+    ~GameOver();
 signals:
-    void retry(); // retry信号声明
-
+    void retry();
 private:
-    Ui::GameOver *ui; // UI界面指针声明
+    Ui::GameOver *ui;
 };
 
 #endif // GAMEOVER_H
-
