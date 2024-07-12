@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>90Tank/boom/insect_sprite.png</file>
+        <file>90Tank/boom/insect_sprite2.png</file>
+        <file>90Tank/boom/insect_sprite3.png</file>
+        <file>90Tank/boom/insect_sprite4.png</file>
+        <file>90Tank/boom/insect_sprite5.png</file>
+        <file>90Tank/building/Grass.png</file>
+        <file>90Tank/building/Iron.png</file>
+        <file>90Tank/building/Wall.png</file>
+        <file>90Tank/building/Water.png</file>
+        <file>90Tank/enemy/animation_sprite_126.png</file>
+        <file>90Tank/player_tank/girls_preview.png</file>
+        <file>90Tank/player_tank/Icon-hdpi.png</file>
+        <file>90Tank/player_tank/Icon-ldpi.png</file>
+        <file>90Tank/player_tank/Icon-mdpi.png</file>
+        <file>90Tank/start/1(1).png</file>
+        <file>90Tank/start/1.png</file>
+        <file>90Tank/start/tank_main.png</file>
+        <file>90Tank/player_tank/mTank.png</file>
+        <file>90Tank/start/8114UVRG{SC5(IMLK}5XH3D.png</file>
+        <file>90Tank/enemy/pic_13step.png</file>
+        <file>90Tank/player_tank/HP.txt</file>
+        <file>90Tank/player_tank/Speed.txt</file>
+    </qresource>
+</RCC>

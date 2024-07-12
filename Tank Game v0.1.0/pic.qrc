@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/pic">
-        <file>resources/background.png</file>
-        <file>resources/icon.png</file>
-        <file>resources/sound.png</file>
-        <file>resources/config.png</file>
-        <file>resources/muted.png</file>
-    </qresource>
-</RCC>
