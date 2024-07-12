@@ -20,6 +20,9 @@
 #include<QFileDialog>
 #include"mainwindow2.h"
 #include<QPushButton>
+#include"gameover.h"
+#include <QApplication>
+#include <QProcess>
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +36,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     MainWindow2* main2=NULL;
+    GameOver* main3=NULL;
     //按键控制坦克移动和发射子弹
     void keyPressEvent(QKeyEvent* event);
 
@@ -78,10 +82,7 @@ public:
     //第五关
     void game5();
     //游戏结束
-    void GameOver();
-
-signals:
-    void changeMusic(int cnt);
+    void gameOver();
 private:
     Ui::MainWindow *ui;
 

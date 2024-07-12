@@ -9,6 +9,7 @@ class Enemy : public QGraphicsPixmapItem,public QObject
 public:
     Enemy(int x,int y);
     int enemySpeed=10;
+    int EHP=3;
 private:
 };
 

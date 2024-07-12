@@ -6,6 +6,9 @@ GameOver::GameOver(QWidget *parent) :
     ui(new Ui::GameOver)
 {
     ui->setupUi(this);
+    connect(ui->ReTty,&QPushButton::clicked,[=](){
+        emit this->retry();
+    });
 }
 
 GameOver::~GameOver()
