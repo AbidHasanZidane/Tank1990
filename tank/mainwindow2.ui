@@ -13,40 +13,31 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background-image: url(:/90Tank/player_tank/OKOCIN.png);</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="BACK">
     <property name="geometry">
      <rect>
       <x>200</x>
       <y>440</y>
-      <width>261</width>
-      <height>141</height>
+      <width>251</width>
+      <height>131</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/90Tank/player_tank/MENU.png);</string>
-    </property>
     <property name="text">
-     <string/>
+     <string>返回菜单</string>
     </property>
    </widget>
    <widget class="QPushButton" name="NEXT">
     <property name="geometry">
      <rect>
-      <x>950</x>
+      <x>1000</x>
       <y>440</y>
-      <width>321</width>
-      <height>171</height>
+      <width>251</width>
+      <height>131</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/90Tank/player_tank/NEIS.png);</string>
-    </property>
     <property name="text">
-     <string/>
+     <string>下一关</string>
     </property>
    </widget>
   </widget>
@@ -56,7 +47,7 @@
      <x>0</x>
      <y>0</y>
      <width>1440</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

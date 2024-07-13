@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT += multimedia
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = tank
@@ -34,7 +34,8 @@ SOURCES += \
     mainwindow2.cpp \
     gameover.cpp \
     boss.cpp \
-    bossbullet.cpp
+    bossbullet.cpp \
+    settings.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     mainwindow2.h \
     gameover.h \
     boss.h \
-    bossbullet.h
+    bossbullet.h \
+    settings.h
 
 FORMS += \
         mainwindow.ui \

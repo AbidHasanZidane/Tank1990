@@ -25,6 +25,7 @@
 #include <QProcess>
 #include"boss.h"
 #include"bossbullet.h"
+#include"settings.h"
 
 namespace Ui {
 class MainWindow;
@@ -102,8 +103,6 @@ public:
     void game6();
     //游戏结束
     void gameOver();
-
-    void upgrade();
 private:
     Ui::MainWindow *ui;
 
@@ -150,9 +149,11 @@ private:
 
     int grade;
 
-    int hp;
+    int hp=3;
 
     int mtankspeed;
+
+    int Fire;
     //地图二维数组，数字代表建筑种类
     int map1[18][32]={
         {3, 0, 3, 0,	0,	1,	0,	0,	0,	1,	0,	0,	0,	1,	1,	0,	1,	1,	1,1,0,0,1,1,0,0,0,0,0,1,1,1},
