@@ -55,9 +55,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     EnemyMove();
 
+    BossShoot();
+
+    BossMove();
+
+    BossBoom();
+
+    BossCollide();
+
     myTankCollide1();
 
     myTankCollide2();
+
+    myTankCollide3();
 
     BuildingCollide1();
 
@@ -67,6 +77,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     BuildingCollide4();
 
+    eBulletShoot();
+
+    bBulletShoot();
+
     BulletTime =new QTimer (this);
     BulletTime->start(50);
     connect(BulletTime,&QTimer::timeout,[this](){
@@ -74,7 +88,6 @@ MainWindow::MainWindow(QWidget *parent) :
             bullet->BulletMove();
         }
     });
-    eBulletShoot();
     game1();
     Time = new QTimer (this);
     Time->start(100);
@@ -130,7 +143,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
          qDebug()<<killnum<<endl;
      }
      case Qt::Key_K:{
-         game5();
+         game6();
      }
      };
      if(mTank.x()<0){
@@ -239,6 +252,104 @@ void MainWindow::EnemyShoot()
     }
 }
 
+void MainWindow::BossShoot()
+{
+    QPixmap ebulletImg("://90Tank/enemy/animation_sprite_125.png");
+    for(auto enemy:mBoss){
+        if(enemy->rotation()==0){
+            QPoint pos(enemy->x()+enemy->pixmap().width()/2+10,enemy->y());
+            QPoint pos2(enemy->x()+enemy->pixmap().width()/2-20,enemy->y());
+            QPoint pos3(enemy->x()+30,enemy->y());
+            QPoint pos4(enemy->x()+enemy->pixmap().width()-30,enemy->y());
+            BossBullet* ebullet=new BossBullet(pos,ebulletImg,'N');
+            BossBullet* ebullet2=new BossBullet(pos2,ebulletImg,'N');
+            BossBullet* ebullet3=new BossBullet(pos3,ebulletImg,'N');
+            BossBullet* ebullet4=new BossBullet(pos4,ebulletImg,'N');
+            ebullet->setRotation(0);
+            ebullet2->setRotation(0);
+            ebullet3->setRotation(0);
+            ebullet4->setRotation(0);
+            mScene.addItem(ebullet);
+            mScene.addItem(ebullet2);
+            mScene.addItem(ebullet3);
+            mScene.addItem(ebullet4);
+            bBullet.append(ebullet);
+            bBullet.append(ebullet2);
+            bBullet.append(ebullet3);
+            bBullet.append(ebullet4);
+        }
+
+        if(enemy->rotation()==180){
+            QPoint pos(enemy->x()+enemy->pixmap().width()/2+10,enemy->y()+enemy->pixmap().height());
+            QPoint pos2(enemy->x()+enemy->pixmap().width()/2-20,enemy->y()+enemy->pixmap().height());
+            QPoint pos3(enemy->x()+30,enemy->y()+enemy->pixmap().height());
+            QPoint pos4(enemy->x()+enemy->pixmap().width()-30,enemy->y()+enemy->pixmap().height());
+            BossBullet* ebullet=new BossBullet(pos,ebulletImg,'S');
+            BossBullet* ebullet2=new BossBullet(pos2,ebulletImg,'S');
+            BossBullet* ebullet3=new BossBullet(pos3,ebulletImg,'S');
+            BossBullet* ebullet4=new BossBullet(pos4,ebulletImg,'S');
+            ebullet->setRotation(180);
+            ebullet2->setRotation(180);
+            ebullet3->setRotation(180);
+            ebullet4->setRotation(180);
+            mScene.addItem(ebullet);
+            mScene.addItem(ebullet2);
+            mScene.addItem(ebullet3);
+            mScene.addItem(ebullet4);
+            bBullet.append(ebullet);
+            bBullet.append(ebullet2);
+            bBullet.append(ebullet3);
+            bBullet.append(ebullet4);
+        }
+
+        if(enemy->rotation()==90){
+            QPoint pos(enemy->x()+enemy->pixmap().width(),enemy->y()+enemy->pixmap().height()/2+10);
+            QPoint pos2(enemy->x()+enemy->pixmap().width(),enemy->y()+enemy->pixmap().height()/2-20);
+            QPoint pos3(enemy->x()+enemy->pixmap().width(),enemy->y()+30);
+            QPoint pos4(enemy->x()+enemy->pixmap().width(),enemy->y()+enemy->pixmap().height()-30);
+            BossBullet* ebullet=new BossBullet(pos,ebulletImg,'E');
+            BossBullet* ebullet2=new BossBullet(pos2,ebulletImg,'E');
+            BossBullet* ebullet3=new BossBullet(pos3,ebulletImg,'E');
+            BossBullet* ebullet4=new BossBullet(pos4,ebulletImg,'E');
+            ebullet->setRotation(90);
+            ebullet2->setRotation(90);
+            ebullet3->setRotation(90);
+            ebullet4->setRotation(90);
+            mScene.addItem(ebullet);
+            mScene.addItem(ebullet2);
+            mScene.addItem(ebullet3);
+            mScene.addItem(ebullet4);
+            bBullet.append(ebullet);
+            bBullet.append(ebullet2);
+            bBullet.append(ebullet3);
+            bBullet.append(ebullet4);
+        }
+
+        if(enemy->rotation()==270){
+            QPoint pos(enemy->x(),enemy->y()+enemy->pixmap().height()/2+10);
+            QPoint pos2(enemy->x(),enemy->y()+enemy->pixmap().height()/2-20);
+            QPoint pos3(enemy->x(),enemy->y()+30);
+            QPoint pos4(enemy->x(),enemy->y()+enemy->pixmap().height()-30);
+            BossBullet* ebullet=new BossBullet(pos,ebulletImg,'W');
+            BossBullet* ebullet2=new BossBullet(pos2,ebulletImg,'W');
+            BossBullet* ebullet3=new BossBullet(pos3,ebulletImg,'W');
+            BossBullet* ebullet4=new BossBullet(pos4,ebulletImg,'W');
+            ebullet->setRotation(270);
+            ebullet2->setRotation(270);
+            ebullet3->setRotation(270);
+            ebullet4->setRotation(270);
+            mScene.addItem(ebullet);
+            mScene.addItem(ebullet2);
+            mScene.addItem(ebullet3);
+            mScene.addItem(ebullet4);
+            bBullet.append(ebullet);
+            bBullet.append(ebullet2);
+            bBullet.append(ebullet3);
+            bBullet.append(ebullet4);
+        }
+    }
+}
+
 void MainWindow::eBulletShoot()
 {
     Time = new QTimer (this);
@@ -256,11 +367,35 @@ void MainWindow::eBulletShoot()
     });
 }
 
+void MainWindow::bBulletShoot()
+{
+    Time = new QTimer (this);
+    Time->start(1000);
+    connect(Time,&QTimer::timeout,[this](){
+        BossShoot();
+    });
+    BossShoot();
+    Time2 = new QTimer (this);
+    Time2->start(50);
+    connect(Time2,&QTimer::timeout,[this](){
+        for(auto bullet:bBullet){
+            bullet->BossBulletMove();
+        }
+    });
+}
+
 void MainWindow::CreatEnemy(int x,int y)
 {
     Enemy* enemy=new Enemy(x,y);
     mScene.addItem(enemy);
     mEnemy.append(enemy);
+}
+
+void MainWindow::CreatBoss(int x, int y)
+{
+    BOSS* boss=new BOSS(x,y);
+    mScene.addItem(boss);
+    mBoss.append(boss);
 }
 
 void MainWindow::EnemyBoom()
@@ -302,6 +437,45 @@ void MainWindow::EnemyBoom()
 
 }
 
+void MainWindow::BossBoom()
+{
+    Time =new QTimer (this);
+    Time->start(10);
+    connect(Time,&QTimer::timeout,[this](){
+       for(auto enemy : mBoss)
+       for(auto bullet : mBullet)
+       {
+           if(bullet->collidesWithItem(enemy)){
+               mBullet.removeOne(bullet);
+               bullet->deleteLater();
+               enemy->BossHp--;
+               if(enemy->BossHp<=0){
+               mBoss.removeOne(enemy);
+               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+               QTimer::singleShot(50,this,[=](){
+               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+               });
+               QTimer::singleShot(100,this,[=](){
+               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+               });
+               QTimer::singleShot(150,this,[=](){
+               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+               });
+               QTimer::singleShot(200,this,[=](){
+               enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+               });
+               QTimer::singleShot(200,this,[=](){
+               enemy->deleteLater();
+               });
+               killnum++;
+               grade+=10000;
+               }
+           }
+       }
+    });
+
+}
+
 void MainWindow::EnemyMove()
 {
     Time2=new QTimer(this);
@@ -331,6 +505,40 @@ void MainWindow::EnemyMove()
        if(mTank.y()>enemy->y()){
        enemy->setRotation(180);
        enemy->moveBy(0,enemy->enemySpeed);
+       }
+       }}
+    });
+}
+
+void MainWindow::BossMove()
+{
+    Time2=new QTimer(this);
+    Time2->start(1000);
+    connect(Time2,&QTimer::timeout,[this](){
+    dir=rand();
+    });
+    Time =new QTimer (this);
+    Time->start(100);
+    connect(Time,&QTimer::timeout,[this](){
+       for(auto enemy:mBoss){
+       enemy->setTransformOriginPoint(enemy->boundingRect().center());
+       if(dir%2==1){
+       if(mTank.x()>enemy->x()){
+       enemy->setRotation(90);
+       enemy->moveBy(enemy->bossSpeed,0);
+       }
+       if(mTank.x()<enemy->x()){
+       enemy->setRotation(270);
+       enemy->moveBy(-enemy->bossSpeed,0);
+       }}
+       if(dir%2==0){
+       if(mTank.y()<enemy->y()){
+       enemy->setRotation(0);
+       enemy->moveBy(0,-enemy->bossSpeed);
+       }
+       if(mTank.y()>enemy->y()){
+       enemy->setRotation(180);
+       enemy->moveBy(0,enemy->bossSpeed);
        }
        }}
     });
@@ -424,11 +632,80 @@ void MainWindow::myTankCollide2()
     });
 }
 
+void MainWindow::myTankCollide3()
+{
+    Time =new QTimer (this);
+    Time->start(10);
+    connect(Time,&QTimer::timeout,[this](){
+       for(auto bullet : bBullet)
+       {
+           if(bullet->collidesWithItem(&mTank)){
+               bBullet.removeOne(bullet);
+               bullet->deleteLater();
+               mTank.mTankSpeed=0;
+               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+               QTimer::singleShot(50,this,[=](){
+               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+               });
+               QTimer::singleShot(100,this,[=](){
+               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+               });
+               QTimer::singleShot(150,this,[=](){
+               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+               });
+               QTimer::singleShot(200,this,[=](){
+               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+               });
+               QTimer::singleShot(250,this,[=](){
+               mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+               mTank.setX(200);
+               mTank.setY(200);
+               mTank.mTankSpeed=10;
+               mTank.HP--;
+               });
+           }
+       }
+    });
+}
+
 void MainWindow::BuildingCreate(int y,int x,int kind)
 {
     Building* building=new Building(y,x,kind);
     mScene.addItem(building);
     mBuilding.append(building);
+}
+
+void MainWindow::BossCollide()
+{
+    Time =new QTimer (this);
+    Time->start(10);
+    connect(Time,&QTimer::timeout,[this](){
+        for(auto enemy : mBoss){
+            if(mTank.collidesWithItem(enemy)){
+                mTank.mTankSpeed=0;
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+                QTimer::singleShot(50,this,[=](){
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                });
+                QTimer::singleShot(100,this,[=](){
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                });
+                QTimer::singleShot(150,this,[=](){
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                });
+                QTimer::singleShot(200,this,[=](){
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                });
+                QTimer::singleShot(250,this,[=](){
+                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                mTank.setX(200);
+                mTank.setY(200);
+                mTank.mTankSpeed=10;
+                mTank.HP--;
+                });
+            }
+        }
+    });
 }
 
 void MainWindow::BuildingCollide1()
@@ -815,6 +1092,32 @@ void MainWindow::game5()
         CreatEnemy(760,200);
         });
     }
+    connect(this->main2,&MainWindow2::next,[=](){
+        this->show();
+        this->main2->close();
+        game6();
+    });
+}
+
+void MainWindow::game6()
+{
+    clear();
+    mTank.setX(560);
+    mTank.setY(400);
+    mTank.HP=3;
+    for(int j=0;j<18;j++){
+        BuildingCreate(j,-2,2);
+    }
+    for(int j=0;j<18;j++){
+        BuildingCreate(j,33,2);
+    }
+    for(int i=0;i<32;i++){
+        BuildingCreate(-1,i,2);
+    }
+    for(int i=0;i<32;i++){
+        BuildingCreate(18,i,2);
+    }
+    CreatBoss(400,100);
 }
 
 void MainWindow::gameOver()
@@ -824,4 +1127,27 @@ void MainWindow::gameOver()
         this->hide();
         this->main3->show();
     }
+}
+
+void MainWindow::upgrade()
+{
+
+    QFile f("grade.txt");
+    //f.open(QIODevice::WriteOnly | QIODevice::Text);
+     /*if(f.open(QFile::WriteOnly|QIODevice::Text))
+     {
+         qDebug() << ("打开文件成功");
+
+         QTextStream txtOutput(&f);
+         QString str = "123";
+         txtOutput << str;
+     }*/
+     /*if(f.open(QIODevice::WriteOnly|QIODevice::Truncate)){
+         qDebug() << ("打开文件成功");
+     QTextStream txtOutput(&f);
+     QString str = "123";
+     txtOutput << str;
+     }*/
+     f.close();
+
 }

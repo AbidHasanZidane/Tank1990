@@ -23,6 +23,8 @@
 #include"gameover.h"
 #include <QApplication>
 #include <QProcess>
+#include"boss.h"
+#include"bossbullet.h"
 
 namespace Ui {
 class MainWindow;
@@ -47,20 +49,35 @@ public:
     void BulletShoot2();
     //敌人射击
     void EnemyShoot();
+    //Boss射击
+    void BossShoot();
     //敌人子弹的移动
     void eBulletShoot();
+
+    void bBulletShoot();
     //在（x,y）处生成敌人
     void CreatEnemy(int x,int y);
+
+    void CreatBoss(int x,int y);
     //敌人死亡
     void EnemyBoom();
+
+    void BossBoom();
     //敌人移动
     void EnemyMove();
+
+    void BossMove();
     //我方与敌方坦克的碰撞判定
     void myTankCollide1();
     //我方坦克与敌方子弹的碰撞判定及我方的死亡动画
     void myTankCollide2();
+
+    void myTankCollide3();
     //在（x,y）处创造某种建筑物
     void BuildingCreate(int x,int y,int kind);
+
+    void BossCollide();
+
     //我方子弹与各类建筑物的碰撞判定
     void BuildingCollide1();
     //我方坦克与各类建筑的碰撞判定
@@ -81,8 +98,12 @@ public:
     void game4();
     //第五关
     void game5();
+    //第六关
+    void game6();
     //游戏结束
     void gameOver();
+
+    void upgrade();
 private:
     Ui::MainWindow *ui;
 
@@ -117,6 +138,11 @@ private:
     QList<enemyBullet*>eBullet;
 
     QList<int>BulletMove;
+
+    QList<BOSS*>mBoss;
+
+    QList<BossBullet*>bBullet;
+
 
     int dir;
 
