@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
      {
         SlineStr = StxtInput.readLine();
         mTank.mTankSpeed=SlineStr.toInt();
+        mtankspeed=SlineStr.toInt();
      }
     Sfile.close();
 
@@ -138,12 +139,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
      case Qt::Key_J:{
          BulletMove.append(Qt::Key_J);
          break;
-     }
-     case Qt::Key_F:{
-         qDebug()<<killnum<<endl;
-     }
-     case Qt::Key_K:{
-         game6();
      }
      };
      if(mTank.x()<0){
@@ -586,7 +581,7 @@ void MainWindow::myTankCollide1()
                 mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
                 mTank.setX(200);
                 mTank.setY(200);
-                mTank.mTankSpeed=10;
+                mTank.mTankSpeed=mtankspeed;
                 mTank.HP--;
                 });
                 killnum++;
@@ -624,7 +619,7 @@ void MainWindow::myTankCollide2()
                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
                mTank.setX(200);
                mTank.setY(200);
-               mTank.mTankSpeed=10;
+               mTank.mTankSpeed=mtankspeed;
                mTank.HP--;
                });
            }
@@ -660,7 +655,7 @@ void MainWindow::myTankCollide3()
                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
                mTank.setX(200);
                mTank.setY(200);
-               mTank.mTankSpeed=10;
+               mTank.mTankSpeed=mtankspeed;
                mTank.HP--;
                });
            }
@@ -700,7 +695,7 @@ void MainWindow::BossCollide()
                 mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
                 mTank.setX(200);
                 mTank.setY(200);
-                mTank.mTankSpeed=10;
+                mTank.mTankSpeed=mtankspeed;
                 mTank.HP--;
                 });
             }
