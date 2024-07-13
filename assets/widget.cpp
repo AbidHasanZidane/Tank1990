@@ -7,9 +7,11 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
     ui->pushButton_2->setStyleSheet("background-color:rgba(255,255,255,1)");
     ui->toolButton->setStyleSheet("background-color:rgba(255,255,255,1)");
-    effect->setSource(QUrl::fromLocalFile(":/music/resources/background.wav"));
+    ui->toolButton_2->setStyleSheet("background-color:rgba(255,255,255,1)");
+    effect->setSource(QUrl::fromLocalFile(":/music/resources/menuTheme.wav"));
     effect->setLoopCount(QSoundEffect::Infinite);
     effect->setVolume(0.7);
     effect->play();
@@ -110,6 +112,8 @@ void Widget::keyPressEvent(QKeyEvent *event)
     {
         this->hide();
         w1 *w=new w1();
+        connect(w,&w1::retmain,this,&Widget::switchOn);
+        w->setFixedSize(1280,720);
         w->show();
     }
 }
@@ -166,4 +170,13 @@ void Widget::changeTexts()
             break;
         }
     }
+}
+
+void Widget::on_toolButton_2_clicked()
+{
+    achivement *w=new achivement();
+    w->setFixedSize(1280,720);
+    w->show();
+    this->hide();
+    connect(w,SIGNAL(switch2w()),this,SLOT(switchOn()));
 }

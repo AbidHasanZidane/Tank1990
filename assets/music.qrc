@@ -2,5 +2,6 @@
     <qresource prefix="/music">
         <file>resources/background.wav</file>
         <file>resources/bell.wav</file>
+        <file>resources/menuTheme.wav</file>
     </qresource>
 </RCC>

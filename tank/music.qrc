@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/music">
+        <file>resources/background.wav</file>
+        <file>resources/bell.wav</file>
+        <file>resources/Lvl1Background.mp3</file>
+        <file>resources/Lvl2background.mp3</file>
+        <file>resources/Lvl3BossMusic.mp3</file>
+        <file>resources/menuTheme.wav</file>
+        <file>resources/Lvl1Background.wav</file>
+    </qresource>
+</RCC>

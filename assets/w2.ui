@@ -35,8 +35,16 @@
      <height>50</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
    <property name="text">
-    <string>返回</string>
+    <string>返 回</string>
    </property>
   </widget>
   <widget class="QSlider" name="horizontalSlider">
@@ -153,6 +161,9 @@
      <pointsize>15</pointsize>
     </font>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
@@ -167,6 +178,9 @@
     <font>
      <pointsize>15</pointsize>
     </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="text">
     <string>恢 复 默 认 设 置</string>

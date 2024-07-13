@@ -1,14 +1,18 @@
 #include "w2.h"
 #include "ui_w2.h"
 #include "widget.h"
+
 w2::w2(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::w2)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
     butEffect->setSource(QUrl::fromLocalFile(":/music/resources/bell.wav"));
     ui->pushButton->setAttribute(Qt::WA_Hover,true);
     ui->pushButton->installEventFilter(this);
+    ui->pushButton_2->setAttribute(Qt::WA_Hover,true);
+    ui->pushButton_2->installEventFilter(this);
     QStringList list;
     list<<"全屏"<<"2560 x 1440"<<"1920 x 1080"<<"1600 x 900"<<"1280 x 720"<<"1024 x 576";
     ui->comboBox->addItems(list);
@@ -61,13 +65,27 @@ bool w2::eventFilter(QObject *obj, QEvent *event)
     {
         if(event->type() == QEvent::HoverEnter)
         {
-            ui->pushButton->setStyleSheet("background-color:rgba(255,255,255,0.7)");
+            ui->pushButton->setStyleSheet("background-color:rgba(255,255,255,0.5)");
             butEffect->play();
             return true;
         }
         if(event->type()==QEvent::HoverLeave)
         {
             ui->pushButton->setStyleSheet("background-color:rgba(255,255,255,1)");
+            return true;
+        }
+    }
+    else if(obj == ui->pushButton_2)
+    {
+        if(event->type() == QEvent::HoverEnter)
+        {
+            ui->pushButton_2->setStyleSheet("background-color:rgba(255,255,255,0.5)");
+            butEffect->play();
+            return true;
+        }
+        if(event->type()==QEvent::HoverLeave)
+        {
+            ui->pushButton_2->setStyleSheet("background-color:rgba(255,255,255,1)");
             return true;
         }
     }
@@ -120,3 +138,11 @@ void w2::on_pushButton_2_clicked()
     ui->horizontalSlider_2->setValue(70);
 }
 
+void w2::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()==Qt::Key_Escape)
+    {
+        emit switch2w();
+        this->close();
+    }
+}

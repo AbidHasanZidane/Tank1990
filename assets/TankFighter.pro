@@ -10,17 +10,23 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    achivement.cpp \
     main.cpp \
+    pause.cpp \
     w1.cpp \
     w2.cpp \
     widget.cpp
 
 HEADERS += \
+    achivement.h \
+    pause.h \
     w1.h \
     w2.h \
     widget.h
 
 FORMS += \
+    achivement.ui \
+    pause.ui \
     w1.ui \
     w2.ui \
     widget.ui

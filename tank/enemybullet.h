@@ -9,13 +9,13 @@
 class enemyBullet : public QGraphicsPixmapItem,public QObject
 {
 public:
-    char _dir;// 子弹的移动方向 ('N', 'S', 'W', 'E')
+    char _dir;
 
-    enemyBullet(QPoint _pos,QPixmap _pixmap,char _dir); // 构造函数，初始化子弹的位置、图像和方向
+    enemyBullet(QPoint _pos,QPixmap _pixmap,char _dir);
 
-    int eBulletSpeed=40;// 子弹的移动速度
+    int eBulletSpeed=40;
 
-    void eBulletMove();// 子弹移动的方法
+    void eBulletMove();
 };
 
 #endif // ENEMYBULLET_H

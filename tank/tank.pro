@@ -32,7 +32,10 @@ SOURCES += \
     building.cpp \
     enemybullet.cpp \
     mainwindow2.cpp \
-    gameover.cpp
+    gameover.cpp \
+    boss.cpp \
+    bossbullet.cpp \
+    settings.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +45,10 @@ HEADERS += \
     building.h \
     enemybullet.h \
     mainwindow2.h \
-    gameover.h
+    gameover.h \
+    boss.h \
+    bossbullet.h \
+    settings.h
 
 FORMS += \
         mainwindow.ui \
