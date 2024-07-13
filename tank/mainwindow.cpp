@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<QKeyEvent>
+#include<QSoundEffect>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -395,9 +396,12 @@ void MainWindow::CreatBoss(int x, int y)
 
 void MainWindow::EnemyBoom()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time,&QTimer::timeout,[this, Boomsound](){
        for(auto enemy : mEnemy)
        for(auto bullet : mBullet)
        {
@@ -407,6 +411,7 @@ void MainWindow::EnemyBoom()
                enemy->EHP--;
                if(enemy->EHP<=0){
                mEnemy.removeOne(enemy);
+                    Boomsound->play();
                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                QTimer::singleShot(50,this,[=](){
                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
@@ -434,9 +439,12 @@ void MainWindow::EnemyBoom()
 
 void MainWindow::BossBoom()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
        for(auto enemy : mBoss)
        for(auto bullet : mBullet)
        {
@@ -446,6 +454,7 @@ void MainWindow::BossBoom()
                enemy->BossHp--;
                if(enemy->BossHp<=0){
                mBoss.removeOne(enemy);
+                   Boomsound->play();
                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                QTimer::singleShot(50,this,[=](){
                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
@@ -541,12 +550,17 @@ void MainWindow::BossMove()
 
 void MainWindow::myTankCollide1()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
+
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
         for(auto enemy : mEnemy){
             if(mTank.collidesWithItem(enemy)){
                 mEnemy.removeOne(enemy);
+                Boomsound->play();
                 enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                 QTimer::singleShot(50,this,[=](){
                 enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
@@ -629,6 +643,7 @@ void MainWindow::myTankCollide2()
 
 void MainWindow::myTankCollide3()
 {
+
     Time =new QTimer (this);
     Time->start(10);
     connect(Time,&QTimer::timeout,[this](){

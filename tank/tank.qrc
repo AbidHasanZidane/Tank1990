@@ -24,5 +24,11 @@
         <file>90Tank/player_tank/Speed.txt</file>
         <file>90Tank/enemy/animation_sprite_125.png</file>
         <file>90Tank/enemy/space_full_preview.png</file>
+        <file>90Tank/player_tank/MENU.png</file>
+        <file>90Tank/player_tank/RESTART(1).png</file>
+        <file>90Tank/player_tank/NEIS.png</file>
+        <file>90Tank/player_tank/WJKADSKL.png</file>
+        <file>90Tank/player_tank/OKOCIN.png</file>
+        <file>90Tank/boom/TANKBOOM.wav</file>
     </qresource>
 </RCC>

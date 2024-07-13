@@ -1,0 +1,15 @@
+debug/main.o
+debug/mainwindow.o
+debug/mytank.o
+debug/bullet.o
+debug/enemy.o
+debug/building.o
+debug/enemybullet.o
+debug/mainwindow2.o
+debug/gameover.o
+debug/boss.o
+debug/bossbullet.o
+debug/qrc_tank.o
+debug/moc_mainwindow.o
+debug/moc_mainwindow2.o
+debug/moc_gameover.o
