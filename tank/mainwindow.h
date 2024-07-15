@@ -19,6 +19,7 @@
 #include<QTextStream>
 #include<QFileDialog>
 #include"mainwindow2.h"
+#include"mainwindow3.h"
 #include<QPushButton>
 #include"gameover.h"
 #include <QApplication>
@@ -26,6 +27,7 @@
 #include"boss.h"
 #include"bossbullet.h"
 #include"settings.h"
+#include"Heart.h"
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +42,7 @@ public:
     ~MainWindow();
     MainWindow2* main2=NULL;
     GameOver* main3=NULL;
+    MainWindow3* main4=NULL;
     //按键控制坦克移动和发射子弹
     void keyPressEvent(QKeyEvent* event);
 
@@ -87,6 +90,8 @@ public:
     void BuildingCollide3();
     //敌方子弹与各类建筑的碰撞判定
     void BuildingCollide4();
+    //显示生命值
+    void showHeart(int number);
     //清除场上所有物品
     void clear();
     //第一关
@@ -128,11 +133,15 @@ private:
 
     QTimer* GTime4;
 
-    QTimer* GTimer5;
+    QTimer* GTime5;
+
+    QTimer* GTime6;
 
     QList<Bullet*>mBullet;
 
     QList<Enemy*>mEnemy;
+
+    QList<Heart*>mHeart;
 
     QList<Building*>mBuilding;
 
@@ -144,6 +153,8 @@ private:
 
     QList<BossBullet*>bBullet;
 
+
+    int Ehp=2;
 
     int dir;
 

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<QKeyEvent>
+#include<QsoundEffect>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->main2=new MainWindow2;
     this->main3=new GameOver;
+    this->main4=new MainWindow3;
     mTank.HP=settings::readSettings("Hp:").toInt();
 
     hp=settings::readSettings("Hp:").toInt();
@@ -387,7 +389,7 @@ void MainWindow::bBulletShoot()
 
 void MainWindow::CreatEnemy(int x,int y)
 {
-    Enemy* enemy=new Enemy(x,y);
+    Enemy* enemy=new Enemy(x,y,Ehp);
     mScene.addItem(enemy);
     mEnemy.append(enemy);
 }
@@ -549,52 +551,60 @@ void MainWindow::BossMove()
 
 void MainWindow::myTankCollide1()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
+
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
         for(auto enemy : mEnemy){
             if(mTank.collidesWithItem(enemy)){
                 mEnemy.removeOne(enemy);
+                Boomsound->play();
                 enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                 QTimer::singleShot(50,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
                 });
                 QTimer::singleShot(100,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
                 });
                 QTimer::singleShot(150,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
                 });
                 QTimer::singleShot(200,this,[=](){
-                enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                    enemy->setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
                 QTimer::singleShot(200,this,[=](){
-                enemy->deleteLater();
+                    enemy->deleteLater();
                 });
                 mTank.mTankSpeed=0;
                 mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                 QTimer::singleShot(50,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
                 });
                 QTimer::singleShot(100,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
                 });
                 QTimer::singleShot(150,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
                 });
                 QTimer::singleShot(200,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
                 QTimer::singleShot(250,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-                mTank.setX(200);
-                mTank.setY(200);
-                mTank.mTankSpeed=mtankspeed;
-                mTank.HP--;
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed=mtankspeed;
+                    for(auto bullet : mBullet){
+                        mBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                    }
+                    mTank.HP--;
+                    showHeart(mTank.HP);
                 });
                 killnum++;
-                KillNum++;
-                Death++;
                 grade+=100;
             }
         }
@@ -603,75 +613,91 @@ void MainWindow::myTankCollide1()
 
 void MainWindow::myTankCollide2()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-       for(auto bullet : eBullet)
-       {
-           if(bullet->collidesWithItem(&mTank)){
-               eBullet.removeOne(bullet);
-               bullet->deleteLater();
-               mTank.mTankSpeed=0;
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-               QTimer::singleShot(50,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
-               });
-               QTimer::singleShot(100,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
-               });
-               QTimer::singleShot(150,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
-               });
-               QTimer::singleShot(200,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
-               });
-               QTimer::singleShot(250,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-               mTank.setX(200);
-               mTank.setY(200);
-               mTank.mTankSpeed=mtankspeed;
-               mTank.HP--;
-               });
-               Death++;
-           }
-       }
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
+        for(auto bullet : eBullet)
+        {
+            if(bullet->collidesWithItem(&mTank)){
+                eBullet.removeOne(bullet);
+                bullet->deleteLater();
+                mTank.mTankSpeed=0;
+                Boomsound->play();
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+                QTimer::singleShot(50,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                });
+                QTimer::singleShot(100,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                });
+                QTimer::singleShot(150,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                });
+                QTimer::singleShot(200,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                });
+                QTimer::singleShot(250,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed=mtankspeed;
+                    for(auto bullet : mBullet){
+                        mBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                    }
+                    mTank.HP--;
+                    showHeart(mTank.HP);
+                });
+            }
+        }
     });
 }
 
 void MainWindow::myTankCollide3()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
-       for(auto bullet : bBullet)
-       {
-           if(bullet->collidesWithItem(&mTank)){
-               bBullet.removeOne(bullet);
-               bullet->deleteLater();
-               mTank.mTankSpeed=0;
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
-               QTimer::singleShot(50,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
-               });
-               QTimer::singleShot(100,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
-               });
-               QTimer::singleShot(150,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
-               });
-               QTimer::singleShot(200,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
-               });
-               QTimer::singleShot(250,this,[=](){
-               mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-               mTank.setX(200);
-               mTank.setY(200);
-               mTank.mTankSpeed=mtankspeed;
-               mTank.HP--;
-               });
-               Death++;
-           }
-       }
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
+        for(auto bullet : bBullet)
+        {
+            if(bullet->collidesWithItem(&mTank)){
+                bBullet.removeOne(bullet);
+                bullet->deleteLater();
+                mTank.mTankSpeed=0;
+                Boomsound->play();
+                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
+                QTimer::singleShot(50,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                });
+                QTimer::singleShot(100,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                });
+                QTimer::singleShot(150,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                });
+                QTimer::singleShot(200,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                });
+                QTimer::singleShot(250,this,[=](){
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed=mtankspeed;
+                    for(auto bullet : mBullet){
+                        mBullet.removeOne(bullet);
+                        bullet->deleteLater();
+                    }
+                    mTank.HP--;
+                    showHeart(mTank.HP);
+                });
+            }
+        }
     });
 }
 
@@ -684,33 +710,37 @@ void MainWindow::BuildingCreate(int y,int x,int kind)
 
 void MainWindow::BossCollide()
 {
+    QSoundEffect* Boomsound = new QSoundEffect(this);
+    Boomsound->setSource(QUrl::fromLocalFile("://90Tank/boom/TANKBOOM.wav")); // Replace with your sound file
+    Boomsound->setVolume(0.5);
     Time =new QTimer (this);
     Time->start(10);
-    connect(Time,&QTimer::timeout,[this](){
+    connect(Time,&QTimer::timeout,[this,Boomsound](){
         for(auto enemy : mBoss){
             if(mTank.collidesWithItem(enemy)){
                 mTank.mTankSpeed=0;
+                Boomsound->play();
                 mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite.png"));
                 QTimer::singleShot(50,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite2.png"));
                 });
                 QTimer::singleShot(100,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite3.png"));
                 });
                 QTimer::singleShot(150,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite4.png"));
                 });
                 QTimer::singleShot(200,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
+                    mTank.setPixmap(QPixmap("://90Tank/boom/insect_sprite5.png"));
                 });
                 QTimer::singleShot(250,this,[=](){
-                mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
-                mTank.setX(200);
-                mTank.setY(200);
-                mTank.mTankSpeed=mtankspeed;
-                mTank.HP--;
+                    mTank.setPixmap(QPixmap("://90Tank/player_tank/mTank.png"));
+                    mTank.setX(200);
+                    mTank.setY(200);
+                    mTank.mTankSpeed=mtankspeed;
+                    mTank.HP--;
+                    showHeart(mTank.HP);
                 });
-                Death++;
             }
         }
     });
@@ -849,6 +879,15 @@ void MainWindow::BuildingCollide4()
     });
 }
 
+void MainWindow::showHeart(int number)
+{
+    for(int i=0;i<number;i++){
+        Heart *h=new Heart(0,i);
+        mScene.addItem(h);
+        mHeart.append(h);
+    }
+}
+
 void MainWindow::clear()
 {
     for(auto building : mBuilding){
@@ -890,13 +929,14 @@ void MainWindow::game1()
         }
     }
     mTank.HP=hp;
+    showHeart(mTank.HP);
     killnum=0;
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,600);
+            CreatEnemy(200,600);
         });
         QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(1100,600);
+            CreatEnemy(1100,600);
         });
     }
     GTime1 = new QTimer (this);
@@ -904,6 +944,9 @@ void MainWindow::game1()
     connect(GTime1,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
+            if(mTank.HP==hp){
+                Ehp++;
+            }
             GTime1->stop();
             this->hide();
             this->main2->show();
@@ -941,12 +984,13 @@ void MainWindow::game2()
         }
     }
     mTank.HP=hp;
+    showHeart(mTank.HP);
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+            CreatEnemy(200,150);
         });
         QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+            CreatEnemy(760,200);
         });
     }
     GTime2 = new QTimer (this);
@@ -954,6 +998,9 @@ void MainWindow::game2()
     connect(GTime2,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
+            if(mTank.HP==hp){
+                Ehp++;
+            }
             GTime2->stop();
             this->hide();
             this->main2->show();
@@ -963,10 +1010,6 @@ void MainWindow::game2()
         this->show();
         this->main2->close();
         game3();
-    });
-    connect(this->main3,&GameOver::retry,[=](){
-        this->close();
-        this->show();
     });
 }
 
@@ -995,12 +1038,13 @@ void MainWindow::game3()
         }
     }
     mTank.HP=hp;
+    showHeart(mTank.HP);
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+            CreatEnemy(200,150);
         });
         QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+            CreatEnemy(760,200);
         });
     }
     GTime3 = new QTimer (this);
@@ -1008,7 +1052,12 @@ void MainWindow::game3()
     connect(GTime3,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
+            if(mTank.HP==hp){
+                Ehp++;
+            }
             GTime3->stop();
+            this->hide();
+            this->main2->show();
         }
     });
     connect(this->main2,&MainWindow2::next,[=](){
@@ -1043,12 +1092,13 @@ void MainWindow::game4()
         }
     }
     mTank.HP=hp;
+    showHeart(mTank.HP);
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+            CreatEnemy(200,150);
         });
         QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+            CreatEnemy(760,200);
         });
     }
     GTime4 = new QTimer (this);
@@ -1056,7 +1106,12 @@ void MainWindow::game4()
     connect(GTime4,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
+            if(mTank.HP==hp){
+                Ehp++;
+            }
             GTime4->stop();
+            this->hide();
+            this->main2->show();
         }
     });
     connect(this->main2,&MainWindow2::next,[=](){
@@ -1092,12 +1147,13 @@ void MainWindow::game5()
         }
     }
     mTank.HP=hp;
+    showHeart(mTank.HP);
     for(int i=1;i<=5;i++){
         QTimer::singleShot(5000*i,this,[=](){
-        CreatEnemy(200,150);
+            CreatEnemy(200,150);
         });
         QTimer::singleShot(10000*i,this,[=](){
-        CreatEnemy(760,200);
+            CreatEnemy(760,200);
         });
     }
     GTime5 = new QTimer (this);
@@ -1105,7 +1161,10 @@ void MainWindow::game5()
     connect(GTime5,&QTimer::timeout,[this](){
         if(killnum>=10){
             killnum=0;
+            Ehp=2;//游戏结束，回归初始生命值
             GTime5->stop();
+            this->hide();
+            this->main2->show();
         }
     });
     connect(this->main2,&MainWindow2::next,[=](){
@@ -1120,7 +1179,8 @@ void MainWindow::game6()
     clear();
     mTank.setX(560);
     mTank.setY(400);
-    mTank.HP=3;
+    mTank.HP=hp;
+    showHeart(mTank.HP);
     for(int j=0;j<18;j++){
         BuildingCreate(j,-2,2);
     }
@@ -1134,6 +1194,16 @@ void MainWindow::game6()
         BuildingCreate(18,i,2);
     }
     CreatBoss(400,100);
+    GTime6 = new QTimer (this);
+    GTime6->start(100);
+    connect(GTime6,&QTimer::timeout,[this](){
+        if(killnum>=1){
+            killnum=0;
+            GTime6->stop();
+            this->main4->show();
+            this->hide();
+        }
+    });
 }
 
 void MainWindow::gameOver()

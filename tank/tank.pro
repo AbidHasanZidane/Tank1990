@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = tank
@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    Heart.cpp \
         main.cpp \
         mainwindow.cpp \
+    mainwindow3.cpp \
     mytank.cpp \
     bullet.cpp \
     enemy.cpp \
@@ -38,7 +40,9 @@ SOURCES += \
     settings.cpp
 
 HEADERS += \
+    Heart.h \
         mainwindow.h \
+    mainwindow3.h \
     mytank.h \
     bullet.h \
     enemy.h \
@@ -53,7 +57,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     mainwindow2.ui \
-    gameover.ui
+    gameover.ui \
+    mainwindow3.ui
 
 RESOURCES += \
     tank.qrc \
