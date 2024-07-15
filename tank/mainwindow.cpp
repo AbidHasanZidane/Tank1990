@@ -9,15 +9,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->main2=new MainWindow2;
     this->main3=new GameOver;
-    //mTank.HP=settings::readSettings("Hp:").toInt();
+    mTank.HP=settings::readSettings("Hp:").toInt();
 
-    //hp=settings::readSettings("Hp:").toInt();
+    hp=settings::readSettings("Hp:").toInt();
 
-    //mTank.mTankSpeed=settings::readSettings("Speed:").toInt();
+    mTank.mTankSpeed=settings::readSettings("Speed:").toInt();
 
-    //mtankspeed=settings::readSettings("Speed:").toInt();
+    mtankspeed=settings::readSettings("Speed:").toInt();
 
-    //Fire=settings::readSettings("Fire:").toInt();
+    Fire=settings::readSettings("Fire:").toInt();
+
+    grade=settings::readSettings("Grade:").toInt();
+
+    Death=settings::readSettings("Death:").toInt();
+
+    KillNum=settings::readSettings("KillNum:").toInt();
     this->setFixedSize(1320,790);
 
     mGameView.setSceneRect(QRect(0,0,1280,720));
@@ -80,12 +86,22 @@ MainWindow::MainWindow(QWidget *parent) :
     Time->start(100);
     connect(Time,&QTimer::timeout,this,&MainWindow::gameOver);
     Time = new QTimer (this);
-    Time->start(300);
+    Time->start(Fire);
     connect(Time,&QTimer::timeout,this,&MainWindow::BulletShoot2);
     connect(this->main3,&GameOver::retry,[=](){
     this->main3->close();
     Time->stop();
     QProcess::startDetached(qApp->applicationFilePath(), QStringList());
+    });
+    Time = new QTimer (this);
+    Time->start(100);
+    connect(Time,&QTimer::timeout,[this](){
+        QString g=QString::number (grade);
+       settings::modifySettings("Grade:",g);
+       QString k=QString::number (KillNum);
+       settings::modifySettings("KillNum:",k);
+       QString d=QString::number(Death);
+       settings::modifySettings("Death:",d);
     });
 }
 
@@ -414,6 +430,7 @@ void MainWindow::EnemyBoom()
                enemy->deleteLater();
                });
                killnum++;
+               KillNum++
                grade+=100;
                }
            }
@@ -453,6 +470,7 @@ void MainWindow::BossBoom()
                enemy->deleteLater();
                });
                killnum++;
+               KillNum+=50;
                grade+=10000;
                }
            }
@@ -575,6 +593,8 @@ void MainWindow::myTankCollide1()
                 mTank.HP--;
                 });
                 killnum++;
+                KillNum++;
+                Death++;
                 grade+=100;
             }
         }
@@ -612,6 +632,7 @@ void MainWindow::myTankCollide2()
                mTank.mTankSpeed=mtankspeed;
                mTank.HP--;
                });
+               Death++;
            }
        }
     });
@@ -648,6 +669,7 @@ void MainWindow::myTankCollide3()
                mTank.mTankSpeed=mtankspeed;
                mTank.HP--;
                });
+               Death++;
            }
        }
     });
@@ -688,6 +710,7 @@ void MainWindow::BossCollide()
                 mTank.mTankSpeed=mtankspeed;
                 mTank.HP--;
                 });
+                Death++;
             }
         }
     });
@@ -1077,6 +1100,14 @@ void MainWindow::game5()
         CreatEnemy(760,200);
         });
     }
+    GTime5 = new QTimer (this);
+    GTime5->start(100);
+    connect(GTime5,&QTimer::timeout,[this](){
+        if(killnum>=10){
+            killnum=0;
+            GTime5->stop();
+        }
+    });
     connect(this->main2,&MainWindow2::next,[=](){
         this->show();
         this->main2->close();
