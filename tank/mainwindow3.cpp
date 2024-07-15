@@ -1,6 +1,6 @@
 #include "mainwindow3.h"
 #include "ui_mainwindow3.h"
-mainwindow3::mainwindow3(QWidget *parent):
+Mainwindow3::Mainwindow3(QWidget *parent):
         QMainWindow(parent),
         ui(new Ui::MainWindow3)
     {
