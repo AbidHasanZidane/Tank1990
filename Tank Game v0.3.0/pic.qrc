@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/pic">
+        <file>resources/background.png</file>
+        <file>resources/icon.png</file>
+        <file>resources/sound.png</file>
+        <file>resources/config.png</file>
+        <file>resources/muted.png</file>
+        <file>resources/plot_0.jpg</file>
+        <file>resources/plot_1.jpg</file>
+        <file>resources/plot_2.jpg</file>
+        <file>resources/plot_3.jpg</file>
+        <file>resources/plot_4.jpg</file>
+        <file>resources/plot_5.jpg</file>
+        <file>resources/achivements.png</file>
+        <file>resources/shelf.png</file>
+        <file>resources/shop.png</file>
+        <file>resources/board.jpg</file>
+        <file>resources/titleShop.png</file>
+        <file>resources/pause.png</file>
+        <file>resources/HP.png</file>
+        <file>resources/speed.png</file>
+        <file>resources/fire.png</file>
+        <file>resources/coin.png</file>
+        <file>resources/ribbon.png</file>
+        <file>resources/achievement.png</file>
+        <file>resources/titleAchivement.png</file>
+    </qresource>
+</RCC>
