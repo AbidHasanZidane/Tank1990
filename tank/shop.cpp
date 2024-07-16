@@ -107,9 +107,9 @@ void shop::on_pushButton_2_clicked()
 {
     butEffect->play();
     if(settings::readSettings("Hp:").toInt()<8)
-        if(settings::readSettings("Grade:").toInt()>=1000)
+        if(settings::readSettings("Grade:").toInt()>=2000)
         {
-            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-1000));
+            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-2000));
             settings::modifySettings("Hp:",QString::number(settings::readSettings("Hp:").toInt()+1));
         }
         else
@@ -129,9 +129,9 @@ void shop::on_pushButton_3_clicked()
 {
     butEffect->play();
     if(settings::readSettings("Speed:").toInt()<20)
-        if(settings::readSettings("Grade:").toInt()>=1000)
+        if(settings::readSettings("Grade:").toInt()>=2000)
         {
-            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-1000));
+            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-2000));
             settings::modifySettings("Speed:",QString::number(settings::readSettings("Speed:").toInt()+2));
         }
         else
@@ -152,9 +152,9 @@ void shop::on_pushButton_4_clicked()
 {
     butEffect->play();
     if(settings::readSettings("Fire:").toInt()>300)
-        if(settings::readSettings("Grade:").toInt()>=1000)
+        if(settings::readSettings("Grade:").toInt()>=2000)
         {
-            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-1000));
+            settings::modifySettings("Grade:",QString::number(settings::readSettings("Grade:").toInt()-2000));
             settings::modifySettings("Fire:",QString::number(settings::readSettings("Fire:").toInt()-40));
         }
         else

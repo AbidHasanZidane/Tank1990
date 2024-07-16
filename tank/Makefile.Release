@@ -209,13 +209,19 @@ release/qrc_music.cpp: music.qrc \
 
 release/qrc_pic.cpp: pic.qrc \
 		../../../Qt/6.7.2/mingw_64/bin/rcc.exe \
+		resources/RESTART.png \
 		resources/background.png \
 		resources/ribbon.png \
 		resources/sound.png \
+		resources/NEIS.png \
 		resources/titleAchivement.png \
 		resources/pause.png \
+		resources/OKOCIN.png \
+		resources/MENU.png \
 		resources/board.jpg \
+		resources/WJKADSKL.png \
 		resources/fire.png \
+		resources/gameover.png \
 		resources/titleShop.png \
 		resources/coin.png \
 		resources/achivements.png \
@@ -1994,15 +2000,6 @@ release/moc_w1.cpp: w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
 		ui_w1.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -2017,6 +2014,7 @@ release/moc_w1.cpp: w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -2040,6 +2038,8 @@ release/moc_w1.cpp: w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -2468,15 +2468,6 @@ release/moc_widget.cpp: widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
 		ui_w1.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -2491,6 +2482,7 @@ release/moc_widget.cpp: widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -2514,6 +2506,8 @@ release/moc_widget.cpp: widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -2929,19 +2923,7 @@ release/achievement.o: achievement.cpp achievement.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
-		ui_achievement.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h
+		ui_achievement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\achievement.o achievement.cpp
 
 release/main.o: main.cpp widget.h \
@@ -3159,15 +3141,6 @@ release/main.o: main.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
 		ui_w1.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -3182,6 +3155,7 @@ release/main.o: main.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -3205,6 +3179,8 @@ release/main.o: main.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -3459,17 +3435,6 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		Heart.h \
 		ui_mainwindow.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QAction \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QStatusBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QToolBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbar.h \
 		../../../Qt/6.7.2/mingw_64/include/QtMultimedia/QsoundEffect \
 		../../../Qt/6.7.2/mingw_64/include/QtMultimedia/qsoundeffect.h \
 		../../../Qt/6.7.2/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
@@ -3670,11 +3635,7 @@ release/mainwindow3.o: mainwindow3.cpp mainwindow3.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		ui_mainwindow3.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget
+		ui_mainwindow3.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow3.o mainwindow3.cpp
 
 release/mytank.o: mytank.cpp mytank.h \
@@ -4636,14 +4597,7 @@ release/mainwindow2.o: mainwindow2.cpp mainwindow2.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		ui_mainwindow2.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QStatusBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget
+		ui_mainwindow2.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow2.o mainwindow2.cpp
 
 release/gameover.o: gameover.cpp gameover.h \
@@ -4835,20 +4789,7 @@ release/gameover.o: gameover.cpp gameover.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
-		ui_gameover.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QStatusBar \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QWidget
+		ui_gameover.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\gameover.o gameover.cpp
 
 release/boss.o: boss.cpp boss.h \
@@ -5331,18 +5272,7 @@ release/pause.o: pause.cpp pause.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
-		ui_pause.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h
+		ui_pause.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\pause.o pause.cpp
 
 release/settings.o: settings.cpp settings.h \
@@ -5657,19 +5587,7 @@ release/shop.o: shop.cpp shop.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
-		ui_shop.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h
+		ui_shop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\shop.o shop.cpp
 
 release/w1.o: w1.cpp w1.h \
@@ -5880,15 +5798,6 @@ release/w1.o: w1.cpp w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
 		ui_w1.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -5903,6 +5812,7 @@ release/w1.o: w1.cpp w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -5926,6 +5836,8 @@ release/w1.o: w1.cpp w1.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -6134,33 +6046,6 @@ release/w2.o: w2.cpp w2.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		ui_w2.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QComboBox \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcombobox.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/QKeyEvent \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
@@ -6182,6 +6067,7 @@ release/w2.o: w2.cpp w2.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpainterpath.h \
@@ -6192,6 +6078,7 @@ release/w2.o: w2.cpp w2.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -6210,8 +6097,13 @@ release/w2.o: w2.cpp w2.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		mainwindow2.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -6436,15 +6328,6 @@ release/widget.o: widget.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QTextStream \
 		ui_w1.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/QIcon \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		mainwindow.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -6459,6 +6342,7 @@ release/widget.o: widget.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QtDebug \
@@ -6482,6 +6366,8 @@ release/widget.o: widget.cpp widget.h \
 		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		mainwindow3.h \
 		gameover.h \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/QProcess \
 		../../../Qt/6.7.2/mingw_64/include/QtCore/qprocess.h \
 		boss.h \
@@ -6493,23 +6379,7 @@ release/widget.o: widget.cpp widget.h \
 		achievement.h \
 		shop.h \
 		ui_w2.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QComboBox \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcombobox.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/6.7.2/mingw_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
-		ui_widget.h \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/QToolButton \
-		../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbutton.h
+		ui_widget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\widget.o widget.cpp
 
 release/qrc_music.o: release/qrc_music.cpp 

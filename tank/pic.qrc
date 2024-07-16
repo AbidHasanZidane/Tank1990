@@ -45,5 +45,11 @@
         <file>resources/Scene6/6.3.jpg</file>
         <file>resources/Scene6/6.4.png</file>
         <file>resources/Scene3/3.1.jpg</file>
+        <file>resources/gameover.png</file>
+        <file>resources/MENU.png</file>
+        <file>resources/NEIS.png</file>
+        <file>resources/OKOCIN.png</file>
+        <file>resources/RESTART.png</file>
+        <file>resources/WJKADSKL.png</file>
     </qresource>
 </RCC>

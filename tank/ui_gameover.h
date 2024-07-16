@@ -13,7 +13,6 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -26,7 +25,6 @@ public:
     QWidget *centralwidget;
     QPushButton *pushButton;
     QPushButton *ReTty;
-    QMenuBar *menubar;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *GameOver)
@@ -37,19 +35,18 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/pic/resources/icon.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         GameOver->setWindowIcon(icon);
+        GameOver->setStyleSheet(QString::fromUtf8("background-image: url(:/pic/resources/WJKADSKL.png);"));
         centralwidget = new QWidget(GameOver);
         centralwidget->setObjectName("centralwidget");
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(270, 520, 281, 131));
+        pushButton->setGeometry(QRect(270, 520, 331, 151));
+        pushButton->setStyleSheet(QString::fromUtf8("image: url(:/pic/resources/MENU.png);"));
         ReTty = new QPushButton(centralwidget);
         ReTty->setObjectName("ReTty");
-        ReTty->setGeometry(QRect(860, 520, 281, 131));
+        ReTty->setGeometry(QRect(860, 520, 311, 151));
+        ReTty->setStyleSheet(QString::fromUtf8("image: url(:/pic/resources/RESTART.png);"));
         GameOver->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(GameOver);
-        menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1440, 17));
-        GameOver->setMenuBar(menubar);
         statusbar = new QStatusBar(GameOver);
         statusbar->setObjectName("statusbar");
         GameOver->setStatusBar(statusbar);
@@ -62,8 +59,8 @@ public:
     void retranslateUi(QMainWindow *GameOver)
     {
         GameOver->setWindowTitle(QCoreApplication::translate("GameOver", "\345\235\246\345\205\213\345\244\247\346\210\230 by TANK MAKERS", nullptr));
-        pushButton->setText(QCoreApplication::translate("GameOver", "\350\277\224\345\233\236\350\217\234\345\215\225", nullptr));
-        ReTty->setText(QCoreApplication::translate("GameOver", "\351\207\215\346\226\260\345\274\200\345\247\213", nullptr));
+        pushButton->setText(QString());
+        ReTty->setText(QString());
     } // retranslateUi
 
 };

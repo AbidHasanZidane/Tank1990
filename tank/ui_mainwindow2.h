@@ -35,14 +35,17 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/pic/resources/icon.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         MainWindow2->setWindowIcon(icon);
+        MainWindow2->setStyleSheet(QString::fromUtf8("background-image: url(:/pic/resources/OKOCIN.png);"));
         centralwidget = new QWidget(MainWindow2);
         centralwidget->setObjectName("centralwidget");
         BACK = new QPushButton(centralwidget);
         BACK->setObjectName("BACK");
-        BACK->setGeometry(QRect(200, 440, 251, 131));
+        BACK->setGeometry(QRect(200, 440, 311, 141));
+        BACK->setStyleSheet(QString::fromUtf8("image: url(:/pic/resources/MENU.png);"));
         NEXT = new QPushButton(centralwidget);
         NEXT->setObjectName("NEXT");
-        NEXT->setGeometry(QRect(1000, 440, 251, 131));
+        NEXT->setGeometry(QRect(1000, 440, 371, 151));
+        NEXT->setStyleSheet(QString::fromUtf8("image: url(:/pic/resources/NEIS.png);"));
         MainWindow2->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow2);
         statusbar->setObjectName("statusbar");
@@ -56,8 +59,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow2)
     {
         MainWindow2->setWindowTitle(QCoreApplication::translate("MainWindow2", "\345\235\246\345\205\213\345\244\247\346\210\230 by TANK MAKERS", nullptr));
-        BACK->setText(QCoreApplication::translate("MainWindow2", "\350\277\224\345\233\236\350\217\234\345\215\225", nullptr));
-        NEXT->setText(QCoreApplication::translate("MainWindow2", "\344\270\213\344\270\200\345\205\263", nullptr));
+        BACK->setText(QString());
+        NEXT->setText(QString());
     } // retranslateUi
 
 };

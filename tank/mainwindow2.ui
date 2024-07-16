@@ -17,18 +17,24 @@
    <iconset resource="pic.qrc">
     <normaloff>:/pic/resources/icon.png</normaloff>:/pic/resources/icon.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/pic/resources/OKOCIN.png);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="BACK">
     <property name="geometry">
      <rect>
       <x>200</x>
       <y>440</y>
-      <width>251</width>
-      <height>131</height>
+      <width>311</width>
+      <height>141</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/pic/resources/MENU.png);</string>
+    </property>
     <property name="text">
-     <string>返回菜单</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="NEXT">
@@ -36,12 +42,15 @@
      <rect>
       <x>1000</x>
       <y>440</y>
-      <width>251</width>
-      <height>131</height>
+      <width>371</width>
+      <height>151</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/pic/resources/NEIS.png);</string>
+    </property>
     <property name="text">
-     <string>下一关</string>
+     <string/>
     </property>
    </widget>
   </widget>
