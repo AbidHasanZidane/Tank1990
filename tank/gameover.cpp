@@ -9,7 +9,8 @@ GameOver::GameOver(QWidget *parent) :
     connect(ui->ReTty,&QPushButton::clicked,[=](){
         emit this->retry();});
     connect(ui->pushButton,&QPushButton::clicked,[=](){
-        qApp->exit(1280);
+            emit switch2main();
+            this->close();
     });
 }
 

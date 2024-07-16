@@ -1,19 +1,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QWidget>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QList>
-#include <QTimer>
-#include <QtDebug>
-#include <QKeyEvent>
-#include "mytank.h"
-#include "bullet.h"
-#include "enemy.h"
-#include "building.h"
+#include<QMainWindow>
+#include<QWidget>
+#include<QGraphicsPixmapItem>
+#include<QGraphicsView>
+#include<QGraphicsScene>
+#include<QList>
+#include<QTimer>
+#include<QtDebug>
+#include<QKeyEvent>
+#include"mytank.h"
+#include"bullet.h"
+#include"enemy.h"
+#include"building.h"
 #include"enemybullet.h"
 #include<QFile>
 #include<QTextStream>
@@ -29,7 +29,6 @@
 #include"settings.h"
 #include"Heart.h"
 
-
 namespace Ui {
 class MainWindow;
 }
@@ -41,10 +40,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-  MainWindow2* main2=NULL;
+    MainWindow2* main2=NULL;
     GameOver* main3=NULL;
     MainWindow3* main4=NULL;
-     //按键控制坦克移动和发射子弹
+    //按键控制坦克移动和发射子弹
     void keyPressEvent(QKeyEvent* event);
 
     void keyReleaseEvent(QKeyEvent* event);
@@ -108,83 +107,85 @@ public:
     //第六关
     void game6();
     //游戏结束
-void gameOver();
+    void gameOver();
+
 signals:
-    void changeMusic(int cnt);  // 切换音乐信号，参数为计数器
-    void boomEffect();  // 爆炸效果信号
-    void switch2main();  // 切换到主界面信号
-    void switch2w1();  // 切换到第一关界面信号
+    void changeMusic(int cnt);
+    void boomEffect();
+    void switch2main();
+    void switch2w1();
 
 private slots:
-    void fromw2main();  // 从第二关返回主界面槽函数
-    void switchOn();  // 开关触发槽函数
+    void fromw2main();
+    void switchOn();
 
 private:
-    Ui::MainWindow *ui;  // 主窗口UI指针
+    Ui::MainWindow *ui;
 
-    QGraphicsView mGameView;  // 游戏视图对象
+    QGraphicsView mGameView;
 
-    QGraphicsScene mScene;  // 游戏场景对象
+    QGraphicsScene mScene;
 
-    QGraphicsPixmapItem mBackGround;  // 背景图片对象
+    QGraphicsPixmapItem mBackGround;
 
-    MyTank mTank;  // 玩家坦克对象
+    MyTank mTank;
 
-    QTimer* BulletTime;  // 子弹计时器指针
+    QTimer* BulletTime;
 
-    QTimer* Time;  // 时间计时器指针
+    QTimer* Time;
 
-    QTimer* Time2;  // 时间2计时器指针
+    QTimer* Time2;
 
-    QTimer* GTime1;  // 游戏时间1计时器指针
+    QTimer* GTime1;
 
-    QTimer* GTime2;  // 游戏时间2计时器指针
+    QTimer* GTime2;
 
-    QTimer* GTime3;  // 游戏时间3计时器指针
+    QTimer* GTime3;
 
-    QTimer* GTime4;  // 游戏时间4计时器指针
+    QTimer* GTime4;
 
-    QTimer* GTime5;  // 游戏时间5计时器指针
+    QTimer* GTime5;
 
-    QTimer* GTime6;  // 游戏时间6计时器指针
+    QTimer* GTime6;
 
-    QList<Bullet*> mBullet;  // 子弹列表
+    QList<Bullet*>mBullet;
 
-    QList<Enemy*> mEnemy;  // 敌人列表
+    QList<Enemy*>mEnemy;
 
-    QList<Heart*> mHeart;  // 心形道具列表
+    QList<Heart*>mHeart;
 
-    QList<Building*> mBuilding;  // 建筑物列表
+    QList<Building*>mBuilding;
 
-    QList<enemyBullet*> eBullet;  // 敌人子弹列表
+    QList<enemyBullet*>eBullet;
 
-    QList<int> BulletMove;  // 子弹移动列表
+    QList<int>BulletMove;
 
-    QList<BOSS*> mBoss;  // BOSS列表
+    QList<BOSS*>mBoss;
 
-    QList<BossBullet*> bBullet;  // BOSS子弹列表
+    QList<BossBullet*>bBullet;
 
-    int Ehp = 2;  // 敌人生命值
 
-    int dir;  // 方向
+    int Ehp=2;
 
-    int killnum;  // 击杀数量
+    int dir;
 
-    int grade;  // 等级
+    int killnum;
 
-    int hp;  // 生命值
+    int grade;
 
-    int mtankspeed;  // 坦克速度
+    int hp;
 
-    int Fire;  // 火力
+    int mtankspeed;
 
-    int Death;  // 死亡
+    int Fire;
 
-    int count = 0;  // 计数器
+    int Death;
 
-    int KillNum;  // 击杀数
+    int count=0;
 
-    int accomplishment;  // 成就   
+    int KillNum;
+
+    int accomplishment;
 
     //地图二维数组，数字代表建筑种类
     int map1[18][32]={

@@ -409,10 +409,6 @@ void MainWindow::CreatBoss(int x, int y)
 
 void MainWindow::EnemyBoom()
 {
-    QSoundEffect *effect=new QSoundEffect;
-    effect->setSource(QUrl::fromLocalFile(":/music/resources/TANKBOOM.wav"));
-    effect->setVolume(70);
-    effect->play();
     Time =new QTimer (this);
     Time->start(10);
     connect(Time,&QTimer::timeout,[this](){
@@ -1215,7 +1211,7 @@ void MainWindow::gameOver()
 {
     if(mTank.HP<=0){
         mTank.HP=hp;
-        this->close();
+        this->hide();
         this->main3->show();
     }
 }

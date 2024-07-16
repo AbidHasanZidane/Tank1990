@@ -8,9 +8,9 @@
 class settings
 {
 public:
-    settings();  // 默认构造函数
-    static void modifySettings(QString location, QString content);  // 修改设置项
-    static QString readSettings(QString location);  // 读取设置项
+    settings();
+    static void modifySettings(QString location,QString content);
+    static QString readSettings(QString location);
 };
 
 #endif // SETTINGS_H

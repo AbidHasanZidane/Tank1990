@@ -209,19 +209,13 @@ debug/qrc_music.cpp: music.qrc \
 
 debug/qrc_pic.cpp: pic.qrc \
 		../../../Qt/6.7.2/mingw_64/bin/rcc.exe \
-		resources/RESTART.png \
 		resources/background.png \
 		resources/ribbon.png \
 		resources/sound.png \
-		resources/NEIS.png \
 		resources/titleAchivement.png \
 		resources/pause.png \
-		resources/OKOCIN.png \
-		resources/MENU.png \
 		resources/board.jpg \
-		resources/WJKADSKL.png \
 		resources/fire.png \
-		resources/gameover.png \
 		resources/titleShop.png \
 		resources/coin.png \
 		resources/achivements.png \
