@@ -22,42 +22,43 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow2
 {
 public:
-    QWidget *centralwidget;
-    QPushButton *BACK;
-    QPushButton *NEXT;
-    QStatusBar *statusbar;
+    QWidget *centralwidget;  // 中央部件
+    QPushButton *BACK;  // 返回按钮
+    QPushButton *NEXT;  // 下一步按钮
+    QStatusBar *statusbar;  // 状态栏
 
     void setupUi(QMainWindow *MainWindow2)
     {
         if (MainWindow2->objectName().isEmpty())
-            MainWindow2->setObjectName("MainWindow2");
-        MainWindow2->resize(1440, 810);
+            MainWindow2->setObjectName("MainWindow2");  // 设置主窗口对象名称
+        MainWindow2->resize(1440, 810);  // 设置窗口大小
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/pic/resources/icon.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        MainWindow2->setWindowIcon(icon);
-        centralwidget = new QWidget(MainWindow2);
+        MainWindow2->setWindowIcon(icon);  // 设置窗口图标
+        centralwidget = new QWidget(MainWindow2);  // 创建中央部件
         centralwidget->setObjectName("centralwidget");
-        BACK = new QPushButton(centralwidget);
+        BACK = new QPushButton(centralwidget);  // 创建返回按钮
         BACK->setObjectName("BACK");
-        BACK->setGeometry(QRect(200, 440, 251, 131));
-        NEXT = new QPushButton(centralwidget);
+        BACK->setGeometry(QRect(200, 440, 251, 131));  // 设置按钮位置和大小
+        NEXT = new QPushButton(centralwidget);  // 创建下一步按钮
         NEXT->setObjectName("NEXT");
-        NEXT->setGeometry(QRect(1000, 440, 251, 131));
-        MainWindow2->setCentralWidget(centralwidget);
-        statusbar = new QStatusBar(MainWindow2);
+        NEXT->setGeometry(QRect(1000, 440, 251, 131));  // 设置按钮位置和大小
+        MainWindow2->setCentralWidget(centralwidget);  // 将中央部件设置为主窗口的中心部件
+        statusbar = new QStatusBar(MainWindow2);  // 创建状态栏
         statusbar->setObjectName("statusbar");
-        MainWindow2->setStatusBar(statusbar);
+        MainWindow2->setStatusBar(statusbar);  // 设置主窗口的状态栏
 
-        retranslateUi(MainWindow2);
+        retranslateUi(MainWindow2);  // 更新界面文字内容
 
-        QMetaObject::connectSlotsByName(MainWindow2);
+        QMetaObject::connectSlotsByName(MainWindow2);  // 自动连接对象信号到槽函数
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindow2)
     {
-        MainWindow2->setWindowTitle(QCoreApplication::translate("MainWindow2", "\345\235\246\345\205\213\345\244\247\346\210\230 by TANK MAKERS", nullptr));
-        BACK->setText(QCoreApplication::translate("MainWindow2", "\350\277\224\345\233\236\350\217\234\345\215\225", nullptr));
-        NEXT->setText(QCoreApplication::translate("MainWindow2", "\344\270\213\344\270\200\345\205\263", nullptr));
+        // 界面翻译函数，设置窗口标题和按钮的文本内容
+        MainWindow2->setWindowTitle(QCoreApplication::translate("MainWindow2", "主窗口2 by TANK MAKERS", nullptr));
+        BACK->setText(QCoreApplication::translate("MainWindow2", "返回主菜单", nullptr));
+        NEXT->setText(QCoreApplication::translate("MainWindow2", "下一步", nullptr));
     } // retranslateUi
 
 };
