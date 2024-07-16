@@ -19,25 +19,26 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow3
 {
 public:
-    QPushButton *BACK;
+    QPushButton *BACK;  // 返回按钮
 
     void setupUi(QWidget *MainWindow3)
     {
         if (MainWindow3->objectName().isEmpty())
-            MainWindow3->setObjectName("MainWindow3");
-        MainWindow3->resize(1440, 810);
-        BACK = new QPushButton(MainWindow3);
+            MainWindow3->setObjectName("MainWindow3");  // 设置主窗口对象名称
+        MainWindow3->resize(1440, 810);  // 设置窗口大小
+        BACK = new QPushButton(MainWindow3);  // 创建返回按钮
         BACK->setObjectName("BACK");
-        BACK->setGeometry(QRect(670, 590, 361, 131));
+        BACK->setGeometry(QRect(670, 590, 361, 131));  // 设置按钮位置和大小
 
-        retranslateUi(MainWindow3);
+        retranslateUi(MainWindow3);  // 更新界面文字内容
 
-        QMetaObject::connectSlotsByName(MainWindow3);
+        QMetaObject::connectSlotsByName(MainWindow3);  // 自动连接对象信号到槽函数
     } // setupUi
 
     void retranslateUi(QWidget *MainWindow3)
     {
-        MainWindow3->setWindowTitle(QCoreApplication::translate("MainWindow3", "Form", nullptr));
+        // 界面翻译函数，设置窗口标题和按钮的文本内容
+        MainWindow3->setWindowTitle(QCoreApplication::translate("MainWindow3", "表单", nullptr));
         BACK->setText(QString());
     } // retranslateUi
 
